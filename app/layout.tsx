@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Providers } from "./providers";
+// import { Providers } from "./providers";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import {config} from "@fortawesome/fontawesome-svg-core"
+import { StoreProvider } from "./StoreProvider";
 config.autoAddCss = false
 
 const geistSans = Geist({
@@ -32,9 +33,9 @@ export default function RootLayout({
       <body
         className={``}
       >
-        <Providers>
+        <StoreProvider>
           {children}
-        </Providers>
+        </StoreProvider>
       </body>
     </html>
   );

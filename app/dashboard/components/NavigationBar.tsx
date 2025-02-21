@@ -12,6 +12,9 @@ import Moon from "./svg/moon"
 import Logo from "./svg/logo"
 import { Button, Divider, Dropdown, MenuProps, Space } from "antd"
 import Navbar from "./svg/navbar"
+import { useDispatch, useSelector } from "react-redux"
+import { setisSidebarCollapsed } from "@/lib/slices/dashboardSlice"
+import { RootState } from "@/lib/store"
 
 // dropdownRender={(menu) => (
 //     <div className="ring-2 bg-white rounded-lg">
@@ -31,9 +34,10 @@ import Navbar from "./svg/navbar"
 
 
 const NavigationBar = () => {
+    const dispatch = useDispatch()
     const [sidebarPos, setSidebarPos] = useState<string>('sidebar')
     const [darkmode, setDarkmode] = useState<boolean | null>(null)
-    const [ isSidebarcollapsed ,setIsSidebarCollapsed ] = useState<boolean>(false)
+    const isSidebarCollapsed = useSelector((state: RootState) => state.dashboard.isSidebarCollapsed)
 
     useEffect(() => {
         const storedDarkmode = localStorage.getItem('dark-mode') === "true"
@@ -54,7 +58,7 @@ const NavigationBar = () => {
     }, [darkmode])
 
     const handleCollapse = () => {
-        setIsSidebarCollapsed(!isSidebarcollapsed)
+        dispatch(setisSidebarCollapsed(!isSidebarCollapsed))
     }
 
     const handleChangeSidebarPosition = (pos: string) => {
@@ -97,7 +101,7 @@ const NavigationBar = () => {
       ];
     
     return(
-        <nav className=" flex justify-between items-center h-[74px] py-3 px-4 bg-white dark:bg-navDark " >
+        <nav className=" flex justify-between items-center h-[74px] py-3 px-4 bg-white dark:bg-navDark border-b dark:border-slate-600 " >
             <div className=" flex justify-between items-center w-[539px] h-[50px] ">
                 <div className=" flex justify-between items-center w-[215px]  " >
                     <Logo className=" text-black dark:text-white" width={130} height={50} />
@@ -105,7 +109,7 @@ const NavigationBar = () => {
                         className="text-primary_black dark:text-slate-300 hover:!text-deep_red duration-300 hidden tab:block "
                         onClick={handleCollapse}
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className={`lucide lucide-arrow-left-to-line w-6 duration-300 ${isSidebarcollapsed ? " rotate-180 " : " rotate-0 "} `}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className={`lucide lucide-arrow-left-to-line w-6 duration-300 ${isSidebarCollapsed ? " rotate-180 " : " rotate-0 "} `}>
                             <path d="M3 19V5"></path><path d="m13 6-6 6 6 6"></path>
                             <path d="M7 12h14"></path>
                         </svg>
@@ -132,7 +136,7 @@ const NavigationBar = () => {
                             </h1>
                             <ul>
                                 <li>
-                                    
+
                                 </li>
                             </ul>
                         </div>
