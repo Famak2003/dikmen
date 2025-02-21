@@ -4,12 +4,14 @@ interface dashboardSlice {
     selectedKey: string,
     sidebarPos: string,
     isSidebarCollapsed: boolean
+    isSidebarHidden: boolean
 }
 
 const initialState: dashboardSlice = {
     selectedKey: "1",
     sidebarPos: 'side',
     isSidebarCollapsed: false,
+    isSidebarHidden: true
 }
 
 const dashboardSlice = createSlice({
@@ -24,9 +26,12 @@ const dashboardSlice = createSlice({
         },
         setisSidebarCollapsed: (state, action: PayloadAction<boolean>) => {
             state.isSidebarCollapsed = action.payload
+        },
+        setisSidebarHidden: (state, action: PayloadAction<boolean>) => {
+            state.isSidebarHidden = action.payload
         }
     }
 })
 
-export const {setSelectedKey, setSidebarPos, setisSidebarCollapsed} = dashboardSlice.actions;
+export const {setSelectedKey, setSidebarPos, setisSidebarCollapsed, setisSidebarHidden} = dashboardSlice.actions;
 export default dashboardSlice.reducer;

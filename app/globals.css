@@ -70,6 +70,9 @@ input:focus {
 }
 
 @layer components {
+  .navIcon{
+    @apply !text-inherit w-[19px] lmd:w-[24px] h-[19px] lmd:h-[24px] ring-2
+  }
   .navActions button{
     @apply flex justify-center items-center h-10 w-10 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-500
   }

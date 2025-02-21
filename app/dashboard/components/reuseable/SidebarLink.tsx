@@ -17,7 +17,7 @@ const SidebarLink = ({href, childRoute = false, children}: sidebarInfo) => {
     const {isSidebarCollapsed} = useSelector((state: RootState) => state.dashboard)
     const pathname = usePathname()
     const isActive = href === pathname
-    console.log(pathname, href)
+    
     if(childRoute){
         return(
             <Link href={href ?? '/'} >
