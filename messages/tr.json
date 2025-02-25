@@ -1,0 +1,19 @@
+
+{
+    "title": "Selam Dünya!",
+    "about": "Hakkında sayfasına gidin",
+    "PASSWORD_CHANGED_SUCCESSFULLY": "Şifre başarıyla değiştirildi",
+    "DONT_WORRY_WE_GOT_YOU_COVERED": "Endişelenme, seni koruduk",
+    "SEND_OTP": "OTP'yi gönder",
+    "PASSWORD": "Şifre",
+    "CONFIRM_PASSWORD": "Şifreyi Onayla",
+    "FORGOT_PASSWORD": "Parolanızı mı unuttunuz",
+    "OTP": "otp",
+    "EMAIL": "E-posta",
+    "LOGIN": "giriş yapmak",
+    "CHANGE_PASSWORD": "Şifre değiştir",
+    "REQUEST_PASSWORD_CHANGE": "Şifre Değişikliği İste",
+    "PLEASE_INPUT_YOUR_EMAIL": "Lütfen e-posta adresinizi girin",
+    "THE_INPUT_IS_NOT_A_VALID_EMAIL": "Giriş geçerli bir e-posta değil",
+    "PLEASE_INPUT_YOUR_OTP": "Lütfen otp'nizi girin"
+}

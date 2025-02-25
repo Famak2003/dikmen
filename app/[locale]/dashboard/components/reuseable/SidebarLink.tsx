@@ -1,9 +1,8 @@
 "use client"
 
+import { Link } from '@/i18n/routing'
 import { RootState } from '@/lib/store'
-import { Tooltip } from 'antd'
 import { Url } from 'next/dist/shared/lib/router/router'
-import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useSelector } from 'react-redux'
 

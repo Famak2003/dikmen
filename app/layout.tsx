@@ -5,7 +5,7 @@ import "./globals.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import {config} from "@fortawesome/fontawesome-svg-core"
-import { StoreProvider } from "./StoreProvider";
+import { StoreProvider } from "../app/StoreProvider";
 config.autoAddCss = false
 
 const geistSans = Geist({

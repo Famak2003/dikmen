@@ -34,6 +34,10 @@ export default {
         navDark: "#1e293b",
         deep_red: "#E51E25"
       },
+      boxShadow: {
+        custom_shad1: "rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px",
+        custome_sha2: "rgb(240, 143, 178, 0.25) 0px 14px 28px, rgb(240, 143, 178, 0.22) 0px 10px 10px"
+      }
     },
   },
   plugins: [],

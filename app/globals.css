@@ -109,6 +109,9 @@ input:focus {
   .subMenuPage-text{
     @apply flex h-full items-center !rounded-none
   }
+  .inputStyle{
+    @apply hover:border-black focus-within:!border-black bg-gray-200
+  }
   /* .ant-menu-submenu{
     @apply !hidden
   }

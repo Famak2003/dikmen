@@ -15,7 +15,7 @@ import Navbar from "./svg/navbar"
 import { useDispatch, useSelector } from "react-redux"
 import { setisSidebarCollapsed, setisSidebarHidden } from "@/lib/slices/dashboardSlice"
 import { RootState } from "@/lib/store"
-import Link from "next/link"
+import { Link } from "@/i18n/routing"
 
 // dropdownRender={(menu) => (
 //     <div className="ring-2 bg-white rounded-lg">

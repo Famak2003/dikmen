@@ -1,0 +1,20 @@
+
+{
+    "PASSWORD_CHANGED_SUCCESSFULLY": "Password chanaged successfully",
+    "PLEASE_INPUT_YOUR_EMAIL": "Please input your email",
+    "THE_INPUT_IS_NOT_A_VALID_EMAIL": "The input is not a valid email",
+    "DONT_WORRY_WE_GOT_YOU_COVERED": "Dont worry we got you covered",
+    "PLEASE_INPUT_YOUR_OTP": "Please input your otp",
+    "PASSWORD": "Password",
+    "CONFIRM_PASSWORD": "Confirm Password",
+    "SEND_OTP": "Send OTP",
+    "FORGOT_PASSWORD": "Forgot Password",
+    "OTP": "otp",
+    "EMAIL": "Email",
+    "LOGIN": "login",
+    "CHANGE_PASSWORD": "Change Password",
+    "REQUEST_PASSWORD_CHANGE": "Request Password Change",
+    "PLEASE_INPUT_YOUR_PASSWORD": "Please input your password",
+    "title": "Hello world!",
+    "about": "Go to the about page"
+}
