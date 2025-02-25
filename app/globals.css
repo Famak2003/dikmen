@@ -11,11 +11,134 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --slate: #475569;
   }
+}
+
+.DisableScrollBar {
+  scroll-behavior: smooth;
+}
+.DisableScrollBar::-webkit-scrollbar {
+  display: none;
+}
+
+.DisableScrollBar::-webkit-scrollbar-thumb {
+  display: none;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* disables input ring on focus */
+input:focus { 
+  outline: none;
+}
+
+.dashboardBody{
+  height: calc(100vh - 74px)
+}
+
+/* Sidebar Menu style */
+/* .ant-menu-submenu-title{
+  border: 2px solid red !important;
+  display: flex !important;
+  align-items: center;
+  min-height: 57px;
+  margin: 0 !important;
+  padding: 0 !important;
+} */
+
+/* .ant-menu-item{
+  display: flex !important;
+  align-items: center;
+  min-height: 57px !important;
+  height: 100% !important;
+
+} */
+
+/* .ant-menu-sub li{
+  max-height: 36px !important;
+  height: 100% !important;
+  border: 2px solid green !important;
+} */
+
+.ant-menu-vertical{
+  border-radius: 0px !important;
+}
+
+@layer components {
+  .navIcon{
+    @apply !text-inherit w-[19px] lmd:w-[24px] h-[19px] lmd:h-[24px] ring-2
+  }
+  .navActions button{
+    @apply flex justify-center items-center h-10 w-10 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-500
+  }
+  .barPosition{
+    @apply flex justify-center gap-4 w-[248px] h-[72px] pt-2
+  }
+  .barPosition li{
+    @apply flex gap-1 justify-between items-center max-h-[40px] ring-slate-300 rounded-md ring-1 py-2 px-4 hover:bg-slate-50 text-sm !text-deep_red
+  }
+  .barPosition li p{
+    @apply text-black
+  }
+  .sidebarPages{
+    @apply flex items-center hover:!bg-deep_red hover:!text-white dark:text-white !w-full !min-h-[57px] !m-0 !py-0 !px-0 !rounded-none border-b dark:border-slate-600
+  }
+  .sidebarSubPages{
+    @apply !rounded-none border-b dark:border-slate-600 
+  }
+  .sidebarSubPages > div {
+    @apply !flex items-center !m-0 !py-0 !px-4 dark:!text-white gap-3 !w-full !rounded-none !min-h-[57px] hover:!bg-deep_red hover:!text-white
+  }
+  .collapsedSidebarSubPages > div {
+    @apply !flex items-center !m-0 !py-0 !pr-0 !pl-2 dark:!text-white gap-3 !w-full !rounded-none !min-h-[57px] hover:!bg-deep_red hover:!text-white
+  }
+  .sidebarSubPages > ul {
+    @apply !bg-gray-100 dark:!bg-slate-500 !border-t dark:border-slate-600
+  }
+  .collapsedSidebarSubPages > ul {
+    @apply !bg-gray-100 dark:!bg-slate-500 !border-t dark:border-slate-600
+  }
+  .subMenuPage{
+    @apply flex gap-4 justify-center items-center !py-0 !px-0 !m-0 !rounded-none !w-full !max-h-[36px] hover:!bg-deep_red hover:!text-white dark:text-white
+  }
+  .subMenuPage-text{
+    @apply flex h-full items-center !rounded-none
+  }
+  .inputStyle{
+    @apply hover:border-black focus-within:!border-black bg-gray-200
+  }
+  /* .ant-menu-submenu{
+    @apply !hidden
+  }
+  .ant-menu-submenu-title{
+    @apply !border !border-red-500
+  }
+  
+  .sidebar ul li span{
+    @apply dark:text-white 
+  }
+  .sidebar ul li ul{
+    @apply !bg-gray-100 dark:!bg-slate-500
+  }
+  .sidebar ul li ul li{
+    @apply !border-none !max-h-[36px]
+  }
+  .ant-menu-sub li{
+    @apply !bg-green-500
+  }
+  .sidebar ul li div{
+    @apply !min-h-[57px] !rounded-none !m-0 !w-full
+  } */
+  i{
+    @apply dark:!text-white
+  }
+  .sidebarNakedIcon{
+    @apply !h-6 !w-6 !text-deep_red dark:!text-white
+  }
+
 }
