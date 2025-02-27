@@ -1,11 +1,11 @@
 'use client'
 
-import { faBars, faBlog, faBullhorn, faCalculator, faCertificate, faChartPie, faFolder, faMouse, faPenFancy, faQuestion, faQuestionCircle, faUser, faUserFriends, faUsers, faUserTie } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faBlog, faBullhorn, faCalculator, faCertificate, faChartPie, faFolder, faMouse, faPenFancy, faQuestion, faQuestionCircle, faSignOut, faUser, faUserFriends, faUsers, faUserTie } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Menu, MenuProps } from "antd";
+import { ConfigProvider, Menu, MenuProps } from "antd";
 import SidebarIcon from "./reuseable/SidebarIcon";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/lib/store";
+import { RootState, useAppSelector } from "@/lib/store";
 import { setisSidebarHidden, setSelectedKey } from "@/lib/slices/dashboardSlice";
 import { redirect } from "next/navigation";
 import SidebarLink from "./reuseable/SidebarLink";
@@ -18,6 +18,9 @@ const Sidebar = () => {
     const {selectedKey, isSidebarCollapsed, isSidebarHidden} = useSelector((state: RootState) => state.dashboard)
     type MenuItem = Required<MenuProps>['items'][number];
     
+    
+    const token = useAppSelector((state: RootState) => state.auth)
+    console.log(token);
 
 
     const handleMenuSelect: MenuProps['onSelect'] = (info: any) => {
@@ -138,6 +141,16 @@ const Sidebar = () => {
                 <FontAwesomeIcon icon={faBars} />
             </button>
             <aside ref={sidebarRef} className={`sidebar DisableScrollBar overflow-scroll pb-20 bg-white dark:bg-slate-800 duration-300 fixed top-[74px] ${ isSidebarHidden ? "left-[-100%]" : "left-0" }  lmd:left-0 lmd:top-0 lmd:relative ${isSidebarCollapsed ? "w-[60px]" : "w-[230px]"} h-full border-r `}>
+            <ConfigProvider
+                theme={{
+                    components: {
+                    Menu: {
+                        itemSelectedBg: "#ef4444",
+                        itemSelectedColor: "white",
+                    },
+                    },
+                }}
+            >
                 <Menu 
                     className="!w-full bg-transparent "
                     mode={isSidebarCollapsed ? "vertical" : "inline"}
@@ -363,7 +376,18 @@ const Sidebar = () => {
                             </SidebarLink>
                         </Menu.Item>
                     </Menu.SubMenu>
+                    <Menu.Item key={""} className={` sidebarPages`} >
+                        <SidebarLink isLogout={true}>
+                            <SidebarIcon>
+                                <FontAwesomeIcon icon={faSignOut} className="sidebarNakedIcon" />
+                            </SidebarIcon>
+                            <p className={` ${isSidebarCollapsed ? "hidden" : " "} `}>
+                                Logout
+                            </p>
+                        </SidebarLink>
+                    </Menu.Item>
                 </Menu>
+            </ConfigProvider>
             </aside>
         </>
     )

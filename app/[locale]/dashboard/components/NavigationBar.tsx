@@ -14,7 +14,7 @@ import { Button, Divider, Dropdown, MenuProps, Space } from "antd"
 import Navbar from "./svg/navbar"
 import { useDispatch, useSelector } from "react-redux"
 import { setisSidebarCollapsed, setisSidebarHidden } from "@/lib/slices/dashboardSlice"
-import { RootState } from "@/lib/store"
+import { RootState, useAppDispatch } from "@/lib/store"
 import { Link } from "@/i18n/routing"
 
 // dropdownRender={(menu) => (
@@ -35,7 +35,7 @@ import { Link } from "@/i18n/routing"
 
 
 const NavigationBar = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const [sidebarPos, setSidebarPos] = useState<string>('sidebar')
     const [darkmode, setDarkmode] = useState<boolean | null>(null)
     const {isSidebarCollapsed, isSidebarHidden} = useSelector((state: RootState) => state.dashboard)

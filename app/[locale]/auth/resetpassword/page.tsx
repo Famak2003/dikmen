@@ -5,8 +5,7 @@ import { Button, Form, Input } from "antd";
 import FormItem from "antd/es/form/FormItem";
 import OTP from "antd/es/input/OTP";
 import axios from "@/axios";
-import React, { useState } from "react";
-// import { toast } from "react-toastify";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "@/i18n/routing";
 import { motion } from "framer-motion";
 import {Link} from "@/i18n/routing";
@@ -14,6 +13,8 @@ import I18N from "@/i18n";
 import toast from "react-hot-toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faMailBulk, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { useChangePasswordMutation, useSendOtpMutation } from "@/lib/api/authApiSlice";
+import { redirect } from "next/navigation";
 type Props = {};
 
 const customizeRequiredMark = (
@@ -29,44 +30,28 @@ const customizeRequiredMark = (
 const page = (props: Props) => {
     const router = useRouter();
     const [form] = Form.useForm();
-    const [sendOTPLoading, setSendOTPLoading] = useState(false);
-    const [changePasswordLoading, setChangePasswordLoading] = useState(false);
+    const [sendOTP,  {isLoading: isSendOTPLoading}] = useSendOtpMutation()
+    const [changePassword,  {isLoading: isChangePasswordLoading, isError, isSuccess: isResetSuccessful}] = useChangePasswordMutation()
 
+    useEffect(() => {
+        if(isResetSuccessful){
+            // router.replace("/auth/login");
+            router.push("/auth/login")
+        }
+    }, [isResetSuccessful])
+
+    console.log(isResetSuccessful);
     const handleSubmit = (values: any) => {
-        setChangePasswordLoading(true);
-        axios.post("/admin/reset-password", {
-            email: form.getFieldValue("email"),
+        changePassword({
             token: form.getFieldValue("otp"),
+            email: form.getFieldValue("email"),
             password: form.getFieldValue("password"),
             password_confirmation: form.getFieldValue("password_confirmation"),
-        }).then((res : any) => {
-            toast.success(<I18N>PASSWORD_CHANGED_SUCCESSFULLY</I18N>);
-            form.resetFields();
-            router.push("/admin/auth/login");
-        }).catch((err : any) => {
-            console.log("ERR", err);
-            if(err?.response?.status === 422){
-                toast.error(err?.response?.data?.message);
-            }
-        }).finally(() => {
-        setChangePasswordLoading(false);
-        });
+        } )
     };
 
-    const sendOTP = () => {
-        setSendOTPLoading(true);
-        axios.post("/admin/send-reset-password-email", {
-            email: form.getFieldValue("email"),
-        }).then((res: any) => {
-            console.log("RES", res);
-        }).catch((err : any) => {
-            console.log("ERR", err);
-            if(err?.response?.status === 422){
-                toast.error(err?.response?.data?.message);
-            } 
-        }).finally(() => {
-            setSendOTPLoading(false);
-        });
+    const handleSendOTP = () => {
+        sendOTP({email: form.getFieldValue("email")})
     };
 
   const validatePassword = (_: any, value: string) => {
@@ -74,11 +59,11 @@ const page = (props: Props) => {
       return Promise.reject(
         <span>
             Password must be:
-            <br /> ✅ At least 2 lowercase letters
-            <br /> ✅ At least 2 uppercase letters
-            <br /> ✅ At least 2 special characters
-            <br /> ✅ At least 2 numbers
-            <br /> ✅ Minimum length of 8 characters!
+            <br /> . At least 2 lowercase letters
+            <br /> . At least 2 uppercase letters
+            <br /> . At least 2 special characters
+            <br /> . At least 2 numbers
+            <br /> . Minimum length of 8 characters!
         </span>
       );
     }
@@ -113,7 +98,7 @@ const page = (props: Props) => {
 
     return (
         <>
-        <motion.section animate={{scale:1}} initial={{scale:0.3}} transition={{duration:0.5}}  className="bg-white relative max-w-[500px] w-[90%] flex flex-col rounded-lg shadow-custom_shad1 p-4">
+        <motion.section animate={{scale:1}} initial={{scale:0.3}} transition={{duration:0.5}}  className={`bg-white ${isError ? "pulse_once" : ""} relative max-w-[500px] w-[90%] flex flex-col rounded-lg shadow-custom_shad1 p-4`}>
             <div className="p-3 rounded-lg grid place-items-center bg-white shadow-shadow-1 w-fit mx-auto mb-4">
                 <UnlockOutlined className="text-2xl text-black" />
             </div>
@@ -147,10 +132,10 @@ const page = (props: Props) => {
                         size="large"
                         prefix={<FontAwesomeIcon icon={faPaperPlane} className=" text-black mr-2" />}
                         suffix={
-                            sendOTPLoading ? (
+                            isSendOTPLoading ? (
                                 <LoadingOutlined className="animate-spin" />
                             ) : (
-                                <div className="cursor-pointer" onClick={sendOTP}>
+                                <div className="cursor-pointer" onClick={handleSendOTP}>
                                 <I18N>SEND_OTP</I18N>
                                 </div>
                             )
@@ -227,11 +212,11 @@ const page = (props: Props) => {
                 </Link>
                 <button type="submit" className="font-medium bg-black h-[39.6px] text-white py-[7px] px-[11px] rounded-sm flex justify-center items-center gap-2">
                     {
-                    changePasswordLoading ? (
-                        <LoadingOutlined className="animate-spin" />
-                    ) : (
-                        <I18N>CHANGE_PASSWORD</I18N>
-                    )
+                        isChangePasswordLoading ? (
+                            <LoadingOutlined className="animate-spin" />
+                        ) : (
+                            <I18N>CHANGE_PASSWORD</I18N>
+                        )
                     }
                 </button>
             </Form>

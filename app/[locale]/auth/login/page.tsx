@@ -5,9 +5,13 @@ import I18N from "@/i18n"
 import { Link } from "@/i18n/routing"
 import { faLock, faPaperPlane, faUser, faUserTie } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { LoadingOutlined } from "@ant-design/icons";
+
 import { Button, Form, Input } from "antd"
 import toast from "react-hot-toast"
 import { motion } from "framer-motion";
+import { useLoginMutation } from "@/lib/api/authApiSlice"
+import { RootState, useAppSelector } from "@/lib/store"
 
 
 interface loginForm {
@@ -16,25 +20,15 @@ interface loginForm {
 }
 
 const Login = () => {
-    // const [form] = Form.useForm()
-
+    const token = useAppSelector((state: RootState) => state.auth)
+    console.log(token);
+    console.log(typeof token.token);
+    
+    const [login, {isLoading, isError, isSuccess, data, error}] = useLoginMutation()
     const handlSubmit = (value : loginForm) => {
-        const _toastId = toast.loading("processing...");
-        axiosInstance.post("/admin/login", {
-            email: value?.email,
-            password: value?.password
-        }).then((res: any) =>{
-            toast.dismiss(_toastId);
-            toast.success("Login Successful")
-            console.log(res)
-        }).catch((err : any) => {
-            toast.dismiss(_toastId);
-            toast.error("problem verifying certificate")
-            console.log(err)
-        })
-
-        console.log(value)
+        login({ email: value.email, password: value.password});
     }
+ 
 
     return(
         <motion.section animate={{scale:1}} initial={{scale:0.3}} transition={{duration:0.5}}  className=" flex justify-center items-center h-full bg-white shadow-custom_shad1 p-4 rounded-sm " >
@@ -81,10 +75,15 @@ const Login = () => {
                         Forgot Password?
                     </Link>
                     <Button className=" hover:border-none hover:!bg-black hover:!text-white !w-full bg-black text-white rounded-none " htmlType="submit" >
-                        <I18N>LOGIN</I18N>
+                        {isLoading ? (
+                            <LoadingOutlined className="animate-spin" />
+                        ) : (
+                            <I18N>LOGIN</I18N>
+                        )}  
                     </Button>
                 </Form.Item>
             </Form>
+            
         </motion.section>
     )
 
