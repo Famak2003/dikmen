@@ -133,7 +133,8 @@ const NavigationBar = () => {
             <div className=" flex flex-row justify-between items-center w-[200px] lmd:w-[290px] " >
                 <button 
                     type="button"
-                    onClick={(e) => e.stopPropagation()} className=" relative h-6 w-6 ">
+                    onClick={(e) => e.stopPropagation()} className=" relative h-6 w-6 "
+                >
                     <Cart/>
                 </button>
                 <Dropdown

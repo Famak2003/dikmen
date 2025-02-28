@@ -46,71 +46,67 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addMatcher(
-        authApiSlice.endpoints.login.matchFulfilled,
-        (state, action : PayloadAction<{token: string, user: {}, message: string }>) => {
-            console.log(action.payload);
-          state.token = action.payload.token;
-          state.user = action.payload.user; 
-          toast.success("login successful");
-          window.location.reload();
-        }
-      )
-      .addMatcher(
-        authApiSlice.endpoints.login.matchRejected,
-        (state, action ) => {
-        const errData = action.payload?.data as LoginErrorResponse;
-          toast.error(errData?.message);
-        }
-      )
-      .addMatcher(
-        authApiSlice.endpoints.logout.matchFulfilled,
-        (state, action) => {
-          state.user = {};
-          state.token = "";
-          clearCookie("token")
-          console.log("From redux");
-          window.location.reload();
-        }
-      )
-      .addMatcher(
-        authApiSlice.endpoints.logout.matchRejected,
-        (state, action) => {
-          const errData = action.payload?.data as LoginErrorResponse;
-          toast.error(errData?.message);
-        }
-      )
-      .addMatcher(
-        authApiSlice.endpoints.sendOtp.matchFulfilled,
-        (state, action) => {
-            toast.success("OTP sent")
-        //   toast.success(<I18N children={"OTP_SENT"} />)
-        }
-      )
-      .addMatcher(
-        authApiSlice.endpoints.sendOtp.matchRejected,
-        (state, action) => {
-          const errData = action.payload?.data as LoginErrorResponse;
-          console.log(" OTP Error ===> ",errData)
-          toast.error(errData?.message);
-        }
-      )
-      .addMatcher(
-        authApiSlice.endpoints.changePassword.matchFulfilled,
-        (state, action) => {
-            toast.success("Password changed")
-        //   toast.success(<I18N children={"OTP_SENT"} />)
-        }
-      )
-      .addMatcher(
-        authApiSlice.endpoints.changePassword.matchRejected,
-        (state, action) => {
-          const errData = action.payload?.data as LoginErrorResponse;
-          console.log(" Change password Error ===> ",errData)
-          toast.error("Something went wrong");
-        }
-      );
-  },
+        .addMatcher(
+            authApiSlice.endpoints.login.matchFulfilled,
+            (state, action : PayloadAction<{token: string, user: {}, message: string }>) => {
+                state.token = action.payload.token;
+                state.user = action.payload.user; 
+                window.location.reload();
+            }
+        )
+        .addMatcher(
+            authApiSlice.endpoints.login.matchRejected,
+            (state, action ) => {
+                const errData = action.payload?.data as LoginErrorResponse;
+                // toast.error(errData?.message);
+            }
+        )
+        .addMatcher(
+            authApiSlice.endpoints.logout.matchFulfilled,
+            (state, action) => {
+                state.user = {};
+                state.token = "";
+                clearCookie("token")
+                window.location.reload();
+            }
+        )
+        .addMatcher(
+            authApiSlice.endpoints.logout.matchRejected,
+            (state, action) => {
+                const errData = action.payload?.data as LoginErrorResponse;
+                // toast.error(errData?.message);
+            }
+        )
+        .addMatcher(
+            authApiSlice.endpoints.sendOtp.matchFulfilled,
+            (state, action) => {
+                // toast.success("OTP sent")
+                //  toast.success(<I18N children={"OTP_SENT"} />)
+            }
+        )
+        .addMatcher(
+            authApiSlice.endpoints.sendOtp.matchRejected,
+            (state, action) => {
+                const errData = action.payload?.data as LoginErrorResponse;
+                console.log(" OTP Error ===> ",errData)
+                toast.error(errData?.message);
+            }
+        )
+        .addMatcher(
+            authApiSlice.endpoints.changePassword.matchFulfilled,
+            (state, action) => {
+                // toast.success("Password changed")
+                // toast.success(<I18N children={"OTP_SENT"} />)
+            }
+        )
+        .addMatcher(
+            authApiSlice.endpoints.changePassword.matchRejected,
+            (state, action) => {
+                const errData = action.payload?.data as LoginErrorResponse;
+                // console.log(" Change password Error ===> ",errData)
+            }
+        );
+    },
 });
 
 export const { setAuthorizationToken, logoutUser } = authSlice.actions;

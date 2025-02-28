@@ -1,10 +1,13 @@
 "use client"
 
+import I18N from '@/i18n'
 import { Link } from '@/i18n/routing'
 import { useLogoutMutation } from '@/lib/api/authApiSlice'
 import { RootState } from '@/lib/store'
 import { Url } from 'next/dist/shared/lib/router/router'
 import { usePathname } from 'next/navigation'
+import { useEffect } from 'react'
+import toast from 'react-hot-toast'
 import { useSelector } from 'react-redux'
 
 interface sidebarInfo {
@@ -19,6 +22,15 @@ const SidebarLink = ({href, childRoute = false, isLogout = false, children}: sid
     const {isSidebarCollapsed} = useSelector((state: RootState) => state.dashboard)
     const pathname = usePathname()
     const isActive = href === pathname
+
+    useEffect(() => {
+        if(isSuccess){
+            toast.success(<I18N>LOGOUT_SUCCESSFUL</I18N>);
+        }
+        if(isError){
+            toast.error(<I18N>SOMETHING_WENT_WRONG</I18N>)
+        }
+    }, [isSuccess, isError])
 
     const handleLogout =() => {
         console.log("logout clicked");

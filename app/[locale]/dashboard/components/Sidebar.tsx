@@ -27,15 +27,6 @@ const Sidebar = () => {
         dispatch(setSelectedKey(info.key))
       };
 
-    const handleLink = (to: string) => {
-        redirect(to)
-    }
-
-    const handleHideSidebar = () => {
-        dispatch(setisSidebarHidden(false))
-        return
-    }
-
     // useOutsideClick({ref: sidebarRef, callback: handleHideSidebar})
 
     // const sidebarData: MenuItem[] = [

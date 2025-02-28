@@ -1,10 +1,12 @@
 import type { Config } from "tailwindcss";
+const flowbite = require("flowbite-react/tailwind");
 
 export default {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    flowbite.content(),
   ],
   theme: {
     extend: {
@@ -13,7 +15,7 @@ export default {
         "lmd": "850px",
         "tab": "950px",
         "ltab": "1100px",
-        "xxl": "1250px",
+        "xxl": "1200px",
         "3xl": "1380px",
         "lmobile": "550px",
         "mobile": "450px",
@@ -32,7 +34,10 @@ export default {
         primary_black: "#000",
         white: "#fff",
         navDark: "#1e293b",
-        deep_red: "#E51E25"
+        deep_red: "#E51E25",
+        base_yellow: "#D7DD17",
+        base_gray: "#757575",
+        dark_yellow: "#6C6F00"
       },
       boxShadow: {
         custom_shad1: "rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px",
@@ -43,6 +48,8 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    flowbite.plugin(), // Correctly imported as a require statement
+  ],
   darkMode: 'class'
 } satisfies Config;

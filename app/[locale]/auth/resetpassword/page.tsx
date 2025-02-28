@@ -30,17 +30,26 @@ const customizeRequiredMark = (
 const page = (props: Props) => {
     const router = useRouter();
     const [form] = Form.useForm();
-    const [sendOTP,  {isLoading: isSendOTPLoading}] = useSendOtpMutation()
-    const [changePassword,  {isLoading: isChangePasswordLoading, isError, isSuccess: isResetSuccessful}] = useChangePasswordMutation()
+    const [sendOTP,  {isLoading: isSendOTPLoading, isError: isOTPError, isSuccess: isOTPSuccess}] = useSendOtpMutation()
+    const [changePassword,  {isLoading: isResetLoading, isError: isResetError, isSuccess: isResetSuccessful}] = useChangePasswordMutation()
 
     useEffect(() => {
         if(isResetSuccessful){
-            // router.replace("/auth/login");
+            toast.success(<I18N>PASSWORD_CHANGED</I18N>);
             router.push("/auth/login")
         }
-    }, [isResetSuccessful])
+        if(isResetError){
+            toast.error(<I18N>SOMETHING_WENT_WRONG</I18N>);
+        }
+        if(isOTPSuccess){
+            toast.success(<I18N>OTP_SENT</I18N>);
+        }
+        if(isOTPError){
+            toast.error(<I18N>SOMETHING_WENT_WRONG</I18N>);
+        }
+    }, [isResetSuccessful, isResetError, isOTPError])
 
-    console.log(isResetSuccessful);
+
     const handleSubmit = (values: any) => {
         changePassword({
             token: form.getFieldValue("otp"),
@@ -98,7 +107,7 @@ const page = (props: Props) => {
 
     return (
         <>
-        <motion.section animate={{scale:1}} initial={{scale:0.3}} transition={{duration:0.5}}  className={`bg-white ${isError ? "pulse_once" : ""} relative max-w-[500px] w-[90%] flex flex-col rounded-lg shadow-custom_shad1 p-4`}>
+        <motion.section animate={{scale:1}} initial={{scale:0.3}} transition={{duration:0.5}}  className={`bg-white ${isResetError ? "pulse_once" : ""} relative max-w-[500px] w-[90%] flex flex-col rounded-lg shadow-custom_shad1 p-4`}>
             <div className="p-3 rounded-lg grid place-items-center bg-white shadow-shadow-1 w-fit mx-auto mb-4">
                 <UnlockOutlined className="text-2xl text-black" />
             </div>
@@ -212,7 +221,7 @@ const page = (props: Props) => {
                 </Link>
                 <button type="submit" className="font-medium bg-black h-[39.6px] text-white py-[7px] px-[11px] rounded-sm flex justify-center items-center gap-2">
                     {
-                        isChangePasswordLoading ? (
+                        isResetLoading ? (
                             <LoadingOutlined className="animate-spin" />
                         ) : (
                             <I18N>CHANGE_PASSWORD</I18N>

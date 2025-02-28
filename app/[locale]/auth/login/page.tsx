@@ -12,6 +12,7 @@ import toast from "react-hot-toast"
 import { motion } from "framer-motion";
 import { useLoginMutation } from "@/lib/api/authApiSlice"
 import { RootState, useAppSelector } from "@/lib/store"
+import { useEffect } from "react"
 
 
 interface loginForm {
@@ -28,6 +29,15 @@ const Login = () => {
     const handlSubmit = (value : loginForm) => {
         login({ email: value.email, password: value.password});
     }
+
+    useEffect(() => {
+        if(isSuccess){
+            toast.success(<I18N>LOGIN_SUCCESSFUL</I18N>);
+        }
+        if(isError){
+            toast.error(<I18N>SOMETHING_WENT_WRONG</I18N>)
+        }
+    }, [isSuccess, isError])
  
 
     return(

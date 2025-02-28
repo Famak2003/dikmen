@@ -38,7 +38,12 @@ input:focus {
 }
 
 .dashboardBody{
+  /* background-size: ; */
   height: calc(100vh - 74px)
+}
+
+#carousel > div{
+  border-radius: 0 !important;
 }
 
 /* Sidebar Menu style */
@@ -139,6 +144,9 @@ input:focus {
   }
   .sidebarNakedIcon{
     @apply !h-6 !w-6 !text-deep_red dark:!text-white
+  }
+  .socialLink{
+    @apply flex justify-center items-center h-[25px] w-[25px] bg-gray-200 hover:bg-white hover:ring-1 hover:ring-gray-300 duration-300
   }
 
 }
