@@ -34,33 +34,30 @@ const geistSans = Geist({
   })
   
  
-export default async function RootLayout({
-  children,
-  params
-}: {
-  children: React.ReactNode;
-  params: {locale: string};
-}) {
-    const awaitParams = await params
-    const locale = awaitParams?.locale; 
-    // Ensure that the incoming `locale` is valid
-    if (!routing.locales.includes(locale as any)) {
-        notFound();
-    }
-    
-    // Providing all messages to the client
-    // side is the easiest way to get started
-    const messages = await getMessages();
-    
-    return (
-        <html lang={locale}>
-            <body className={` ${lato.className} `} >
-                <NextIntlClientProvider messages={messages}>
-                    <StoreProvider>
-                        {children}
-                    </StoreProvider>
-                </NextIntlClientProvider>
-            </body>
-        </html>
-    );
-}
+  export default async function RootLayout({
+    children,
+    params
+  }: any) {
+      const locale = (params as { locale: string }).locale;
+  
+      // Ensure that the incoming `locale` is valid
+      if (!routing.locales.includes(locale as any)) {
+          notFound();
+      }
+  
+      const messages = await getMessages();
+  
+      return (
+          <html lang={locale}>
+              <body className={` ${lato.className} `}>
+                  <NextIntlClientProvider messages={messages}>
+                      <StoreProvider>
+                          {children}
+                      </StoreProvider>
+                  </NextIntlClientProvider>
+              </body>
+          </html>
+      );
+  }
+  
+  
