@@ -12,6 +12,7 @@
     --background: #0a0a0a;
     --foreground: #ededed;
     --slate: #475569;
+    --base_yellow: #D7DD17
   }
 }
 
@@ -30,6 +31,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  /* background-size: ; */
 }
 
 /* disables input ring on focus */
@@ -37,8 +39,17 @@ input:focus {
   outline: none;
 }
 
+.input:focus {
+  outline: none;
+}
+
 .dashboardBody{
+  /* background-size: ; */
   height: calc(100vh - 74px)
+}
+
+#carousel > div{
+  border-radius: 0 !important;
 }
 
 /* Sidebar Menu style */
@@ -67,6 +78,15 @@ input:focus {
 
 .ant-menu-vertical{
   border-radius: 0px !important;
+}
+
+.ant-tooltip-inner{
+  background: var(--base_yellow) !important;
+  color: #0a0a0a !important;
+}
+
+.ant-tooltip-arrow ::before{
+  background: var(--base_yellow) !important ;
 }
 
 @layer components {
@@ -109,6 +129,9 @@ input:focus {
   .subMenuPage-text{
     @apply flex h-full items-center !rounded-none
   }
+  .inputStyle{
+    @apply hover:border-black focus-within:!border-black bg-gray-200
+  }
   /* .ant-menu-submenu{
     @apply !hidden
   }
@@ -136,6 +159,15 @@ input:focus {
   }
   .sidebarNakedIcon{
     @apply !h-6 !w-6 !text-deep_red dark:!text-white
+  }
+  .socialLink{
+    @apply flex justify-center items-center h-[25px] w-[25px] bg-gray-200 hover:bg-white hover:ring-1 hover:ring-gray-300 duration-300
+  }
+  .footerSocialLink{
+    @apply flex justify-center items-center h-[25px] w-[25px]  hover:bg-white hover:ring-1 hover:ring-gray-300 duration-300
+  }
+  .text{
+    @apply text-[14px]
   }
 
 }
