@@ -151,7 +151,7 @@ export default function Public() {
                     </div>
                 </div>
                 <div className=" flex justify-between flex-1 pt-[120px] w-screen max-w-[1170px] ">
-                    <div className=" flex w-[70%] justify-between ">
+                    <div className=" grid grid-cols-4 w-[70%] justify-between ">
                         {
                             footerLeftData.map((obj, idx) => {
                                 return(
