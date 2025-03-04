@@ -66,19 +66,19 @@ const Hero = () => {
                 }
 
             </Carousel>
-            <div className=" flex absolute bottom-[-60px] left-[50%] translate-x-[-50%] bg-white h-[120px] w-screen max-w-[1170px] ring-1 ring-dark_yellow ">
+            <div className=" flex absolute bottom-[-60px] left-[50%] translate-x-[-50%] bg-white h-[90px] md:h-[120px] w-screen max-w-[1170px] ring-1 ring-dark_yellow ">
                 <button className=" flex-1 flex justify-center items-center bg-base_yellow  ">
                     <FontAwesomeIcon className=" text-dark_yellow " icon={faChevronLeft} />
                 </button>
-                <ul className=" flex justify-between items-center max-w-[1060px] w-[90%] px-4 " >
+                <ul className=" flex items-center max-w-[1060px] w-[90%] h-full overflow-x-scroll px-4 " >
                     {
                         carouselBarData.map((obj, idx) => {
                             const writeupText = <I18N>{obj.writeup}</I18N>
                             const isLast = (carouselBarData.length - 1) === idx
                             return(
-                                <>
-                                    <li key={idx} className=" cursor-pointer flex flex-col justify-center items-center gap-1 px-2 xl:px-4 ">
-                                        <figure className=" relative  h-[28px] w-[40px] ">
+                                <li className=" flex items-center justify-center min-w-[120px] h-full ">
+                                    <div key={idx} className=" cursor-pointer flex flex-col justify-center items-center md:gap-1 px-2 xl:px-4 ">
+                                        <figure className=" relative h-[20px] md:h-[28px] w-[30px] md:w-[40px] ">
                                             <Image className="object-contain" src={obj.image} alt="icon" fill />
                                         </figure>
                                         <h2 title="hhhhhfhf" className=" text-center text-[13px] font-semibold text-light_dark_yellow ">
@@ -92,9 +92,9 @@ const Hero = () => {
                                             </I18N>
                                         </p>
                                         
-                                    </li>
+                                    </div>
                                     <hr className={` h-[25%] border ${isLast ? " hidden " : ""} `} />
-                                </>
+                                </li>
                             )
                         })
                     }
