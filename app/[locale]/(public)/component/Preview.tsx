@@ -128,7 +128,7 @@ const Preview = () => {
     ]
     
     return(
-        <div className=" flex flex-col tab:flex-row gap-4 tab:gap-0 bg-section_bg  w-screen max-w-[1170px] min-h-[475px] mt-[120px] tab:mt-[180px] lg:mt-[150px] px-2 xl:px-0 " >
+        <div className=" flex flex-col tab:flex-row gap-4 tab:gap-0 bg-section_bg section min-h-[475px] mt-[40px] md:mt-[90px] tab:mt-[180px] lg:mt-[150px] " >
             <div className=" flex flex-col w-full tab:w-[40%] h-full text-gray-500 ">
                 <ul className=" flex justify-start items-center gap-4 h-[73px] w-full bg-white px-3 tab:pr-3 xl:pr-10 " >
                     {
@@ -159,7 +159,7 @@ const Preview = () => {
                                             <Image src={SMALLNEWS} fill alt="events" />
                                         </figure>
                                     </div>
-                                    <p className=" text-[16px] " >
+                                    <p className=" text16 " >
                                         {obj.title}
                                     </p>
                                 </li>

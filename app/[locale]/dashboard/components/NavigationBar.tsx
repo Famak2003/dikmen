@@ -176,7 +176,7 @@ const NavigationBar = () => {
                                         <small className=" block text-black">az once</small>
                                     </div>
                                 </li>
-                                <div className=" text-center text-[16px] py-2 " >
+                                <div className=" text-center text16 py-2 " >
                                     Tümünü gör
                                 </div>
                             </ul>

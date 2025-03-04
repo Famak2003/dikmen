@@ -46,7 +46,9 @@ export default {
       },
       boxShadow: {
         custom_shad1: "rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px",
-        custome_sha2: "rgb(240, 143, 178, 0.25) 0px 14px 28px, rgb(240, 143, 178, 0.22) 0px 10px 10px"
+        custom_shad2: "rgb(88, 88, 88, 0.25) 0px -12px 10px, rgb(88, 88, 88, 0.22) 0px -12px 10px",
+        custom_shad3: " 0px -11px 18px -4px, rgba(88, 88, 88, 1)"
+
       },
       animation: {
         "pulse_once": "pulse 2s ease-in-out 1",
