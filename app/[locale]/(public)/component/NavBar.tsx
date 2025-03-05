@@ -180,7 +180,7 @@ const NavBar = () => {
                             </ul>
                         </div>
                         <hr className=" w-full "/>
-                        <ul className=" flex flex-col md:flex-row justify-between items-center gap-3 text-sm lg:text-base text-base_gray " >
+                        <ul className=" flex flex-col md:flex-row justify-between items-center gap-2 tab:gap-3 text-sm lg:text-base text-base_gray " >
                             {
                                 navLinks.map((obj,idx) => {
                                     return(
@@ -194,10 +194,10 @@ const NavBar = () => {
 
                     </div>
                     <div className=" flex justify-center w-fit h-fit lmd:bg-base_yellow rounded-md text " >
-                        <div className=" hidden lmd:flex flex-col gap-2 justify-center w-full max-w-[160px] h-[70px] text-dark_yellow p-1 px-5">
-                            <button><I18N>INQUIRE_DEBT</I18N></button>
+                        <div className=" hidden lmd:flex flex-col gap-2 justify-center w-full max-w-[160px] h-[70px] text-dark_yellow p-1 px-2 tab:px-5">
+                            <button className=" "><I18N>INQUIRE_DEBT</I18N></button>
                             <hr/>
-                            <button><I18N>SUBSCRIBER_NUMBER</I18N></button>
+                            <button className=" "><I18N>SUBSCRIBER_NUMBER</I18N></button>
                         </div>
                         <Dropdown
                             className=""
