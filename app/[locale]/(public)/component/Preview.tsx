@@ -1,8 +1,9 @@
 "use client"
 
 import I18N from "@/i18n"
-import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons"
+import { faChevronLeft, faChevronRight, faEye } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Tooltip } from "antd"
 import { useTranslations } from "next-intl"
 import Image from "next/image"
 import { useMemo, useState } from "react"
@@ -99,6 +100,7 @@ const SMALLNEWS = '/assets/smallNews.png'
 
 const Preview = () => {
     const t = useTranslations()
+    const [currentPage, setCurrentPage] = useState<null | number>(null)
     const [currentDisplay, setCurrentDisplay] = useState("news")
     const displayData = useMemo(() => filterPreview(previewData, currentDisplay), [currentDisplay])
 
@@ -126,11 +128,24 @@ const Preview = () => {
             id: "projects"
         },
     ]
+
+    const pageNum = [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+    ]
     
     return(
         <div className=" flex flex-col tab:flex-row gap-4 tab:gap-0 bg-section_bg section min-h-[475px] mt-[140px] tab:mt-[180px] lg:mt-[150px] " >
             <div className=" flex flex-col w-full tab:w-[40%] h-full text-gray-500 ">
-                <ul className=" flex justify-start items-center gap-2 mobile:gap-4 h-[73px] w-full bg-white px-3 tab:pr-3 xl:pr-10 " >
+                <ul className=" flex justify-start items-center gap-2 mobile:gap-4 h-[73px] w-full bg-white px-3 tab:pr-3 xl:pr-10 transition-all duration-300" >
                     {
                         eventsData.map((obj, idx) => {
                             return(
@@ -181,47 +196,33 @@ const Preview = () => {
                     </p> 
                 </div>
                 <div className=" flex items-center justify-between flex-1 h-[73px] border-t border-body_bg ">
-                    <div className=" flex justify-center items-center h-[100%] w-[60px] bg-base_yellow "><FontAwesomeIcon className=" text-white " icon={faChevronLeft} /></div>
+                    <div className=" flex justify-center items-center h-[100%] w-[40px] sm:w-[60px] bg-base_yellow "><FontAwesomeIcon className=" text-white " icon={faChevronLeft} /></div>
                     <div className=" flex justify-between gap-2 items-center py-2 w-full " >
-                        <ul className=" flex justify-between items-center text-text_light_gray w-[75%] px-8 h-full " >
-                            <li className="  " >
-                                1
-                            </li>
-                            <li>
-                                2
-                            </li>
-                            <li>
-                                3
-                            </li>
-                            <li>
-                                4
-                            </li>
-                            <li>
-                                5
-                            </li>
-                            <li>
-                                6
-                            </li>
-                            <li>
-                                7
-                            </li>
-                            <li>
-                                8
-                            </li>
-                            <li>
-                                9
-                            </li>
-                            <li>
-                                10
-                            </li>
+                        <ul className=" flex justify-between items-center text-text_light_gray flex-1 " >
+                            {
+                                pageNum.map((num, idx) => {
+                                    return (
+                                        <li onClick={() => setCurrentPage(idx)} key={idx} className={` text-center h-full w-10/12 text-[15px] sm:text-[18px] md:font-semibold hover:bg-text_light_gray hover:text-white ${currentPage === idx ? "bg-base_yellow text-light_dark_yellow" : ""} transition-all duration-300 `} >
+                                            {num}
+                                        </li>
+                                    )
+                                })
+                            }
                         </ul>
-                        <div className=" flex justify-center items-center h-full w-[25%] px- border-l ">
-                            <I18N>
-                                ALL_NEWS
-                            </I18N>
+                        <div className=" flex justify-center items-center h-full w-fit px-4 lmobile:px-0 lmobile:w-[25%] px- border-l text-dark_yellow text-[14px] font-semibold ">
+                            <p className=" hidden lmobile:block ">
+                                <I18N>
+                                    ALL_NEWS
+                                </I18N>
+                            </p>
+                            <p className="  lmobile:hidden">
+                                <Tooltip placement="bottom" title={<p><I18N>ALL_NEWS</I18N></p>}>
+                                    <FontAwesomeIcon icon={faEye} />
+                                </Tooltip>
+                            </p>
                         </div>
                     </div>
-                    <div className=" flex justify-center items-center h-full w-[60px] bg-base_yellow "><FontAwesomeIcon className=" text-white " icon={faChevronRight} /></div>
+                    <div className=" flex justify-center items-center h-full w-[40px] sm:w-[60px] bg-base_yellow "><FontAwesomeIcon className=" text-white " icon={faChevronRight} /></div>
                 </div>
             </div>
         </div>

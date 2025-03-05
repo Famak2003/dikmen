@@ -19,6 +19,7 @@ import FooterStrip from "./component/FooterStrip";
 import { title } from "process";
 import Footer from "./component/Footer";
 import Socials from "./component/reusables/Socials";
+import MayorStripe from "./component/MayorStripe";
 const DIKMENLOGO2 =  '/static/svg/floatingLogo.svg'
 const LINKEDIN =  '/assets/linkedin.png'
 const FACEBOOK =  '/assets/facebook.png'
@@ -35,43 +36,28 @@ const instaSVG = '/static/svg/insta.svg'
 
 export default function Public() {
 
-
-    const MayorStripe = [
-        {
-            title: "RESUME",
-            link: "#"
-        },
-        {
-            title: "MESSAGE_FROM_THE_PRESIDENT",
-            link: "#"
-        },
-        {
-            title: "MESSAGE_TO_THE_PRESIDENT",
-            link: "#"
-        },
-        {
-            title: "",
-            social: true
-        }
-    ]
-
-    const beInformedData = [
-        {
-            title: "CALL_US",
-            info: "+90 392 237 26 18",
-            icon: HEADPHONES
-        },
-        {
-            title: "WHATSAPP_LINE", 
-            info: "+90 555 555 55 55",
-            icon: WHATSAPP
-        },
-        {
-            title: "OUR_EMAIL_ADDRESS", 
-            info: "info@dikmenbelediyesi.com",
-            icon: MAIL
-        },
-    ]
+const ourFeaturesData = [
+    {
+        title: "OUR_SERVICES",
+        writeup: "Lorem Ipsum pasajlarının birçok çeşitlemesi vardır. Ancak bunların büyük bir çoğunluğu mizahtır.",
+        image: "/assets/services.png"
+    },
+    {
+        title: "STUDIES",
+        writeup: "Lorem Ipsum pasajlarının birçok çeşitlemesi vardır. Ancak bunların büyük bir çoğunluğu mizahtır.",
+        image: "/assets/studies.png"
+    },
+    {
+        title: "COURSES",
+        writeup: "Lorem Ipsum pasajlarının birçok çeşitlemesi vardır. Ancak bunların büyük bir çoğunluğu mizahtır.",
+        image: "/assets/course.png"
+    },
+    {
+        title: "CULTURE",
+        writeup: "Lorem Ipsum pasajlarının birçok çeşitlemesi vardır. Ancak bunların büyük bir çoğunluğu mizahtır.",
+        image: "/assets/culture.png"
+    },
+]
 
     return (
         <section className=" relative flex flex-col justify-center items-center bg-primary_light_grey " >
@@ -80,54 +66,34 @@ export default function Public() {
             <div className=" flex flex-col gap-24 justify-center items-center " >
                 <Preview/>
                 <WhatsApp/>
-                <section id="mayorStrip" className="  flex justify-center items-center w-screen mt-10 shadow-custom_shad2  ">
-                    <div className=" flex flex-col tab:flex-row justify-between gap-[2%] w-full h-fit tab:section bg-white ">
-                        <div className=" flex items-center h-[75px] w-full justify-center tab:justify-normal tab:w-[37%] xl:w-[33%] gap-2 ltab:gap-5 pr-2 ">
-                            <div className=" flex justify-center items-center h-full ">
-                                <figure className=" relative h-full w-[110px] sm:w-[131px] ">
-                                    <Image 
-                                        className=" absolute bottom-0 w-[110px] h-[130px] sm:w-[131px] sm:h-[150px] "
-                                        width={131}
-                                        height={150}
-                                        src={MAYOR} 
-                                        alt="mayor"
-                                    />
-                                </figure>
-                            </div>
-                            <div className=" h-full flex flex-col justify-center items-center  ">
-                                <h1 className=" text-light_dark_yellow text-[28px] sm:text-[32px] ltab:text-[36px] font-semibold truncate w-full max-w-[250px] ">
-                                    <I18N>YUKSEL_CELEBI</I18N>
-                                </h1>
-                                <hr className=" w-full " />
-                                <h2 className=" text-[14px] sm:text-[15px] text-gray-400 font-semibold ">
-                                    <I18N>MAYOR_OF_DIKMEN</I18N>
-                                </h2>
-                            </div>
-                        </div>
-                        <div id="mayorStripList" className=" w-full xl:w-[65%] h-[110px] mobile:h-[100px] md:h-[75px] pl-4 pr-4 tab:pl-5 xl:pl-3 flex justify-between gap-1 bg-base_yellow ">
-                            <ul  className=" flex-1 flex flex-wrap gap-2 md:gap-0 md:flex-row items-center justify-center md:justify-between tab:justify-normal " >
-                                {
-                                    MayorStripe.map((obj, idx) => {
-                                        const isLast = (MayorStripe.length - 1) === idx
-                                        return(
-                                            <li className={` flex justify-center items-center text-[13px] font-semibold  max-h-[25px] md:w-1/4 tab:w-fit truncate border-light_dark_yellow px-4 xl:px-8 text-dark_yellow ${isLast ? "" : "border-r"}  `} key={idx}>
-                                                {
-                                                    obj.social ? (
-                                                        <Socials className=" gap-4 " width="17px" height="17px" color="bg-base_yellow"/>
-                                                    ) : (
-                                                        <I18N>{obj.title}</I18N>
-                                                    )
-                                                }
-                                            </li>
-                                        )
-                                    })
-                                }
-                            </ul>
-                            <div className=" flex justify-center items-center bg-white h-[30px] text-light_dark_yellow aspect-square ">
-                                <FontAwesomeIcon icon={faAngleDown} />
-                            </div>
-                        </div>
-                    </div>
+                <MayorStripe/>
+                <section className=" section ">
+                    <ul className=" w-full h-fit flex flex-wrap tab:flex-nowrap justify-center items-center gap-2 " >
+                        {
+                            ourFeaturesData.map((obj, idx) => {
+                                return(
+                                    <li key={idx} className=" flex flex-col justify-center items-center max-w-[290px] min-w-[220px] w-1/4 h-fit gap-3 bg-section_bg pb-6 " >
+                                        <figure className=" w-full h-[285px] ">
+                                            <Image
+                                                className=" object-cover w-full h-full "
+                                                width={290}
+                                                height={285} 
+                                                src={obj.image} 
+                                                alt="our features"
+                                            />
+                                        </figure>
+                                        <div className=" flex flex-col gap-2 px-6">
+                                            <h1 className=" text16 font-semibold text-light_dark_yellow w-fit " > {obj.title} </h1>
+                                            <hr className=" max-w-[120px] border-light_dark_yellow " />
+                                            <p className=" text-secondary_gray text-left mt-1" >
+                                                {obj.writeup}
+                                            </p>
+                                        </div>
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
                 </section>
                 <Footer/>
 
