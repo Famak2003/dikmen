@@ -32,6 +32,7 @@ const facebookSVG = '/static/svg/facebook.svg'
 const xSVG = '/static/svg/x.svg'
 const instaSVG = '/static/svg/insta.svg'
 
+
 export default function Public() {
 
 
@@ -72,63 +73,65 @@ export default function Public() {
         },
     ]
 
-
     return (
-        <section className=" relative flex flex-col justify-center items-center gap-32 bg-primary_light_grey " >
+        <section className=" relative flex flex-col justify-center items-center bg-primary_light_grey " >
             <NavBar/>
             <Hero/>
-            <Preview/>
-            <WhatsApp/>
-            <div className="  flex justify-center items-center w-screen mt-10 shadow-custom_shad2  ">
-                <div className=" w-full h-[75px] pl-[6%] flex gap-4 ">
-                    <div className=" flex items-center h-full gap-5 pr-2 ring-2 ">
-                        <figure className=" relative h-full w-[131px] ">
-                            <Image 
-                                className=" absolute bottom-0 "
-                                width={131}
-                                height={150}
-                                // fill 
-                                // sizes="(max-width: 768px) 100px, (max-width: 1200px) 100px, 100px"
-                                src={MAYOR} 
-                                alt="mayor"
-                            />
-                        </figure>
-                        <div className=" h-full flex flex-col justify-center items-center ring-2 ">
-                            <h1 className=" text-light_dark_yellow text-[36px] font-semibold truncate w-full max-w-[250px] ring-2 ">
-                                <I18N>YUKSEL_CELEBI</I18N>
-                            </h1>
-                            <hr className=" w-full " />
-                            <h2 className=" text-[15px] text-gray-400 font-semibold ">
-                                <I18N>MAYOR_OF_DIKMEN</I18N>
-                            </h2>
+            <div className=" flex flex-col gap-32 justify-center items-center " >
+                <Preview/>
+                <WhatsApp/>
+                <div id="mayorStrip" className="  flex justify-center items-center w-screen mt-10 shadow-custom_shad2  ">
+                    <div id="mayorStripList" className=" w-full h-[75px] flex justify-between gap-4 section">
+                        <div className=" flex items-center h-full w-[30%] gap-5 pr-2 ">
+                            <figure className=" relative h-full w-[131px] ">
+                                <Image 
+                                    className=" absolute bottom-0 "
+                                    width={131}
+                                    height={150}
+                                    // fill 
+                                    // sizes="(max-width: 768px) 100px, (max-width: 1200px) 100px, 100px"
+                                    src={MAYOR} 
+                                    alt="mayor"
+                                />
+                            </figure>
+                            <div className=" h-full flex flex-col justify-center items-center  ">
+                                <h1 className=" text-light_dark_yellow text-[36px] font-semibold truncate w-full max-w-[250px] ">
+                                    <I18N>YUKSEL_CELEBI</I18N>
+                                </h1>
+                                <hr className=" w-full " />
+                                <h2 className=" text-[15px] text-gray-400 font-semibold ">
+                                    <I18N>MAYOR_OF_DIKMEN</I18N>
+                                </h2>
+                            </div>
                         </div>
-                    </div>
-                    <div id="mayorStripList" className=" ring-2 flex-1 flex justify-between gap-3 pl-10 bg-base_yellow ">
-                        <ul  className=" flex-1 flex items-center ring-2  " >
-                            {
-                                MayorStripe.map((obj, idx) => {
-                                    const isLast = (MayorStripe.length - 1) === idx
-                                    return(
-                                        <li className={` text-[13px] font-semibold  max-h-[25px] w-fit truncate border-light_dark_yellow px-8 text-dark_yellow ${isLast ? "" : "border-r"}  `} key={idx}>
-                                            {
-                                                obj.social ? (
-                                                     <Socials className=" gap-4 " color="bg-base_yellow"/>
-                                                ) : (
-                                                    <I18N>{obj.title}</I18N>
-                                                )
-                                            }
-                                        </li>
-                                    )
-                                })
-                            }
-                        </ul>
-                        <div className=" flex justify-center items-center bg-white h-[30px] text-light_dark_yellow aspect-square ">
-                            <FontAwesomeIcon icon={faAngleDown} />
+                        <div className=" flex-1 flex justify-between gap-3 pl-10 ">
+                            <ul  className=" flex-1 flex items-center  " >
+                                {
+                                    MayorStripe.map((obj, idx) => {
+                                        const isLast = (MayorStripe.length - 1) === idx
+                                        return(
+                                            <li className={` text-[13px] font-semibold  max-h-[25px] w-fit truncate border-light_dark_yellow px-8 text-dark_yellow ${isLast ? "" : "border-r"}  `} key={idx}>
+                                                {
+                                                    obj.social ? (
+                                                        <Socials className=" gap-4 " color="bg-base_yellow"/>
+                                                    ) : (
+                                                        <I18N>{obj.title}</I18N>
+                                                    )
+                                                }
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+                            <div className=" flex justify-center items-center bg-white h-[30px] text-light_dark_yellow aspect-square ">
+                                <FontAwesomeIcon icon={faAngleDown} />
+                            </div>
                         </div>
                     </div>
                 </div>
+                <Footer/>
+
             </div>
-            <Footer/>
         </section>
     )
 }
