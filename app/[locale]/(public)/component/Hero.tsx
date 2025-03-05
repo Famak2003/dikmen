@@ -70,13 +70,13 @@ const Hero = () => {
                 <button className=" flex-1 flex justify-center items-center bg-base_yellow  ">
                     <FontAwesomeIcon className=" text-dark_yellow " icon={faChevronLeft} />
                 </button>
-                <ul className=" flex items-center max-w-[1060px] w-[90%] h-full overflow-x-scroll px-4 " >
+                <ul className=" flex items-center max-w-[1060px] w-[90%] h-full overflow-x-scroll px-4" >
                     {
                         carouselBarData.map((obj, idx) => {
                             const writeupText = <I18N>{obj.writeup}</I18N>
                             const isLast = (carouselBarData.length - 1) === idx
                             return(
-                                <li className=" flex items-center justify-center min-w-[120px] h-full ">
+                                <li className=" flex items-center justify-center min-w-[120px] w-1/6 h-full ">
                                     <div key={idx} className=" cursor-pointer flex flex-col justify-center items-center md:gap-1 px-2 xl:px-4 ">
                                         <figure className=" relative h-[20px] md:h-[28px] w-[30px] md:w-[40px] ">
                                             <Image className="object-contain" src={obj.image} alt="icon" fill />

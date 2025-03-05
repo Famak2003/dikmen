@@ -77,43 +77,43 @@ export default function Public() {
         <section className=" relative flex flex-col justify-center items-center bg-primary_light_grey " >
             <NavBar/>
             <Hero/>
-            <div className=" flex flex-col gap-32 justify-center items-center " >
+            <div className=" flex flex-col gap-24 justify-center items-center " >
                 <Preview/>
                 <WhatsApp/>
-                <div id="mayorStrip" className="  flex justify-center items-center w-screen mt-10 shadow-custom_shad2  ">
-                    <div id="mayorStripList" className=" w-full h-[75px] flex justify-between gap-4 section">
-                        <div className=" flex items-center h-full w-[30%] gap-5 pr-2 ">
-                            <figure className=" relative h-full w-[131px] ">
-                                <Image 
-                                    className=" absolute bottom-0 "
-                                    width={131}
-                                    height={150}
-                                    // fill 
-                                    // sizes="(max-width: 768px) 100px, (max-width: 1200px) 100px, 100px"
-                                    src={MAYOR} 
-                                    alt="mayor"
-                                />
-                            </figure>
+                <section id="mayorStrip" className="  flex justify-center items-center w-screen mt-10 shadow-custom_shad2  ">
+                    <div className=" flex flex-col tab:flex-row justify-between gap-[2%] w-full h-fit tab:section bg-white ">
+                        <div className=" flex items-center h-[75px] w-full justify-center tab:justify-normal tab:w-[37%] xl:w-[33%] gap-2 ltab:gap-5 pr-2 ">
+                            <div className=" flex justify-center items-center h-full ">
+                                <figure className=" relative h-full w-[110px] sm:w-[131px] ">
+                                    <Image 
+                                        className=" absolute bottom-0 w-[110px] h-[130px] sm:w-[131px] sm:h-[150px] "
+                                        width={131}
+                                        height={150}
+                                        src={MAYOR} 
+                                        alt="mayor"
+                                    />
+                                </figure>
+                            </div>
                             <div className=" h-full flex flex-col justify-center items-center  ">
-                                <h1 className=" text-light_dark_yellow text-[36px] font-semibold truncate w-full max-w-[250px] ">
+                                <h1 className=" text-light_dark_yellow text-[28px] sm:text-[32px] ltab:text-[36px] font-semibold truncate w-full max-w-[250px] ">
                                     <I18N>YUKSEL_CELEBI</I18N>
                                 </h1>
                                 <hr className=" w-full " />
-                                <h2 className=" text-[15px] text-gray-400 font-semibold ">
+                                <h2 className=" text-[14px] sm:text-[15px] text-gray-400 font-semibold ">
                                     <I18N>MAYOR_OF_DIKMEN</I18N>
                                 </h2>
                             </div>
                         </div>
-                        <div className=" flex-1 flex justify-between gap-3 pl-10 ">
-                            <ul  className=" flex-1 flex items-center  " >
+                        <div id="mayorStripList" className=" w-full xl:w-[65%] h-[110px] mobile:h-[100px] md:h-[75px] pl-4 pr-4 tab:pl-5 xl:pl-3 flex justify-between gap-1 bg-base_yellow ">
+                            <ul  className=" flex-1 flex flex-wrap gap-2 md:gap-0 md:flex-row items-center justify-center md:justify-between tab:justify-normal " >
                                 {
                                     MayorStripe.map((obj, idx) => {
                                         const isLast = (MayorStripe.length - 1) === idx
                                         return(
-                                            <li className={` text-[13px] font-semibold  max-h-[25px] w-fit truncate border-light_dark_yellow px-8 text-dark_yellow ${isLast ? "" : "border-r"}  `} key={idx}>
+                                            <li className={` flex justify-center items-center text-[13px] font-semibold  max-h-[25px] md:w-1/4 tab:w-fit truncate border-light_dark_yellow px-4 xl:px-8 text-dark_yellow ${isLast ? "" : "border-r"}  `} key={idx}>
                                                 {
                                                     obj.social ? (
-                                                        <Socials className=" gap-4 " color="bg-base_yellow"/>
+                                                        <Socials className=" gap-4 " width="17px" height="17px" color="bg-base_yellow"/>
                                                     ) : (
                                                         <I18N>{obj.title}</I18N>
                                                     )
@@ -128,7 +128,7 @@ export default function Public() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
                 <Footer/>
 
             </div>

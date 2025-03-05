@@ -128,9 +128,9 @@ const Preview = () => {
     ]
     
     return(
-        <div className=" flex flex-col tab:flex-row gap-4 tab:gap-0 bg-section_bg section min-h-[475px] mt-[40px] md:mt-[90px] tab:mt-[180px] lg:mt-[150px] " >
+        <div className=" flex flex-col tab:flex-row gap-4 tab:gap-0 bg-section_bg section min-h-[475px] mt-[140px] tab:mt-[180px] lg:mt-[150px] " >
             <div className=" flex flex-col w-full tab:w-[40%] h-full text-gray-500 ">
-                <ul className=" flex justify-start items-center gap-4 h-[73px] w-full bg-white px-3 tab:pr-3 xl:pr-10 " >
+                <ul className=" flex justify-start items-center gap-2 mobile:gap-4 h-[73px] w-full bg-white px-3 tab:pr-3 xl:pr-10 " >
                     {
                         eventsData.map((obj, idx) => {
                             return(
@@ -138,7 +138,7 @@ const Preview = () => {
                                     className={` flex flex-col justify-center items-center gap-1 h-full w-1/4 px-3 ${currentDisplay === obj.id ? "border-b-2 border-base_yellow" : ""} `}
                                     onClick={() => (setCurrentDisplay(obj.id))}
                                 >
-                                    <figure className=" relative h-[24px] w-[25px] ">
+                                    <figure className=" relative h-[20px] mobile:h-[24px] aspect-square ">
                                         <Image src={obj.image} fill alt="events" />
                                     </figure>
                                     <p className=" text-[13px] font-semibold ">
