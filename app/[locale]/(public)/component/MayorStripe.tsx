@@ -29,7 +29,7 @@ const MayorStripeData = [
 
 const MayorStripe = () => {
     return(
-        <section id="mayorStrip" className="  flex justify-center items-center w-screen mt-10 shadow-custom_shad2  ">
+        <section id="mayorStrip" className="  flex justify-center items-center w-screen mt-32 shadow-custom_shad2  ">
             <div className=" flex flex-col tab:flex-row justify-between gap-[2%] w-full h-fit tab:section bg-white ">
                 <div className=" flex items-center h-[75px] w-full justify-center tab:justify-normal tab:w-[37%] xl:w-[33%] gap-2 ltab:gap-5 pr-2 ">
                     <div className=" flex justify-center items-center h-full ">
@@ -53,7 +53,7 @@ const MayorStripe = () => {
                         </h2>
                     </div>
                 </div>
-                <div id="mayorStripList" className=" w-full xl:w-[65%] h-[110px] mobile:h-[100px] md:h-[75px] pl-4 pr-4 tab:pl-5 xl:pl-3 flex justify-between gap-1 bg-base_yellow ">
+                <div id="mayorStripList" className=" w-full xl:w-[65%] h-[120px] mobile:h-[100px] md:h-[75px] pl-4 pr-4 py-2 sm:py-0 tab:pl-5 xl:pl-3 flex justify-between gap-1 bg-base_yellow ">
                     <ul  className=" flex-1 flex flex-wrap gap-2 md:gap-0 md:flex-row items-center justify-center md:justify-between tab:justify-normal " >
                         {
                             MayorStripeData.map((obj, idx) => {

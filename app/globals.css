@@ -89,9 +89,14 @@ input:focus {
   background: var(--base_yellow) !important ;
 }
 
+.zooja-font {
+  font-family: 'Zooja Pro', sans-serif;
+  /* font-size: 100px; */
+}
+
 #mayorStrip{
-  background: rgb(246,246,246);
-  background: linear-gradient(120deg, rgba(246,246,246,1) 38%, rgba(215,221,23,1) 38%);
+  background: rgb(255,255,255);
+  background: linear-gradient(120deg, rgba(255,255,255,1) 38%, rgba(215,221,23,1) 38%);
 }
 
 #mayorStripList{

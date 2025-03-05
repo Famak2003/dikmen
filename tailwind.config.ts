@@ -34,6 +34,7 @@ export default {
         white: "#fff",
         navDark: "#1e293b",
         deep_red: "#E51E25",
+        cool_red: "#E40613",
         base_yellow: "#D7DD17",
         light_gray: "#c7c7c7",
         text_light_gray: "#bebebe",
