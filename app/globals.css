@@ -89,9 +89,18 @@ input:focus {
   background: var(--base_yellow) !important ;
 }
 
+@font-face {
+  font-family: 'Zooja Pro';
+  src: url('/fonts/ZoojaPro.woff2') format('woff2'),
+       url('/fonts/ZoojaPro.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
 .zooja-font {
-  font-family: 'Zooja Pro', sans-serif;
-  /* font-size: 100px; */
+  font-family: Zooja pro, sans-serif;
+  font-style: normal;
+  font-weight: 400;
 }
 
 #mayorStrip{
@@ -196,7 +205,7 @@ input:focus {
     @apply text-xs md:text-sm
   }
   .text16{
-    @apply text-sm md:text-base
+    @apply text-xs smobile:text-sm md:text-base
   }
   .section{
     @apply w-screen max-w-[1170px] px-4 xl:px-0
