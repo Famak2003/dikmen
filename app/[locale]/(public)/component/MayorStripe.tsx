@@ -59,7 +59,7 @@ const MayorStripe = () => {
                             MayorStripeData.map((obj, idx) => {
                                 const isLast = (MayorStripe.length - 1) === idx
                                 return(
-                                    <li className={` flex justify-center items-center text-[13px] font-semibold  max-h-[25px] md:w-1/4 tab:w-fit truncate border-light_dark_yellow px-4 xl:px-8 text-dark_yellow ${isLast ? "" : "border-r"}  `} key={idx}>
+                                    <li className={` flex justify-center items-center text-[13px] uppercase font-semibold  max-h-[25px] md:w-1/4 tab:w-fit truncate border-light_dark_yellow px-4 xl:px-8 text-dark_yellow ${isLast ? "" : "border-r"}  `} key={idx}>
                                         {
                                             obj.social ? (
                                                 <Socials className=" gap-4 " width="17px" height="17px" color="bg-base_yellow"/>

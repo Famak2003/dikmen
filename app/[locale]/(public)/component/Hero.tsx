@@ -66,7 +66,7 @@ const Hero = () => {
                 }
 
             </Carousel>
-            <div className=" flex absolute bottom-[-60px] left-[50%] translate-x-[-50%] bg-white h-[70px] mobile:h-[90px] md:h-[120px] w-screen max-w-[1170px] ring-1 ring-dark_yellow ">
+            <div className=" flex absolute bottom-0 translate-y-[100%] lg:translate-y-0 lg:bottom-[-60px] left-[50%] translate-x-[-50%] bg-white h-[70px] mobile:h-[90px] md:h-[120px] w-screen max-w-[1170px] ring-1 ring-dark_yellow ">
                 <button className=" flex-1 flex justify-center items-center bg-base_yellow  ">
                     <FontAwesomeIcon className=" text-dark_yellow " icon={faChevronLeft} />
                 </button>

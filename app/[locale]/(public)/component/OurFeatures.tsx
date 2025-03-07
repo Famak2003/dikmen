@@ -28,7 +28,7 @@ const OurFeatures = () => {
     return(
         <section className=" flex justify-center items-center h-fit py-28 w-screen bg-white ">
             <div className="section h-fit">
-                <ul className=" w-full h-fit flex flex-wrap tab:flex-nowrap justify-center items-center gap-2 " >
+                <ul className=" w-full h-fit flex flex-wrap ltab:flex-nowrap justify-center items-center gap-2 " >
                     {
                         ourFeaturesData.map((obj, idx) => {
                             return(

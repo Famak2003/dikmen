@@ -1,6 +1,5 @@
 "use client"
 
-import axiosInstance from "@/axios"
 import I18N from "@/i18n"
 import { Link } from "@/i18n/routing"
 import { faLock, faPaperPlane, faUser, faUserTie } from "@fortawesome/free-solid-svg-icons"

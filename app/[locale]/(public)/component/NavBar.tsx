@@ -15,11 +15,11 @@ import Socials from "./reusables/Socials"
 const navLinks = [
     {
         name: "HOME_PAGE",
-        link: "#"
+        link: "/"
     },
     {
         name: "MINISTER",
-        link: "#"
+        link: "/minister/resume"
     },
     {
         name: "INSTITUTIONAL",

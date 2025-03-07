@@ -80,7 +80,7 @@
     "YUKSEL_CELEBI": "Yüksel Çelebi̇",
     "RESUME": "Özgeçmi̇ş",
     "MESSAGE_FROM_THE_PRESIDENT": "Başkanin Mesaji",
-    "MESSAGE_TO_THE_PRESIDENT": "Başkanin Mesaj",
+    "MESSAGE_TO_PRESIDENT": "Başkanin Mesaj",
     "OUR_SERVICES": "Hi̇zmetleri̇mi̇z",
     "STUDIES": "Çalişmalar",
     "COURSES": "Kurslar",
@@ -95,5 +95,11 @@
     "TASHKENT_PARK": "Taşkent Park",
     "PARK": "Park",
     "MUSEUM": "Müzesi",
-    "ALL": "Tümü"
+    "ALL": "Tümü",
+    "THOSE_WHO_LEFT_US": "Aramizdan Ayrilanlar",
+    "NAME": "İsim",
+    "SURNAME": "Soyisim",
+    "PRESIDENT_MESSAGE": "Başkanın Mesajı",
+    "YOUR_EMAIL_AND_NUMBER": "E-Posta veya Numaranız",
+    "SEND": "Gönder"
 }

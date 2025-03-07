@@ -80,7 +80,7 @@
     "YUKSEL_CELEBI": "Yuksel Celebi",
     "RESUME": "Resume",
     "MESSAGE_FROM_THE_PRESIDENT": "Mesage From The President",
-    "MESSAGE_TO_THE_PRESIDENT": "Message To The President",
+    "MESSAGE_TO_PRESIDENT": "Message To The President",
     "OUR_SERVICES": "Our Services",
     "STUDIES": "Studies",
     "COURSES": "Courses",
@@ -95,5 +95,11 @@
     "TASHKENT_PARK": "Tashkent Park",
     "PARK": "Park",
     "MUSEUM": "Museum",
-    "ALL": "All"
+    "ALL": "All",
+    "THOSE_WHO_LEFT_US": "Those Who Left us",
+    "NAME": "Name",
+    "SURNAME": "Surname",
+    "PRESIDENT_MESSAGE": "President's Message",
+    "YOUR_EMAIL_AND_NUMBER": "Your Email and Number",
+    "SEND": "Send"
 }

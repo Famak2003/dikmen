@@ -39,6 +39,13 @@ export async function middleware(request: NextRequest) {
     );
   }
 
+  if (pathname ===  `/${siteLocale}/minister`) {
+    console.log(pathname)
+    return NextResponse.redirect(
+      new URL( `/${siteLocale}/minister/resume`)
+    )
+  }
+
   return NextResponse.next();
 }
 
@@ -51,5 +58,6 @@ export const config = {
     "/(en|tr)/dashboard/:path*",
     "/(en|tr)/auth",
     "/(en|tr)/auth/:path*",
+    "/(en|tr)/minister/:path*",
   ],
 };
