@@ -75,8 +75,6 @@ const MinisterLayout = ({children}: {children: React.ReactNode}) => {
     }
 
     const subpageData = Subpages(parentRouteName)
-    console.log(parentRouteName.toLowerCase())
-    console.log(subpageData)
 
     const handleHideSidebar = () => {
         return setIsPagesSidebarOpen(false)
