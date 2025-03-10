@@ -23,7 +23,7 @@ const navLinks = [
     },
     {
         name: "INSTITUTIONAL",
-        link: "#"
+        link: "/institutional/city_council_members"
     },
     {
         name: "NEWS",

@@ -57,7 +57,7 @@
     "MUNICIPAL_COUNCIL_MEMBERS": "Beledi̇ye Mecli̇s Üyeleri̇",
     "VISION": "Vi̇zyon",
     "MISSION": "Mi̇syon",
-    "VISION_OR_MISSION": "Vi̇zyon / Mi̇syon",
+    "VISION_AND_MISSION": "Vi̇zyon / Mi̇syon",
     "UNITS": "Bi̇ri̇mler",
     "OUR_HISTORY": "Tari̇hcemi̇z",
     "QUALITY_AND_SERVICES": "Kali̇te ve Hi̇zmet Poli̇ti̇kasi",
@@ -101,5 +101,9 @@
     "SURNAME": "Soyisim",
     "PRESIDENT_MESSAGE": "Başkanın Mesajı",
     "YOUR_EMAIL_AND_NUMBER": "E-Posta veya Numaranız",
-    "SEND": "Gönder"
+    "SEND": "Gönder",
+    "CITY_COUNCIL_MEMBERS": "Belediye Meclis Üyeleri",
+    "NO_CONTENT": "İçerik Yok",
+    "VISE_PRESIDENT": "Asbaşkan",
+    "CITY_COUNCIL_MEMBER": "Belediye Meclis Üyesi"
 }

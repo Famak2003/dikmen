@@ -7,9 +7,13 @@ import { Link } from "@/i18n/routing"
 import { usePathname } from "next/navigation"
 import { ForwardedRef, forwardRef, useRef } from "react"
 
-const Sidebar = forwardRef<HTMLDivElement, {isPagesSidebarOpen: boolean}>((props, ref) => {
+interface subpages{
+    title: string,
+    link: string
+}
+
+const Sidebar = forwardRef<HTMLDivElement, {isPagesSidebarOpen: boolean, subpages: subpages[]}>((props, ref) => {
     const pathname = usePathname()
-    // const sidebarRef = useRef<HTMLDivElement>(null)
     const parentRouteName = pathname.split("/").filter(Boolean)[1].toLocaleUpperCase()
 
     const parentSubpages = [
@@ -30,13 +34,13 @@ const Sidebar = forwardRef<HTMLDivElement, {isPagesSidebarOpen: boolean}>((props
     console.log(props.isPagesSidebarOpen)
 
     return(
-    <div ref={ref} className={` absolute top-0 ${props.isPagesSidebarOpen ? "translate-x-[0%]" : "translate-x-[-200%]"}  sm:translate-x-0 sm:relative flex flex-col gap-3 bg-section_bg max-w-[290px] w-full h-[598px] z-[30] transition-all duration-300 `}>
+    <div ref={ref} className={` absolute top-0 ${props.isPagesSidebarOpen ? "translate-x-[0%]" : "translate-x-[-200%]"}  sm:translate-x-0 sm:relative flex flex-col gap-3 bg-section_bg max-w-[220px] tab:max-w-[290px] w-full min-h-[598px] h-fit z-[30] transition-all duration-300 `}>
             <div className=" flex flex-col item-center gap-4 px-7 py-7 ">
                 <div className=" flex flex-col gap-5 py-4">
                     <h1 className=" text-[18px] font-bold uppercase text-dark_yellow "><I18N>{parentRouteName}</I18N></h1>
                     <ul className=" flex flex-col gap-4 ">
                         {
-                            parentSubpages.map((obj, idx) => {
+                            props?.subpages.map((obj, idx) => {
                                 return (
                                     <Link key={idx} href={obj.link}>
                                         <li className=" relative flex gap-2 items-center justify-start text-secondary_gray hover:text-dark_yellow w-full ">
@@ -65,7 +69,7 @@ const Sidebar = forwardRef<HTMLDivElement, {isPagesSidebarOpen: boolean}>((props
                     </Button>
                 </div>
             </div>
-            <div className=" flex flex-col gap-2 p-5 bg-base_yellow flex-1">
+            <div className=" flex flex-col gap-2 p-5 bg-base_yellow flex-1 pb-20 ">
                 <h1 className=" text-[18px] text-dark_yellow font-bold uppercase ">
                     <I18N>FOLLOW_US</I18N>
                 </h1>

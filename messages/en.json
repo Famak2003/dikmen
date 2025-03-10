@@ -58,7 +58,7 @@
     "MUNICIPAL_COUNCIL_MEMBERS": "Municipal Council Members",
     "VISION": "Vision",
     "MISSION": "Mission",
-    "VISION_OR_MISSION": "Vision / Mission",
+    "VISION_AND_MISSION": "Vision / Mission",
     "UNITS": "Units",
     "OUR_HISTORY": "Our History",
     "QUALITY_AND_SERVICES": "Quality and Services Policy",
@@ -102,5 +102,9 @@
     "SURNAME": "Surname",
     "PRESIDENT_MESSAGE": "President's Message",
     "YOUR_EMAIL_AND_NUMBER": "Your Email and Number",
-    "SEND": "Send"
+    "SEND": "Send",
+    "CITY_COUNCIL_MEMBERS": "City Council Members",
+    "NO_CONTENT": "No Content",
+    "VISE_PRESIDENT": "Vise President",
+    "CITY_COUNCIL_MEMBER": "City Council Member"
 }
