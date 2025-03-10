@@ -103,6 +103,16 @@ input:focus {
   font-weight: 400;
 }
 
+.breadcrumbs > ol{
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.breadcrumbs > ol > li > a{
+  height: 100%;
+}
+
 #mayorStrip{
   background: rgb(255,255,255);
   background: linear-gradient(120deg, rgba(255,255,255,1) 38%, rgba(215,221,23,1) 38%);

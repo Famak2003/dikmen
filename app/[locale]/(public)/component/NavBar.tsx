@@ -184,7 +184,7 @@ const NavBar = () => {
                             {
                                 navLinks.map((obj,idx) => {
                                     return(
-                                        <Link href={obj.link} >
+                                        <Link key={idx} href={obj.link} >
                                             <li className=" cursor-pointer "><I18N>{obj.name}</I18N></li>
                                         </Link>
                                     )

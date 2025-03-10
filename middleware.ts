@@ -14,6 +14,12 @@ export async function middleware(request: NextRequest) {
   const isAuthRoute = pathname.startsWith(`/${siteLocale}/auth`);
   const isDashboardRoute = pathname.startsWith(`/${siteLocale}/dashboard`);
 
+  if (pathname === `/${siteLocale}/minister`) {
+    return NextResponse.redirect(
+      new URL(`/${siteLocale}/minister/resume`, request.url)
+    );
+  }
+
   // Redirect unauthenticated users away from protected routes
   if (!authorizationToken?.value && isDashboardRoute) {
     const redirectUrl = new URL(`/${siteLocale}/auth/login`, request.url);
@@ -39,25 +45,17 @@ export async function middleware(request: NextRequest) {
     );
   }
 
-  if (pathname ===  `/${siteLocale}/minister`) {
-    console.log(pathname)
-    return NextResponse.redirect(
-      new URL( `/${siteLocale}/minister/resume`)
-    )
-  }
-
   return NextResponse.next();
 }
 
 export const config = {
   // Match only internationalized pathnames
   matcher: [
-    "/",
+    "/(en|tr)/:path*",
     "/(en|tr)",
     "/(en|tr)/dashboard",
     "/(en|tr)/dashboard/:path*",
     "/(en|tr)/auth",
     "/(en|tr)/auth/:path*",
-    "/(en|tr)/minister/:path*",
   ],
 };

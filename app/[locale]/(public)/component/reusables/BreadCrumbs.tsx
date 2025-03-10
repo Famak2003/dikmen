@@ -15,7 +15,7 @@ const BreadCrumbs = () => {
 
     useEffect(() => {
         setPageName(paths[paths.length - 1].toLocaleUpperCase())
-    }, [])
+    }, [paths])
 
     const itemRender: BreadcrumbProps["itemRender"] = (route, params, routes, paths) => {
         const isLast = route?.path === routes[routes.length - 1]?.path;
@@ -58,11 +58,11 @@ const BreadCrumbs = () => {
     }
     return (
         <div className=" flex justify-center items-center bg-base_yellow w-screen h-[85px] ">
-            <div className=" section flex justify-between items-center  ">
-                <h1 className=" text-[26px] text-dark_yellow font-bold " >
+            <div className=" section flex gap-3 justify-between items-center ">
+                <h1 className=" text-sm mobile:text-base sm:text-[20px] tab:text-[26px] text-dark_yellow font-bold " >
                     <I18N>{pageName}</I18N>
                 </h1>
-                <Breadcrumb separator={<FontAwesomeIcon icon={faAngleRight} />} className=" text text-dark_yellow font-bold " itemRender={itemRender} items={items} />
+                <Breadcrumb separator={<FontAwesomeIcon icon={faAngleRight} />} className=" text text-dark_yellow font-bold h-full breadcrumbs " itemRender={itemRender} items={items} />
             </div>
         </div>
     )

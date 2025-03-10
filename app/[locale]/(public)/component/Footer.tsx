@@ -76,7 +76,7 @@ const Footer = () => {
         <footer className=" w-screen min-h-[621px] flex flex-col gap-20 items-center text-secondary_gray ">
             <FooterStrip/>
             <div className=" flex justify-between gap-2 flex-1 w-screen section ">
-                <div className=" grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-10 gap-x-2 w-[60%] sm:w-[75%] justify-between " >
+                <div className=" grid grid-cols-[1fr] sm:grid-cols-3 lg:grid-cols-4 gap-y-10 gap-x-2 w-[60%] sm:w-[75%] justify-between " >
                     {
                         footerLeftData.map((obj, idx) => {
                             return(
