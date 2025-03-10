@@ -14,6 +14,12 @@ export async function middleware(request: NextRequest) {
   const isAuthRoute = pathname.startsWith(`/${siteLocale}/auth`);
   const isDashboardRoute = pathname.startsWith(`/${siteLocale}/dashboard`);
 
+  if (pathname === "/"){
+    return NextResponse.redirect(
+      new URL(`/tr`, request.url)
+    )
+  }
+
   if (pathname === `/${siteLocale}/minister`) {
     return NextResponse.redirect(
       new URL(`/${siteLocale}/minister/resume`, request.url)
@@ -57,5 +63,6 @@ export const config = {
     "/(en|tr)/dashboard/:path*",
     "/(en|tr)/auth",
     "/(en|tr)/auth/:path*",
+    "/"
   ],
 };
