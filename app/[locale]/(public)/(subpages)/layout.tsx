@@ -49,8 +49,8 @@ const MinisterLayout = ({children}: {children: React.ReactNode}) => {
             link: "/institutional/our_history"
         },
         {
-            title: "QUALITY_AND_SERVICES",
-            link: "/institutional/quality_and_services"
+            title: "QUALITY_AND_SERVICE",
+            link: "/institutional/quality_and_service"
         },
         {
             title: "PROJECTS",

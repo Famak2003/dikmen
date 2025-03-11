@@ -3,6 +3,7 @@
 import I18N from "@/i18n"
 import Image from "next/image"
 import { useState } from "react"
+import GridLayout from "../../../component/pagesComponent/GridLayout"
 
 const City_Council_Members = () => {
     const [currentDisplay, setCurrentDisplay] = useState('ctp')
@@ -119,44 +120,42 @@ const City_Council_Members = () => {
     }
 
     return(
-        <div className=" flex flex-col gap-8 w-full h-full bg-section_bg pt-5 ">
+        <div className=" flex flex-col gap-8 w-full h-full bg-section_bg pt-5 subPageSection ">
             <div className=" flex items-center ">
                 <div onClick={() => handleClick("ctp") } className={` cursor-pointer flex items-center justify-center text16 font-bold border-r h-[19px] w-[100px] ${currentDisplay === "ctp" ? "text-dark_yellow" : "text-gray-300 hover:text-faint_gray"} transition-all duration-300 `}>CTP</div>
                 <div onClick={() => handleClick("ubp") } className={` cursor-pointer flex items-center justify-center text16 font-bold border-r h-[19px] w-[100px] ${currentDisplay === "ubp" ? "text-dark_yellow" : "text-gray-300 hover:text-faint_gray"} transition-all duration-300 `}>UBP</div>
             </div>
-            <ul className=" grid grid-cols-1 smobile:grid-cols-2 lmobile:grid-cols-3 sm:grid-cols-2 lmd:grid-cols-3 ltab:grid-cols-4 place-items-center gap-y-4 gap-x-4 px-2 mobile:px-8 pb-20 ">
-                {
-                    data[currentDisplay as keyof typeof data].map((obj, idx) => {
-                        return(
-                            <li key={idx} className=" flex flex-col gap-3 pt-8 pb-5 px-2 bg-white max-w-[172px] w-full h-[288px] ">
-                                {
-                                    obj.image ? (
-                                        <figure className=" w-full max-w-[153px] h-full max-h-[175px] " >
-                                            <Image
-                                                className=" object-cover h-full w-full"
-                                                src={obj.image}
-                                                width={153}
-                                                height={175}
-                                                alt="profile image"
-                                            />
-                                        </figure>
-                                    )
-                                    : (
-                                        <div className=" w-full max-w-[153px] h-full max-h-[175px] bg-section_bg ">
-                                            
-                                        </div>
-                                    )
-                                }
-                                <div className=" flex flex-col ">
-                                    <h1 className=" text-dark_gray font-bold text16 " >{obj.name}</h1>
-                                    <span className=" text-faint_gray text fonr-bold "> <I18N>{obj.title}</I18N> </span>
-                                </div>
-                            </li>
-                        )
-                    })
-                }
-            </ul>
+            <GridLayout data={data[currentDisplay as keyof typeof data]} Element={City_Council_Member_Card}  />
         </div>
+    )
+}
+
+const City_Council_Member_Card = ({image, title, name}: {image?: string, title?: string, name?: string}) => {
+    return (
+        <li className=" flex flex-col gap-3 pt-8 pb-5 px-2 bg-white max-w-[172px] w-full h-[288px] ">
+            {
+                image ? (
+                    <figure className=" w-full max-w-[153px] h-full max-h-[175px] " >
+                        <Image
+                            className=" object-cover h-full w-full"
+                            src={image}
+                            width={153}
+                            height={175}
+                            alt="profile image"
+                        />
+                    </figure>
+                )
+                : (
+                    <div className=" w-full max-w-[153px] h-full max-h-[175px] bg-section_bg ">
+                        
+                    </div>
+                )
+            }
+            <div className=" flex flex-col ">
+                <h1 className=" text-dark_gray font-bold text16 " >{name}</h1>
+                <span className=" text-faint_gray text font-bold "> <I18N>{title ?? "NO_CONTENT"}</I18N> </span>
+            </div>
+        </li>
     )
 }
 
