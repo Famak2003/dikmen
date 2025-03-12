@@ -27,7 +27,7 @@ const navLinks = [
     },
     {
         name: "NEWS",
-        link: "#"
+        link: "/news"
     },
     {
         name: "EVENTS",

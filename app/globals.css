@@ -22,7 +22,6 @@
 .DisableScrollBar::-webkit-scrollbar {
   display: none;
 }
-
 .DisableScrollBar::-webkit-scrollbar-thumb {
   display: none;
 }
@@ -51,6 +50,7 @@ input:focus {
 #carousel > div{
   border-radius: 0 !important;
 }
+
 
 /* Sidebar Menu style */
 /* .ant-menu-submenu-title{

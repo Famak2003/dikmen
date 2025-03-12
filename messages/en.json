@@ -120,5 +120,7 @@
     "CLEANING_WORKS": "Cleaning Works",
     "ONGOING_PROJECTS": "Ongoing Projects",
     "COMPLETED_PROJECTS": "Completed Projects",
-    "DETAIL": "Detail"
+    "DETAIL": "Detail",
+    "GALLERY": "Gallery",
+    "SHARE": "Share"
 }

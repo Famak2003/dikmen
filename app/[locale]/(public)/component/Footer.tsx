@@ -6,21 +6,16 @@ import Socials from "./reusables/Socials"
 const MAIL = '/static/svg/mail.svg' 
 const HEADPHONES = '/static/svg/headphones.svg'
 const WHATSAPP = '/static/svg/whatsapp.svg'
-const linkedinSVG = '/static/svg/linkedin.svg'
-const facebookSVG = '/static/svg/facebook.svg'
-const xSVG = '/static/svg/x.svg'
-const instaSVG = '/static/svg/insta.svg'
-
 
 const footerLeftData = [
     {
         title: "INSTITUTIONAL",
         sub: [
             "MUNICIPAL_COUNCIL_MEMBERS",
-            "VISION_OR_MISSION",
+            "VISION_AND_MISSION",
             "UNITS",
             "OUR_HISTORY",
-            "QUALITY_AND_SERVICES",
+            "QUALITY_AND_SERVICE",
             "PROJECTS"
         ]
     },
