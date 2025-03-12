@@ -88,7 +88,7 @@ const MinisterLayout = ({children}: {children: React.ReactNode}) => {
             <SidebarBTN ref={btnRef} isPagesSidebarOpen={isPagesSidebarOpen} setIsPagesSidebarOpen={setIsPagesSidebarOpen} />
             <div className=" relative section flex gap-4 sm:gap-6 tab:gap-10 h-full w-full mb-10 ">
                 <Sidebar subpages={subpageData} isPagesSidebarOpen={isPagesSidebarOpen} ref={sidebarRef} />
-                <section className=" flex flex-col flex-1 max-w-[874px] overflow-x-hidden  ">
+                <section className=" flex flex-col flex-1 max-w-[874px] h-fit overflow-x-hidden  ">
                     <div className=" relative h-[40px] md:h-[60px] border-b-[1px] ">
                         <h1 className=" text-[18px] font-bold capitalize text-dark_yellow"><I18N>{pageName}</I18N></h1>
                         <hr className=" absolute bottom-0 translate-y-[70%] border-0 bg-base_yellow h-[3px] w-[20%] " />

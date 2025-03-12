@@ -8,7 +8,7 @@ export default function PublicLayout({
     children: React.ReactNode;
   }>) {
     return (
-        <div className=" w-[100vw] min-h-[100dvh] ring-2 " >
+        <div className=" min-h-[100dvh] overflow-hidden " >
             <div className=" relative flex flex-col justify-center items-center text-black bg-primary_light_grey " >
                 <NavBar/>
                 <BreadCrumbs/>

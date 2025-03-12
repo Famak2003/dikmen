@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleLeft, faAngleRight, faX } from "@fortawesome/free-solid-svg-icons"
 import Image from "next/image"
 import { useRef } from "react"
-import { FacebookFilled, XOutlined, YoutubeFilled } from "@ant-design/icons"
+import { FacebookFilled, FacebookOutlined, XOutlined, YoutubeFilled } from "@ant-design/icons"
 
 const News = () => {
     const scrollRef = useRef<HTMLDivElement>(null)
@@ -31,7 +31,7 @@ const News = () => {
     
 
     return(
-        <div className=" subPageSection richTextSection w-full ">
+        <div className=" subPageSection richTextSection h-fit w-full overflow-hidden ">
             <span>Temmuz 22, 2018</span>
             <p>Dikmen Belediyesi tarafından bu yıl 9’uncusu düzenlenen 11 Meşale Festivali sona erdi.</p>
             <RichTextImage image={image} />
@@ -67,11 +67,11 @@ const News = () => {
                         <button onClick={() => scroll("right")} ><FontAwesomeIcon className=" text-[20px] " icon={faAngleRight} /></button>
                     </div>
                 </div>
-                <div ref={scrollRef} className=" flex gap-2 items-center max-w-[870px] w-full overflow-x-scroll scroll-smooth ">
+                <div ref={scrollRef} className=" CustomiseX-ScrollBar flex gap-2 items-center max-w-[870px] w-full overflow-x-scroll scroll-smooth ">
                     {
                         galleryData.map((value, idx) => {
                             return(
-                                <div className=" h-[150px] mobile:h-[200px] md:h-[275px] aspect-square ">
+                                <div key={idx} className=" h-[150px] mobile:h-[200px] md:h-[275px] aspect-square ">
                                     <Image 
                                         className=" h-full w-full "
                                         height={275}
@@ -88,11 +88,18 @@ const News = () => {
                     <p>
                         <I18N>SHARE</I18N>
                     </p>
-                    <div className=" flex gap-2 ">
-                        <FontAwesomeIcon icon={faX} />
-                        <XOutlined className="" />
-                        <YoutubeFilled className="" />
-                        <FacebookFilled className=" text-blue-500 rounded-full " />
+                    <div className=" flex gap-2 text-[15px] ">
+                        <div className=" h-[23px] aspect-square rounded-full flex justify-center items-start bg-blue-500 ">
+                            <p className=" text-white text-[28px]" >
+                                f
+                            </p>
+                        </div>
+                        <div className=" h-[23px] aspect-square rounded-full flex justify-center items-center bg-black ">
+                            <XOutlined className=" text-white " />
+                        </div>
+                        <div className=" h-[23px] aspect-square rounded-full flex justify-center items-center bg-red-500">
+                            <YoutubeFilled className=" text-white " />                            
+                        </div>
                     </div>
                 </div>
             </div>

@@ -12,7 +12,9 @@
     --background: #0a0a0a;
     --foreground: #ededed;
     --slate: #475569;
-    --base_yellow: #D7DD17
+    --base_yellow: #D7DD17;
+    --secondary_gray: #585858;
+    --dark_yellow: #6C6F00;
   }
 }
 
@@ -24,6 +26,21 @@
 }
 .DisableScrollBar::-webkit-scrollbar-thumb {
   display: none;
+}
+
+.CustomiseX-ScrollBar {
+  overflow-x: scroll;
+}
+
+.CustomiseX-ScrollBar::-webkit-scrollbar {
+  height: 4px;
+  background-color: #ffffff;
+  border-radius: 1rem;
+}
+
+.CustomiseX-ScrollBar::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background-color: #6C6F00;
 }
 
 body {
