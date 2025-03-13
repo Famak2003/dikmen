@@ -124,7 +124,7 @@ const Footer = () => {
             </div>
             <caption className=" relative flex items-start border-t w-full py-6 section">
                 <hr className=" absolute top-0 h-1 w-[150px] translate-y-[-50%] bg-base_yellow" />
-                <p className=" text font-semibold"><I18N>ALL_RIGHTS_RESERVED</I18N>. Copyright {year} <I18N>DIKMEN_BELEDIYESI</I18N></p>
+                <p className=" text font-semibold"><I18N>ALL_RIGHTS_RESERVED</I18N>. Copyright {year} <I18N>DIKMEN_MUNICIPALITY</I18N></p>
             </caption>
         </footer>
     )

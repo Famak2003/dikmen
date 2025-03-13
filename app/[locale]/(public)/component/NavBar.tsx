@@ -35,7 +35,7 @@ const navLinks = [
     },
     {
         name: "TENDERS",
-        link: "#"
+        link: "/tenders"
     },
     {
         name: "ANNOUNCEMENTS",

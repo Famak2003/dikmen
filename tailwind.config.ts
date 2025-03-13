@@ -45,7 +45,8 @@ export default {
         dark_yellow: "#6C6F00",
         light_dark_yellow: "#9B9F00",
         dark_gray: "#4A4B4D",
-        faint_gray: "#BBBBBB"
+        faint_gray: "#BBBBBB",
+        pale_yellow: "#FAFBD4"
       },
       boxShadow: {
         custom_shad1: "rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px",

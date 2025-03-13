@@ -72,7 +72,7 @@
     "WHATSAPP_LINE": "Whatsapp Hatti",
     "OUR_EMAIL_ADDRESS": "Mai̇l Adresi̇mi̇z",
     "ALL_RIGHTS_RESERVED": "Tüm hakları saklıdır",
-    "DIKMEN_BELEDIYESI": "Dikmen Belediyesi",
+    "DIKMEN_MUNICIPALITY": "Dikmen Belediyesi",
     "FOLLOW_US": "Bi̇zi̇ Taki̇p Edi̇n",
     "E_MUNICIPALITY": "E-beldi̇ye",
     "ONLINE_FORM": "Çevrimiçi Form",
@@ -130,5 +130,7 @@
     "SUMMER_CONCERTS": "Yaz Konserleri",
     "PRACTICE_CONCERTS": "Uygulama Konseri",
     "ALL_EVENTS": "Tüm Etkinlikler",
-    "STARTING": "Basliyor"
+    "STARTING": "Basliyor",
+    "SORT_BY_DATE": "Tarihe göre sıralama",
+    "MANAGEMENT": "Başkanliği"
 }

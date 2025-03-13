@@ -73,7 +73,7 @@
     "WHATSAPP_LINE": "Whatsapp Line",
     "OUR_EMAIL_ADDRESS": "Our Email Address",
     "ALL_RIGHTS_RESERVED": "All Rights Reserved",
-    "DIKMEN_BELEDIYESI": "Dikmen Municipality",
+    "DIKMEN_MUNICIPALITY": "Dikmen Municipality",
     "FOLLOW_US": "Follow us",
     "ONLINE_FORM": "Online Form",
     "E_MUNICIPALITY": "E-Municipality",
@@ -131,5 +131,7 @@
     "SUMMER_CONCERTS": "Summer Concert",
     "PRACTICE_CONCERTS": "Practice Concerts",
     "ALL_EVENTS": "All Events",
-    "STARTING": "Starting"
+    "STARTING": "Starting",
+    "SORT_BY_DATE": "Sort by date",
+    "MANAGEMENT": "Management"
 }
