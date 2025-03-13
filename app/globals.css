@@ -113,6 +113,20 @@ input:focus {
   font-weight: 400;
   font-style: normal;
 }
+/* BajaCalifornia */
+@font-face {
+  font-family: 'California Medium';
+  src: url('/fonts/California Medium.woff2') format('woff2'),
+      url('/fonts/California Medium.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+.California-font {
+  font-family: California Medium, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
 
 .zooja-font {
   font-family: Zooja pro, sans-serif;
@@ -238,7 +252,7 @@ input:focus {
     @apply w-screen max-w-[1170px] px-4 xl:px-0
   }
   .subPageSection{
-    @apply pt-4
+    @apply py-5
   }
   .richTextSection{
     @apply flex flex-col gap-3 text font-semibold leading-8 text-secondary_gray

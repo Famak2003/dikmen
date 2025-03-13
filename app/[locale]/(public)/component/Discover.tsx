@@ -45,7 +45,7 @@ const Discover = () => {
                     {
                         discoverData.map((obj, idx) => {
                             return(
-                                <li key={idx} className="relative bg-gray-300 min-w-[250px] 3xl:min-w-[306px] w-[100%] mobile:w-[70%] lmobile:w-1/4 h-fit rounded-[20px] overflow-hidden ">
+                                <li key={idx} className="relative bg-gray-300 min-w-[250px] 3xl:min-w-[306px] w-[70%] lmobile:w-1/4 h-fit rounded-[20px] overflow-hidden ">
                                         <figure className="  w-full h-[400px] rounded-[20px] overflow-hidden ">
                                         <Image
                                             className=" object-cover w-full h-full "

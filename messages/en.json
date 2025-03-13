@@ -127,5 +127,9 @@
     "FINISHED_EVENTS": "Finished Events",
     "EVENT_TITLE": "Event Title",
     "CONCERT": "Concert",
-    "REVIEW": "Review"
+    "REVIEW": "Review",
+    "SUMMER_CONCERTS": "Summer Concert",
+    "PRACTICE_CONCERTS": "Practice Concerts",
+    "ALL_EVENTS": "All Events",
+    "STARTING": "Starting"
 }

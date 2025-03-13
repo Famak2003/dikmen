@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleRight, faPaperPlane } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "@/i18n/routing"
 import { usePathname } from "next/navigation"
-import { ForwardedRef, forwardRef, useRef } from "react"
+import { forwardRef } from "react"
 
 interface subpages{
     title: string,
@@ -16,22 +16,6 @@ const Sidebar = forwardRef<HTMLDivElement, {isPagesSidebarOpen: boolean, subpage
     const pathname = usePathname()
     const parentRouteName = pathname.split("/").filter(Boolean)[1].toLocaleUpperCase()
 
-    const parentSubpages = [
-        {
-            title: "RESUME",
-            link: "/minister/resume"
-        },
-        {
-            title: "PRESIDENT_MESSAGE",
-            link: "/minister/president_message"
-        },
-        {
-            title: "MESSAGE_TO_PRESIDENT",
-            link: "/minister/message_to_president"
-        },
-    ]
-
-    console.log(props.isPagesSidebarOpen)
 
     return(
     <div ref={ref} className={` absolute top-0 ${props.isPagesSidebarOpen ? "translate-x-[0%]" : "translate-x-[-200%]"}  sm:translate-x-0 sm:relative flex flex-col gap-3 bg-section_bg max-w-[220px] tab:max-w-[290px] w-full min-h-[598px] h-fit z-[30] transition-all duration-300 `}>

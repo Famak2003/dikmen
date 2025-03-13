@@ -126,5 +126,9 @@
     "FINISHED_EVENTS": "Biten Etkilikler",
     "EVENT_TITLE": "Etkinlik Başlığı",
     "CONCERT": "Konser",
-    "REVIEW": "İncele"
+    "REVIEW": "İncele",
+    "SUMMER_CONCERTS": "Yaz Konserleri",
+    "PRACTICE_CONCERTS": "Uygulama Konseri",
+    "ALL_EVENTS": "Tüm Etkinlikler",
+    "STARTING": "Basliyor"
 }
