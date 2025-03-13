@@ -122,5 +122,10 @@
     "COMPLETED_PROJECTS": "Completed Projects",
     "DETAIL": "Detail",
     "GALLERY": "Gallery",
-    "SHARE": "Share"
+    "SHARE": "Share",
+    "NEARBY_EVENTS": "Nearby Events",
+    "FINISHED_EVENTS": "Finished Events",
+    "EVENT_TITLE": "Event Title",
+    "CONCERT": "Concert",
+    "REVIEW": "Review"
 }

@@ -121,5 +121,10 @@
     "COMPLETED_PROJECTS": "Tamamlanmış Projeler",
     "DETAIL": "Detay",
     "GALLERY": "Galeri",
-    "SHARE": "Paylaş"
+    "SHARE": "Paylaş",
+    "NEARBY_EVENTS": "Yakındaki Etkinlikler",
+    "FINISHED_EVENTS": "Biten Etkilikler",
+    "EVENT_TITLE": "Etkinlik Başlığı",
+    "CONCERT": "Konser",
+    "REVIEW": "İncele"
 }

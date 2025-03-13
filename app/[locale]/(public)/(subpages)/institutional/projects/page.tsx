@@ -172,7 +172,7 @@ const Projects = () => {
             ]
     }
     return(
-        <div className=" flex flex-col gap-8 w-full h-full bg-white pt-5 subPageSection " >
+        <div className="flex flex-col gap-8 w-full h-full bg-white py-5 subPageSection " >
             <div className=" flex items-center ">
                 <div onClick={() => handleClick("all") } className={` cursor-pointer flex items-center justify-center text16 font-bold border-r h-[19px] w-fit px-5 ${currentDisplay === "all" ? "text-dark_yellow" : "text-gray-300 hover:text-faint_gray"} transition-all duration-300 `}><I18N>ALL</I18N></div>
                 <div onClick={() => handleClick("ongoing") } className={` cursor-pointer flex items-center justify-center text16 font-bold border-r h-[19px] w-fit px-5 ${currentDisplay === "ongoing" ? "text-dark_yellow" : "text-gray-300 hover:text-faint_gray"} transition-all duration-300 `}><I18N>ONGOING_PROJECTS</I18N></div>

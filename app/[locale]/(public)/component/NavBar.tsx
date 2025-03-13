@@ -31,7 +31,7 @@ const navLinks = [
     },
     {
         name: "EVENTS",
-        link: "#"
+        link: "/events"
     },
     {
         name: "TENDERS",
