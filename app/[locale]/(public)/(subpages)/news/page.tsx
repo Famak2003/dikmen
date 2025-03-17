@@ -45,7 +45,7 @@ const News = () => {
             <p>
                 Dikmen Yoğurtları sponsorluğunda Tavla Turnuvasında dereceye giren isimler ise şöyle:
             </p>
-            <ul className=" !list-decimal before:!hidden before:content-[''] ">
+            <ul className="decimalList">
                 <li>
                     Hasan Özerol
                 </li>
@@ -61,7 +61,7 @@ const News = () => {
             </ul>
             <div className=" flex flex-col gap-4 w-full ">
                 <div className=" flex justify-between items-center  " >
-                    <h1 className=" font-bold text-dark_yellow text-[18px] " ><I18N>GALLERY</I18N></h1>
+                    <h1 className=" font-bold text-dark_yellow text18 " ><I18N>GALLERY</I18N></h1>
                     <div className=" flex gap-3 ">
                         <button onClick={() => scroll("left")} ><FontAwesomeIcon className=" text-[20px] " icon={faAngleLeft} /></button>
                         <button onClick={() => scroll("right")} ><FontAwesomeIcon className=" text-[20px] " icon={faAngleRight} /></button>

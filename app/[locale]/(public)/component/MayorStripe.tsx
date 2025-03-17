@@ -18,7 +18,7 @@ const MayorStripeData = [
         link: "#"
     },
     {
-        title: "MESSAGE_TO_THE_PRESIDENT",
+        title: "MESSAGE_TO_PRESIDENT",
         link: "#"
     },
     {

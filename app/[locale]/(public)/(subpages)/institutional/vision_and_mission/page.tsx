@@ -11,7 +11,7 @@ const Vision_And_Mission = () => {
             </p>
             <RichTextImage image={image} />
             <h1>Misyon</h1>
-            <ul className="space-y-2">
+            <ul className="checkedList">
                 <li className="before:content-['✅'] before:mr-2">Daha iyi hizmet sağlamak maksadıyla kapasitesini sürekli geliştirmek ve yurttaşlarına eşit hizmet sunmak.</li>
                 <li className="before:content-['✅'] before:mr-2">Çağdaş belediyecilik anlayışı ve Master Plana göre altyapı çalışmaları yapmak.</li>
                 <li className="before:content-['✅'] before:mr-2">Bölgenin tarihi, doğal ve ekolojik mirasına sahip çıkarak farklı ekonomik ve sosyal faaliyetlerin de bölgede gelişimini sağlamak ve bölgenin tanıtımını yapmak.</li>

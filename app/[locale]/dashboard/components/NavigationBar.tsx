@@ -142,7 +142,7 @@ const NavigationBar = () => {
                     placement="bottomLeft"
                     dropdownRender={() => (
                         <div className="flex flex-col items-center justify-center gap-2 p-4 mt-2 bg-white rounded-lg" >
-                            <h1 className=" text-[18px] text-gray-700" >
+                            <h1 className=" text18 text-gray-700" >
                                 Araçlar
                             </h1>
                             <ul>
@@ -162,7 +162,7 @@ const NavigationBar = () => {
                     placement="bottomLeft"
                     dropdownRender={() => (
                         <div className="flex flex-col items-center justify-center gap-2 p-4 mt-2 bg-white rounded-lg" >
-                            <h1 className=" text-[18px] text-gray-700" >
+                            <h1 className=" text18 text-gray-700" >
                                 Bildirimler
                             </h1>
                             <ul>

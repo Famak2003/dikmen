@@ -2,7 +2,7 @@
 
 import I18N from "@/i18n"
 import Image from "next/image"
-import { notFound, redirect, useParams } from "next/navigation"
+import { notFound, useParams } from "next/navigation"
 import Button from "../../../component/reusables/Button"
 import { useRouter } from "@/i18n/routing"
 
@@ -11,14 +11,16 @@ const EventDetails = () => {
     const DIKMENLOGO =  '/static/svg/floatingLogo.svg'
     const { event } = useParams();
 
+    console.log(event)
+
     const eventDetailsData = {
-        Summer_Concerts: {
+        summer_concerts: {
             date: "Şubat 25, 2025",
             time: "20:00",
             writeup: "Gecede ilk olarak Dikmen Gençlik Merkezi Halk Dansları gruplarının halk dansları gösterileri yer alarak büyük ilgi gördü. Gecede kapanış konseri ile Grup SOS sahnede yer alarak birbirinden güzel seslendirdiği parçalar ile katılımcılara muhteşem bir gece yaşattı.",
             image: '/assets/summer.png'
         },
-        Practice_Concerts: {
+        practice_concerts: {
             date: "Şubat 25, 2025",
             time: "20:00",
             writeup: "Gecede ilk olarak Dikmen Gençlik Merkezi Halk Dansları gruplarının halk dansları gösterileri yer alarak büyük ilgi gördü. Gecede kapanış konseri ile Grup SOS sahnede yer alarak birbirinden güzel seslendirdiği parçalar ile katılımcılara muhteşem bir gece yaşattı.",

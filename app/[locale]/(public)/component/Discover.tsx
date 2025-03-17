@@ -56,8 +56,8 @@ const Discover = () => {
                                         />
                                     </figure>
                                     <div className=" absolute top-4 left-4 flex flex-col gap-1 font-semibold text-[24px] lg:text-[30px] text-dark_yellow ">
-                                        <p className=" w-fit min-w-[80px] bg-base_yellow px-1 "><I18N>{obj.title1}</I18N></p>
-                                        <p className=" w-fit min-w-[80px] bg-base_yellow px-1 "><I18N>{obj.title2}</I18N></p>
+                                        <p className=" w-fit min-w-[80px] bg-base_yellow px-1 ">{obj.title1}</p>
+                                        <p className=" w-fit min-w-[80px] bg-base_yellow px-1 ">{obj.title2}</p>
                                     </div>
                                     <div className=" flex justify-center items-center h-[50px] text16 font-semibold text-dark_yellow text-center w-full " >
                                         <I18N>ALL</I18N>

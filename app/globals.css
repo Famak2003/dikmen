@@ -248,8 +248,11 @@ input:focus {
   .text16{
     @apply text-xs smobile:text-sm md:text-base
   }
+  .text18{
+    @apply text-base mobile:text-lg
+  }
   .section{
-    @apply w-screen max-w-[1170px] px-4 xl:px-0
+    @apply w-screen max-w-[1170px] px-4 xl:px-2
   }
   .subPageSection{
     @apply py-5
@@ -257,12 +260,14 @@ input:focus {
   .richTextSection{
     @apply flex flex-col gap-3 text font-semibold leading-8 text-secondary_gray
   }
-  .richTextSection ul {
+  .checkedList ul {
     @apply list-none space-y-2;
   }
-
-  .richTextSection ul li {
+  .checkedList ul li {
     @apply relative pl-6 before:absolute before:left-0 before:content-['✅'];
+  }
+  .decimalList{
+    @apply flex flex-col gap-2 list-decimal  pl-4
   }
 
 }

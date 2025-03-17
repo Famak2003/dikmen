@@ -1,10 +1,12 @@
 import I18N from "@/i18n"
+import { useRouter } from "@/i18n/routing"
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Carousel } from "flowbite-react"
 import Image from "next/image"
 
 const Hero = () => {
+    const router = useRouter()
     const heroData = [
         {image: "/assets/dikmen.png", text: "Geçmişten Geleceğe"},
         {image: "/assets/dikmen.png", text: "Geçmişten Geleceğe"},
@@ -14,36 +16,43 @@ const Hero = () => {
         {
             image: "/assets/tenders.png", 
             title: "TENDERS", 
+            link: "#",
             writeup: "TENDERS_ANNOUNCEMENTS"
         },
         {
             image: "/assets/council.png", 
             title: "COUNCIL", 
+            link: "#",
             writeup: "DECISIONS"
         },
         {
             image: "/assets/events.png", 
             title: "EVENTS", 
+            link: "#",
             writeup: "DIKMEN_EVENTS"
         },
         {
             image: "/assets/phone.png", 
             title: "IMPORTANT_PHONES", 
+            link: "#",
             writeup: "EMERGENCY_NUMBERS"
         },
         {
             image: "/assets/news.png", 
             title: "NEWS", 
+            link: "#",
             writeup: "MUNICIPALITY_NEWS"
         },
         {
             image: "/assets/forms.png", 
             title: "FORMS", 
+            link: "/forms",
             writeup: "APPLICATION_FORMS"
         },
         {
             image: "/assets/municipality.png", 
             title: "E-MUNICIPALITY", 
+            link: "#",
             writeup: "MUNICIPALITY_SERVICES"
         },
     ]
@@ -70,14 +79,13 @@ const Hero = () => {
                 <button className=" flex-1 flex justify-center items-center bg-base_yellow  ">
                     <FontAwesomeIcon className=" text-dark_yellow " icon={faChevronLeft} />
                 </button>
-                <ul className=" flex items-center max-w-[1060px] w-[85%] mobile:w-[90%] h-full overflow-x-scroll px-4" >
+                <ul className=" flex items-center max-w-[1060px] w-[85%] mobile:w-[90%] h-full DisableScrollBar overflow-x-scroll px-4" >
                     {
                         carouselBarData.map((obj, idx) => {
-                            const writeupText = <I18N>{obj.writeup}</I18N>
                             const isLast = (carouselBarData.length - 1) === idx
                             return(
-                                <li className=" flex items-center justify-center min-w-[120px] w-1/6 h-full  ">
-                                    <div key={idx} className=" cursor-pointer flex flex-col justify-center items-center md:gap-1 px-2 xl:px-4 ">
+                                <li key={idx} onClick={() => router.push(obj?.link)} className=" flex items-center justify-center min-w-[120px] w-1/6 h-full  ">
+                                    <div  className=" cursor-pointer flex flex-col justify-center items-center md:gap-1 px-2 xl:px-4 ">
                                         <figure className=" relative h-[18px] mobile:h-[20px] md:h-[28px] w-[30px] md:w-[40px] ">
                                             <Image className="object-contain" src={obj.image} alt="icon" fill />
                                         </figure>
@@ -91,7 +99,6 @@ const Hero = () => {
                                                 {obj.writeup}
                                             </I18N>
                                         </p>
-                                        
                                     </div>
                                     <hr className={` h-[25%] border ${isLast ? " hidden " : ""} `} />
                                 </li>

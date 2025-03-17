@@ -151,7 +151,8 @@ const Preview = () => {
                             eventsData.map((obj, idx) => {
                                 return(
                                     <li 
-                                        className={` flex flex-col justify-center items-center gap-1 h-full w-1/4 px-3 ${currentDisplay === obj.id ? "border-b-2 border-base_yellow" : ""} `}
+                                        key={idx}
+                                        className={` flex flex-col justify-center items-center gap-1 h-full w-1/4 px-3 cursor-pointer ${currentDisplay === obj.id ? "border-b-2 border-base_yellow" : ""} `}
                                         onClick={() => (setCurrentDisplay(obj.id))}
                                     >
                                         <figure className=" relative h-[20px] mobile:h-[24px] aspect-square ">
@@ -169,7 +170,7 @@ const Preview = () => {
                         {
                             displayData.map((obj, idx) => {
                                 return(
-                                    <li className=" flex justify-start items-center gap-2 h-1/5 border-b py-3 " >
+                                    <li key={idx} className=" flex justify-start items-center gap-2 h-1/5 border-b py-3 " >
                                         <div className=" flex justify-center items-center h-[30px] w-fit p-2 border-r  ">
                                             <figure className=" relative h-[15px] w-[20px] ">
                                                 <Image src={SMALLNEWS} fill alt="events" />
@@ -203,7 +204,7 @@ const Preview = () => {
                                 {
                                     pageNum.map((num, idx) => {
                                         return (
-                                            <li onClick={() => setCurrentPage(idx)} key={idx} className={` text-center h-full w-10/12 text-[15px] sm:text-[18px] md:font-semibold hover:bg-text_light_gray hover:text-white ${currentPage === idx ? "bg-base_yellow text-light_dark_yellow" : ""} transition-all duration-300 `} >
+                                            <li onClick={() => setCurrentPage(idx)} key={idx} className={` cursor-pointer text-center h-full w-10/12 text-[15px] sm:text-[18px] md:font-semibold hover:bg-text_light_gray hover:text-white ${currentPage === idx ? "bg-base_yellow text-light_dark_yellow" : ""} transition-all duration-300 `} >
                                                 {num}
                                             </li>
                                         )

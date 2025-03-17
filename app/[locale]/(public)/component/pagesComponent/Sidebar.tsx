@@ -21,7 +21,7 @@ const Sidebar = forwardRef<HTMLDivElement, {isPagesSidebarOpen: boolean, subpage
     <div ref={ref} className={` absolute top-0 ${props.isPagesSidebarOpen ? "translate-x-[0%]" : "translate-x-[-200%]"}  sm:translate-x-0 sm:relative flex flex-col gap-3 bg-section_bg max-w-[220px] tab:max-w-[290px] w-full min-h-[598px] h-fit z-[30] transition-all duration-300 `}>
             <div className=" flex flex-col item-center gap-4 px-7 py-7 ">
                 <div className=" flex flex-col gap-5 py-4">
-                    <h1 className=" text-[18px] font-bold uppercase text-dark_yellow "><I18N>{parentRouteName}</I18N></h1>
+                    <h1 className=" text18 font-bold uppercase text-dark_yellow "><I18N>{parentRouteName}</I18N></h1>
                     <ul className=" flex flex-col gap-4 ">
                         {
                             props?.subpages.map((obj, idx) => {
@@ -39,7 +39,7 @@ const Sidebar = forwardRef<HTMLDivElement, {isPagesSidebarOpen: boolean, subpage
                 </div>
                 <hr className=" w-full border-[1px] " />
                 <div className=" flex flex-col justify-center items-start gap-4 py-3" >
-                    <h1 className=" text-[18px] font-bold text-dark_yellow ">
+                    <h1 className=" text18 font-bold text-dark_yellow ">
                         <I18N>BE_INFORMED_ABOUT_US</I18N>
                     </h1>
                     <Input
@@ -54,7 +54,7 @@ const Sidebar = forwardRef<HTMLDivElement, {isPagesSidebarOpen: boolean, subpage
                 </div>
             </div>
             <div className=" flex flex-col gap-2 p-5 bg-base_yellow flex-1 pb-20 ">
-                <h1 className=" text-[18px] text-dark_yellow font-bold uppercase ">
+                <h1 className=" text18 text-dark_yellow font-bold uppercase ">
                     <I18N>FOLLOW_US</I18N>
                 </h1>
                 <Socials className=" text-base_yellow " color="bg-dark_yellow text-base_yellow " />

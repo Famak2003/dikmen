@@ -43,7 +43,7 @@ const navLinks = [
     },
     {
         name: "COMMUNICATION",
-        link: "#"
+        link: "/communication"
     },
     
 
@@ -81,10 +81,10 @@ const NavBar = () => {
     const t = useTranslations()
 
     return(
-        <nav className=" relative flex items-center justify-center bg-white h-[100px] md:h-[120px] w-[100%] ">
-            <div className=" relative flex items-center justify-between gap-3 h-full max-w-[1300px] w-[100%] px-1 ">
+        <nav className=" relative flex items-center justify-center bg-white h-[100px] sm:h-[110px] md:h-[120px] w-[100%] ">
+            <div className=" relative flex items-center justify-between gap-3 h-full max-w-[1300px] w-[100%] px-2 ">
                 <Link href={"/"} >
-                    <div className=" relative max-w-[100px] w-screen h-[100px]" >
+                    <div className=" relative max-w-[100px] w-screen h-[80px] sm:h-[100px]" >
                         <Image className=" object-contain " src={DIKMENLOGO} priority fill alt="logo" />
                     </div>
                 </Link>

@@ -13,7 +13,7 @@ const Quality_And_Service = () => {
             </p>
             <RichTextImage image={image} />
             <h1>HEDEFLERİMİZ</h1>
-            <ul>
+            <ul className="checkedList">
                 <li>Tüm Bölge Halkının Belediye hizmetlerinden memnuniyetini arttırmak.</li>
                 <li>Halk-Belediye işbirliği ve iletişimini arttırmak.</li>
                 <li>Belediye kaynaklarının verimli kullanımını sağlamak.</li>

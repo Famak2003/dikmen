@@ -2,7 +2,7 @@
 
 import I18N from "@/i18n"
 import { Link } from "@/i18n/routing"
-import { faLock, faPaperPlane, faUser, faUserTie } from "@fortawesome/free-solid-svg-icons"
+import { faLock, faPaperPlane} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { LoadingOutlined } from "@ant-design/icons";
 
@@ -45,7 +45,8 @@ const Login = () => {
                 className=" w-[550px] h-fit " 
                 onFinish={handlSubmit}
                 name="login"
-                layout="vertical" >
+                layout="vertical" 
+            >
                 <Form.Item 
                     required 
                     name={"email"}
