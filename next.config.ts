@@ -18,6 +18,7 @@ const nextConfig: import('next').NextConfig = {
     }
     return config;
   },
+  reactStrictMode: false,
 };
  
 module.exports = withNextIntl(nextConfig);

@@ -167,7 +167,7 @@ input:focus {
 
 @layer components {
   .navIcon{
-    @apply !text-inherit w-[19px] lmd:w-[24px] h-[19px] lmd:h-[24px] ring-2
+    @apply !text-inherit w-[19px] lmd:w-[24px] h-[19px] lmd:h-[24px] 
   }
   .navActions button{
     @apply flex justify-center items-center h-10 w-10 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-500
@@ -205,8 +205,11 @@ input:focus {
   .subMenuPage-text{
     @apply flex h-full items-center !rounded-none
   }
-  .inputStyle{
+  .authInputStyle{
     @apply hover:border-black focus-within:!border-black bg-gray-200
+  }
+  .inputStyle {
+    @apply text max-w-[443px] h-[35px] rounded-md border-gray-300
   }
   /* .ant-menu-submenu{
     @apply !hidden

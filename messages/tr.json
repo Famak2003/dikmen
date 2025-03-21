@@ -20,6 +20,7 @@
     "REQUEST_PASSWORD_CHANGE": "Şifre Değişikliği İste",
     "SOMETHING_WENT_WRONG": "Bir şeyler ters gitti",
     "PLEASE_INPUT_YOUR_EMAIL": "Lütfen e-posta adresinizi girin",
+    "TITLE": "Başlık",
     "THE_INPUT_IS_NOT_A_VALID_EMAIL": "Giriş geçerli bir e-posta değil",
     "PLEASE_INPUT_YOUR_OTP": "Lütfen otp'nizi girin",
     "HOME_PAGE": "Ana Sayfa",
@@ -154,5 +155,17 @@
     "ID_PHOTOCOPY": "Kimlik Fotokopisi",
     "PHOTOCOPY_OF_WRITTEN_PETITION": "Yazılı Dilekçe Fotokopisi",
     "IF_CONSTRUCTION_PHOTOCOPY_OF_CONSTRUCTION_PERMIT": "Bağlantını Yapılacağı Yerin İnşaat ise İnşaat Rusatı Fotokopisi",
-    "CORRECT_ENTERED_INFO": "Girdiğim Bilgilerin Doğru Olduğunu Kabul Ederim"
+    "CORRECT_ENTERED_INFO": "Girdiğim Bilgilerin Doğru Olduğunu Kabul Ederim",
+    "DASHBOARD": "Gösterge paneli",
+    "USERS": "Kullanıcılar",
+    "IMAGES": "Görseller",
+    "UPDATED": "Güncellendi",
+    "CONTENT": "İçerik",
+    "SLUG": "Slug",
+    "ACTION": "Aksiyon",
+    "ADD_NEW_PROJECT": "Yeni Proje Ekle",
+    "COMPLETED": "Tamamlanmış",
+    "RICH_TEXT_PLACEHOLDER": "İçeriği buraya girin",
+    "UPDATED_SUCCESFULLY": "Başarılı Olarak Güncellendi",
+    "SAVED": "Kaydedildi"
 }

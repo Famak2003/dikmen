@@ -11,7 +11,7 @@ export default function DashboardLayout({
             <NavigationBar/>
             <div className=" dashboardBody flex relative " >
                 <Sidebar/>
-                <div className="  DisableScrollBar flex-1 overflow-y-scroll h-full px-8 pt-5 text-black dark:text-gray-300 bg-white dark:bg-slate-600 " >
+                <div className="  DisableScrollBar flex-1 overflow-y-scroll h-full px-8 pt-5 text-black dark:text-gray-300 bg-gray-200 dark:bg-slate-600 " >
                     {children}
                 </div>
             </div>

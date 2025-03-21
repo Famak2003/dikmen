@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { dashboardApiSlice } from "../api/dashboardApiSlice"
 
-interface dashboardSlice {
+interface dashboardSliceType {
     selectedKey: string,
     sidebarPos: string,
     isSidebarCollapsed: boolean
     isSidebarHidden: boolean
 }
 
-const initialState: dashboardSlice = {
+const initialState: dashboardSliceType = {
     selectedKey: "1",
     sidebarPos: 'side',
     isSidebarCollapsed: false,
@@ -30,6 +31,15 @@ const dashboardSlice = createSlice({
         setisSidebarHidden: (state, action: PayloadAction<boolean>) => {
             state.isSidebarHidden = action.payload
         }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addMatcher(
+                dashboardApiSlice.endpoints.getInfo.matchFulfilled,
+                (state, action) => {
+                    console.log("Fetched All info")
+                }
+            )
     }
 })
 

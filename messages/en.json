@@ -21,7 +21,7 @@
     "CHANGE_PASSWORD": "Change Password",
     "REQUEST_PASSWORD_CHANGE": "Request Password Change",
     "PLEASE_INPUT_YOUR_PASSWORD": "Please input your password",
-    "TITLE": "Hello world!",
+    "TITLE": "Title",
     "ABOUT": "Go to the about page",
     "HOME_PAGE": "Home Page",
     "MINISTER": "Minister",
@@ -155,5 +155,17 @@
     "ID_PHOTOCOPY": "Id Photocopy",
     "PHOOCOPY_OF_WRITTEN_PETITTION": "Photocop of Written Petition",
     "IF_CONSTRUCTION_PHOTOCOPY_OF_CONSTRUCTION_PERMIT": "If location is a construction site, a photocopy of the construction permit",
-    "CORRECT_ENTERED_INFO": "I accept that the information I have entered is correct."    
+    "CORRECT_ENTERED_INFO": "I accept that the information I have entered is correct."    ,
+    "DASHBOARD": "Dashboard",
+    "USERS": "Users",
+    "IMAGES": "Images",
+    "UPDATED": "Updated",
+    "CONTENT": "Content", 
+    "SLUG": "Slug",
+    "ACTION": "Action",
+    "ADD_NEW_PROJECT": "Add New Project",
+    "COMPLETED": "Completed",
+    "RICH_TEXT_PLACEHOLDER": "Input Content here",
+    "UPDATED_SUCCESFULLY": "Updated Successful",
+    "SAVED": "Saved"
 }

@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import { authApiSlice } from "../api/authApiSlice";
 import { UserRole } from "@/constants/auth.constant";
-import I18N from "@/i18n";
 import clearCookie from "@/utility/clearToken";
 
 

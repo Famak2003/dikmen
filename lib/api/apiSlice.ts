@@ -6,9 +6,8 @@ import {
     FetchBaseQueryError,
   } from "@reduxjs/toolkit/query/react";
   import { RootState } from "../store";
-//   import { logoutUser, setAuthorizationToken } from "../slices/authSlice";
 import toast from "react-hot-toast";
-import { logoutUser, setAuthorizationToken } from "../slices/authSlice";
+// import { logoutUser, setAuthorizationToken } from "../slices/authSlice";
 import clearCookie from "@/utility/clearToken";
 
 interface authorizationTokenType {
@@ -40,6 +39,9 @@ interface authorizationTokenType {
     // Make the initial API request
     let result = await baseQuery(args, api, extraOptions);
 
+    // Dynamically import authSlice functions to avoid circular dependency
+    const { setAuthorizationToken, logoutUser } = await import("../slices/authSlice");
+
     const authorizationToken = result.meta?.response?.headers?.get('Authorization')
     if(authorizationToken){
         api.dispatch(setAuthorizationToken(authorizationToken.split(" ")[1]))
@@ -55,39 +57,6 @@ interface authorizationTokenType {
         api.dispatch(logoutUser(undefined));
         toast.error("Unauthorized");
         window.location.reload();
-
-    //   console.warn("Access token expired, attempting refresh...");
-  
-    //   // Attempt to refresh the token
-    //   const refreshResult = await baseQuery(
-    //     { url: "/admin/refresh-token", method: "GET" }, // Refresh token endpoint
-    //     api,
-    //     extraOptions
-    //   );
-  
-      // console.log("refreshResult", refreshResult);
-  
-    //   if (refreshResult.data) {
-
-    //     const newAccessToken = (
-    //       refreshResult.data as {
-    //         status: string;
-    //         message: string;
-    //         data: { token: string };
-    //       }
-    //     ).data.token;
-  
-    //     // Store the new access token in Redux
-    //     api.dispatch(setAuthorizationToken(newAccessToken));
-  
-    //     // Retry the original request with the new access token
-    //     result = await baseQuery(args, api, extraOptions);
-    //   } else {
-    //     // Refresh token failed, log out the user
-    //     console.warn("Session expired. Logging out...");
-    //     api.dispatch(logoutUser(undefined));
-    //     toast.error("Login session expired");
-    //   }
     }
   
     return result;
@@ -97,5 +66,8 @@ interface authorizationTokenType {
   export const apiSlice = createApi({
     reducerPath: "api",
     baseQuery: baseQueryWithReauth,
+    refetchOnFocus: true,
+    refetchOnReconnect: true,
+    keepUnusedDataFor: 10800,
     endpoints: (builder) => ({}),
   });

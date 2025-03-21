@@ -58,7 +58,7 @@ const Login = () => {
                         }]
                 } >
                     <Input 
-                        className="inputStyle "
+                        className="authInputStyle "
                         prefix={<FontAwesomeIcon icon={faPaperPlane} className=" text-black mr-2" />}
                         placeholder="Input email here" 
                     />
@@ -75,7 +75,7 @@ const Login = () => {
                     ]}  
                 >
                     <Input.Password 
-                        className="inputStyle "
+                        className="authInputStyle "
                         prefix={<FontAwesomeIcon icon={faLock} className=" text-black mr-2" />}
                         placeholder="Input password here"  
                     />

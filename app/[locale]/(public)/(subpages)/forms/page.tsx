@@ -75,43 +75,43 @@ const Forms = () => {
                         name={"nameSurname"}    
                         required
                     >
-                        <Input className=" text max-w-[443px] h-[35px] rounded-md border-gray-300 " placeholder="Başvuran Kişinin Adı Soyadı" />
+                        <Input className=" inputStyle " placeholder="Başvuran Kişinin Adı Soyadı" />
                     </Form.Item>
                     <Form.Item
                         name={"id"}    
                         required
                     >
-                        <Input className=" text max-w-[443px] h-[35px] rounded-md border-gray-300 " placeholder="Kimlik No" />
+                        <Input className=" inputStyle " placeholder="Kimlik No" />
                     </Form.Item>
                     <Form.Item
                         name={"phone"}    
                         required
                     >
-                        <Input className=" text max-w-[443px] h-[35px] rounded-md border-gray-300 " placeholder="Telefon No" />
+                        <Input className=" inputStyle " placeholder="Telefon No" />
                     </Form.Item>
                     <Form.Item
                         name={"email"}    
                         required
                     >
-                        <Input className=" text max-w-[443px] h-[35px] rounded-md border-gray-300 " placeholder="E-Posta Adresi" />
+                        <Input className=" inputStyle " placeholder="E-Posta Adresi" />
                     </Form.Item>
                     <Form.Item 
                         name={"date"}
                         required
                     >
-                        <Input suffix={<FontAwesomeIcon className=" text-secondary_gray " icon={faCalendarDays} />} className=" text max-w-[443px] h-[35px] rounded-md border-gray-300 " placeholder="Başvuru Tarihi" />
+                        <Input suffix={<FontAwesomeIcon className=" text-secondary_gray " icon={faCalendarDays} />} className=" inputStyle " placeholder="Başvuru Tarihi" />
                     </Form.Item>
                     <Form.Item
                         name={"address"}    
                         required
                     >
-                        <Input className=" text max-w-[443px] h-[35px] rounded-md border-gray-300 " placeholder="Başvuru Sahibinin Adresi" />
+                        <Input className=" inputStyle " placeholder="Başvuru Sahibinin Adresi" />
                     </Form.Item>
                     <Form.Item
                         name={"meterAddress"}    
                         required
                     >
-                        <Input className=" text max-w-[443px] h-[35px] rounded-md border-gray-300 " placeholder="Su Sayacının Bağlanacağı Adres" />
+                        <Input className=" inputStyle " placeholder="Su Sayacının Bağlanacağı Adres" />
                     </Form.Item>
                 </div>
 
