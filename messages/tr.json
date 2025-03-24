@@ -167,5 +167,6 @@
     "COMPLETED": "Tamamlanmış",
     "RICH_TEXT_PLACEHOLDER": "İçeriği buraya girin",
     "UPDATED_SUCCESFULLY": "Başarılı Olarak Güncellendi",
-    "SAVED": "Kaydedildi"
+    "SAVED": "Kaydedildi",
+    "EDIT_PROJECT": "Projeyi Düzenle"
 }

@@ -1,19 +1,48 @@
+import { LocaleType } from "@/app/[locale]/dashboard/projects/page";
 import { apiSlice } from "./apiSlice";
 
-interface GetProjectsOutputType {
+interface user {
+    id: number;
+    email: string;
+    name: string;
+    role: string;
+}
+
+export interface projectType {
     key: React.Key;
-    title: string;
-    content: string;
-    image: string;
+    title: LocaleType;
+    content: LocaleType;
+    images: string[];
+    display_image: string;
     completed: boolean;
     slug: string;
-    updatedAt: string
+    updated_at: string;
     total: number;
+    user: user;
+}
+
+interface prorjectsLinks {
+    active: boolean;
+    label: string;
+    url?: string;
+}
+
+interface GetProjectsOutputType {
+    data: projectType[];
+    first_page_url: string;
+    links: prorjectsLinks[];
+    from: string;
+    last_page: string;
+    last_page_url: string;
+    per_page: number;
+    to: number;
+    total: number;
+    current_page: number;
 }
 
 interface GetProjectsInputType {
     perPage: number; 
-    page: number
+    page: number;
 }
 
 export const profileApiSlice = apiSlice.injectEndpoints({
@@ -39,13 +68,19 @@ export const profileApiSlice = apiSlice.injectEndpoints({
         }),
         removeProjectImage: builder.mutation({
             query: (imageurl) => {
-                console.log(`admin/projects/image/${imageurl}`)
                 return {
                     url: "admin/projects/image" + imageurl,
                     method: "DELETE"
                 }
             }
-        })
+        }),
+        editProject: builder.mutation({
+            query: ({projectData, slug}) => ({
+                url: `admin/projects/${slug}`,
+                method: "PUT",
+                body: projectData
+            })
+        }),
     }),
     
 })
@@ -54,5 +89,6 @@ export const {
     useGetProfileQuery,
     useRemoveProjectImageMutation,
     useCreateProjectMutation,
-    usePostProjectImageMutation
+    usePostProjectImageMutation,
+    useEditProjectMutation,
 } = profileApiSlice

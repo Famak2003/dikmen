@@ -167,5 +167,6 @@
     "COMPLETED": "Completed",
     "RICH_TEXT_PLACEHOLDER": "Input Content here",
     "UPDATED_SUCCESFULLY": "Updated Successful",
-    "SAVED": "Saved"
+    "SAVED": "Saved",
+    "EDIT_PROJECT": "Edit Project"
 }

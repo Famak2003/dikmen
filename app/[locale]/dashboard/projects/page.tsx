@@ -1,145 +1,51 @@
 "use client"
 
 import I18N from "@/i18n";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faImage, faPlus, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form, Image, Input, Switch, Table, TableColumnsType, UploadFile } from "antd"
-import { useEffect, useMemo, useState } from "react";
-import CreateModal from "../components/reuseable/CreateModal";
-import { useCreateProjectMutation, useGetProfileQuery } from "@/lib/api/profileApiSlice";
-import TextEditor from "../components/reuseable/TextEditor";
-import dynamic from "next/dynamic";
-import ProjectsForm from "../components/reuseable/ProjectsForm";
-import TitleContent from "../components/reuseable/TitleContent";
-import ImageUpload from "../components/reuseable/ImageUpload";
+import { useEffect, useState } from "react";
+import { projectType, useCreateProjectMutation, useEditProjectMutation, useGetProfileQuery } from "@/lib/api/profileApiSlice";
 import toast from "react-hot-toast";
+import { useForm } from "antd/es/form/Form";
+import { getLocale } from "next-intl/server";
+import { useLocale } from "next-intl";
+import EditModal from "../components/reuseable/EditModal";
+import ProjectsForm from "../components/reuseable/ProjectsForm";
+import CustomModal from "../components/reuseable/CustomModal";
+import CreateProject from "../components/CreateProject";
 
-interface DataType {
-    key: React.Key;
-    title: string;
-    content: string;
-    image: string;
-    completed: boolean;
-    slug: string;
-    updatedAt: string
-}
-
-// interface LanguageContent {
-//     title: string;
-//     content: string;
-// }
-interface Locale {
+export interface LocaleType {
     en: string;
     tr: string;
 }
 
 interface ProjectContent  {
-    // en: LanguageContent;
-    // tr: LanguageContent;
-    title: Locale;
-    content: Locale;
+    title: LocaleType;
+    content: LocaleType;
     completed: boolean;
     slug: string;
     images: string[]
 }
 
-const columns: TableColumnsType<DataType> = [
-    {
-        title: <I18N>TITLE</I18N>,
-        dataIndex: "title",
-        defaultSortOrder: "ascend",
-        sorter: (a, b) => a.title.length - b.title.length,
-        sortDirections: ['descend'],
-        render: (title, record) => {
-            console.log(title)
-            return (
-                <p>
-                    {record.title}
-                </p>
-            )
-        }
-    },
-    {
-        title: <I18N>COMPLETED_PROJECTS</I18N>,
-        dataIndex: "completed",
-        filters: [
-            {
-                text: <I18N>COMPLETED_PROJECTS</I18N>,
-                value: true
-            },
-            {
-                text: <I18N>ONGOING_PROJECTS</I18N>,
-                value: false
-            },
-        ],
-        onFilter: (value, record) => record.completed === value,
-        render: (_, record) => {
-            return (
-                <Switch checked={record.completed} />
-            )
-        }
-    },
-    {
-        title: <I18N>IMAGES</I18N>,
-        dataIndex: "images",
-        render: (_, record) => {
-            console.log("This are all the images: =>>", record.image)
-            return(
-                <div>Images should be here</div>
-            )
-        }
-    },
-    {
-        title: <I18N>CONTENT</I18N>,
-        dataIndex: "content",
-        render: (_, record) => {
-            return(
-                <p>{record.content}</p>
-            )
-        }
-    },
-    {
-        title: <I18N>SLUG</I18N>,
-        dataIndex: "slug",
-        render: (_, record) => {
-            return(
-                <p>{record.slug}</p>
-            )
-        }
-    },
-    {
-        title: <I18N>UPDATED</I18N>,
-        dataIndex: "updated",
-        render: (_, record) => {
-            return(
-                <p>{record.updatedAt}</p>
-            )
-        }
-    },
-    {
-        title: <I18N>ACTION</I18N>,
-        dataIndex: "action",
-        render: (_, record) => {
-            return(
-                <div>{record.content}</div>
-            )
-        }
-    },
-]
+
 
 const Projects = () => {
-    const [changes, setChanges] = useState<boolean>(false)
+    const [form] = useForm()
+    const locale = useLocale()
     const [isCreateModalVisible, setisCreateModalVisible] = useState(false)
+    const [isEditModalVisible, setisEditModalVisible] = useState(false)
     const [page, setPage] = useState<number>(1)
     
     const [contentEN, setContentEN] = useState<string>("")
     const [fileList, setFileList] = useState<UploadFile[]>([])
     
     const [contentTR, setContentTR] = useState<string>("")
-    // const [fileListTR, setFileListTR] = useState<UploadFile[]>([])
     const perPage = 10
-    const [createProject, {data: projectCreatedData, isSuccess, isError, isLoading: isCreateProjectLoading}] = useCreateProjectMutation()
-    const {data, error, isLoading, refetch} = useGetProfileQuery({perPage, page})
+    const [createProject, {isSuccess, isError, isLoading: isCreateProjectLoading}] = useCreateProjectMutation()
+    const [editProject, {isSuccess: isEditProfileSuccess, isError: isEditProfileError, isLoading: isEditProfileLoading}] = useEditProjectMutation()
+    
+    const {data, refetch} = useGetProfileQuery({perPage, page})
     const [projectdata, setProjectData] = useState<ProjectContent>({
         title: {
             en: "",
@@ -160,44 +66,150 @@ const Projects = () => {
             toast.error(<I18N>SOMETHING_WENT_WRONG</I18N>)
         }
         if(isSuccess){
-            toast.error(<I18N>UPDATED_SUCCESFULLY</I18N>)
+            toast.success(<I18N>UPDATED_SUCCESFULLY</I18N>)
         }
     }, [isError, isSuccess])
     
     useEffect(() => {
         refetch()
     }, [])
-    // console.log(projectCreatedData)
 
-    const handleSubmit = () => {
-        createProject(projectdata)
-        console.log(projectdata)
-    }
-    
+    const handleSubmit = async () => {
+        try {
+            const value = await form.validateFields()
 
-    const handleFormSubmit = (value: any) => {
-        setProjectData((prev) => {
-            return {
-                ...prev,
-                completed: value.completed,
-                slug: value.slug,
-                content: {
-                    en: contentEN,
-                    tr: contentTR
-                },
-                title: {
-                    en: value.titleEN,
-                    tr: value.titleTR
-                },
-                images: fileList.map(obj => obj.url)  // Extract URL
-                    .filter((url): url is string => Boolean(url)) // Remove undefined values
-            }
-        })
-        toast.success(<I18N>SAVED</I18N>)
+            setProjectData((prev) => {
+                const updatedData = {
+                    ...prev,
+                    completed: value.completed,
+                    slug: value.slug,
+                    content: {
+                        en: contentEN,
+                        tr: contentTR
+                    },
+                    title: {
+                        en: value.titleEN,
+                        tr: value.titleTR
+                    },
+                    images: fileList.map(obj => obj.url)  // Extract URL
+                        .filter((url): url is string => Boolean(url)) // Remove undefined values
+                }
+                
+                createProject(updatedData)
+                // console.log(updatedData)
+
+                return updatedData
+            })
+
+        } catch (error) {
+            console.log("Form submit Failed")
+            console.error("Form validation failed:", error);
+        }
         
     }
-    // console.log(changes)
-    // console.log(data)
+
+    const handleEditSubmit = () => {
+        console.log("Edit modal submit")
+    }
+
+
+    const columns: TableColumnsType<projectType> = [
+        {
+            title: <I18N>TITLE</I18N>,
+            dataIndex: "title",
+            // fixed: "left",
+            defaultSortOrder: "ascend",
+            sorter: (a, b) => a.title.en.length - b.title.en.length,
+            sortDirections: ['descend'],
+            render: (title, record) => {
+                return (
+                    <p>
+                        {record.title[locale as keyof LocaleType]}
+                    </p>
+                )
+            }
+        },
+        {
+            title: <I18N>COMPLETED_PROJECTS</I18N>,
+            dataIndex: "completed",
+            filters: [
+                {
+                    text: <I18N>COMPLETED_PROJECTS</I18N>,
+                    value: true
+                },
+                {
+                    text: <I18N>ONGOING_PROJECTS</I18N>,
+                    value: false
+                },
+            ],
+            onFilter: (value, record) => record.completed === value,
+            render: (_, record) => {
+                return (
+                    <Switch checked={record.completed} />
+                )
+            }
+        },
+        {
+            title: <I18N>IMAGES</I18N>,
+            dataIndex: "display_image",
+            render: (diaplayImage, _) => {
+                return(
+                    <div className=" flex justify-center items-center ">
+                        {
+                            diaplayImage ? (
+                                <figure className=" w-[70px] aspect-square rounded-md overflow-hidden border-dark_yellow ">
+                                    <Image className=" h-full w-full object-fill " height={70} width={70} src={diaplayImage} alt="Project Display Image" />
+                                </figure>
+                            ) : (
+                                <FontAwesomeIcon className=" imageIcon " icon={faImage} />
+                            )
+                        }
+                    </div>
+                )
+            }
+        },
+        {
+            title: <I18N>CONTENT</I18N>,
+            width: "500px",
+            dataIndex: "content",
+            render: (content, record) => {
+                return(
+                    <div dangerouslySetInnerHTML={{__html:content.en}} className=" line-clamp-4 "/>
+                )
+            }
+        },
+        {
+            title: <I18N>SLUG</I18N>,
+            dataIndex: "slug",
+            render: (_, record) => {
+                return(
+                    <p>{record.slug}</p>
+                )
+            }
+        },
+        {
+            title: <I18N>UPDATED</I18N>,
+            dataIndex: "updated",
+            render: (_, record) => {
+                return(
+                    <p>{record.updated_at}</p>
+                )
+            }
+        },
+        {
+            title: <I18N>ACTION</I18N>,
+            fixed: "right",
+            dataIndex: "action",
+            render: (_, record) => {
+                return(
+                    <div className=" flex gap-2 justify-between items-center ">
+                        <FontAwesomeIcon onClick={() => setisEditModalVisible(true)} className="dashboarIcon" icon={faEye} />
+                        <FontAwesomeIcon className="dashboarIcon" icon={faTrashAlt} />
+                    </div>
+                )
+            }
+        },
+    ]
     
 
 
@@ -207,7 +219,7 @@ const Projects = () => {
                 <I18N>PROJECTS</I18N>
             </h1>
             
-            <div className=" flex flex-col gap-6 bg-white dark:bg-dark_side rounded-md p-6 duration-300 transition-all shadow-custom_shad5 " >
+            <div className=" flex flex-col gap-6 bg-white dark:bg-dark_side rounded-md p-6 duration-300 transition-all shadow-custom_shad5 w-full overflow-x-scroll " >
                 <button
                     onClick={() => {
                         return setisCreateModalVisible(true)
@@ -217,49 +229,18 @@ const Projects = () => {
                     <FontAwesomeIcon icon={faPlus} className=' text-[20px] ' /> 
                     
                 </button>
-                <CreateModal handleSubmit={handleSubmit} isCreateModalVisible={isCreateModalVisible} setisCreateModalVisible={setisCreateModalVisible} title="ADD_NEW_PROJECT" loading={isCreateProjectLoading} >
-                    <Form
-                        className=" w-full h-full "
-                        onValuesChange={() => setChanges(true)}
-                        onFinish={handleFormSubmit}
-                        layout="vertical"
-                    >
-                        <div className=" flex flex-col md:flex-row justify-between items-start gap-3 " >
-                            <TitleContent locale={"EN"} content={contentEN} setContent={setContentEN} />
-                            <TitleContent locale={"TR"} content={contentTR} setContent={setContentTR} />
-                        </div>
-                        <Form.Item 
-                            required
-                            name={"slug"}
-                            label={<I18N>SLUG</I18N>}
-                        >
-                            <Input className="inputStyle" placeholder={"İçerik Slug"} />
-                        </Form.Item>
-                        <Form.Item 
-                            required
-                            name={"completed"}
-                            label={<I18N>COMPLETED</I18N>}
-                        >
-                            <Switch />
-                        </Form.Item>
-                        <Form.Item 
-                            required
-                            name={"images"}
-                            label={<I18N>IMAGES</I18N>}
-                        >
-                            <ImageUpload setFileList={setFileList} fileList={fileList}  />
-                        </Form.Item>
-                        <Form.Item>
-                            <button className=" py-2 px-5 text-white hover:text-gray-200 rounded-md bg-green-400 " type="submit" >
-                                save
-                            </button>
-                        </Form.Item>
-
-                    </Form>
-                </CreateModal>
+                {/* <CustomModal handleSubmit={handleSubmit} isModalVisible={isCreateModalVisible} setisModalVisible={setisCreateModalVisible} title="ADD_NEW_PROJECT" loading={isCreateProjectLoading} >
+                    <ProjectsForm form={form} contentEN={contentEN} setContentEN={setContentEN} contentTR={contentTR} setContentTR={setContentTR} fileList={fileList} setFileList={setFileList} />
+                </CustomModal> */}
+                <CreateProject isCreateModalVisible={isCreateModalVisible} setisCreateModalVisible={setisCreateModalVisible} />
+                <EditModal title="EDIT_PROJECT" loading={isEditProfileLoading} setisEditModalVisible={setisEditModalVisible} isEditModalVisible={isEditModalVisible} handleSubmit={handleEditSubmit}  >
+                    <ProjectsForm form={form} contentEN={contentEN} setContentEN={setContentEN} contentTR={contentTR} setContentTR={setContentTR} fileList={fileList} setFileList={setFileList} />
+                </EditModal>
                 <Table 
-                    className=" w-full " 
+                    className=" w-fit  " 
+                    scroll={{ x: 'max-content' }}
                     columns={columns}
+                    dataSource={data?.data}
                     pagination={{
                         current: page,
                         total: data?.total ? data?.total : 0,

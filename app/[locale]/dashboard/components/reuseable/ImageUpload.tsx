@@ -1,8 +1,10 @@
+import I18N from "@/i18n";
 import { usePostProjectImageMutation, useRemoveProjectImageMutation } from "@/lib/api/profileApiSlice";
 import { InboxOutlined, PlusOutlined } from "@ant-design/icons";
 import { GetProp, Image, message, Upload, UploadFile, UploadProps } from "antd"
 import Dragger from "antd/es/upload/Dragger";
 import { Dispatch, SetStateAction, useState } from "react";
+import toast from "react-hot-toast";
 
 export interface ImageUploadProps {
     fileList: UploadFile[];
@@ -25,25 +27,47 @@ const ImageUpload: React.FC<ImageUploadProps> = ({fileList, setFileList}) => {
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [postProjectImage, {}] = usePostProjectImageMutation()
-    const [removeProjectImage, {data, isSuccess}] = useRemoveProjectImageMutation()
+    const [removeProjectImage, {data, isError: removeProjectImageIsError }] = useRemoveProjectImageMutation()
     // const [fileList, setFileList] = useState<UploadFile[]>([])
 
     const uploadImage = async (value:any) => {
         const formData = new FormData()
         formData.append("file", value.file)
-        await postProjectImage(formData).then((response) => {
-            setFileList((prev) => { 
-                return [...prev, {uid: Date.now()+'', name: Date.now()+'', url: process.env.NEXT_PUBLIC_BASE+response.data.link}]}
-            )
-        })
+        try {
+            const response = await postProjectImage(formData).unwrap() // unwrap handles async errors
+            console.log(response)
+            console.log(response?.link)
+            if (response?.link) {
+                setFileList((prev) => {
+                    return [
+                        ...prev, 
+                        {uid: Date.now()+'', name: Date.now()+'', url: process.env.NEXT_PUBLIC_BASE+response?.link}
+                    ]}
+                )
+            }
+            
+        } catch (err: any) {
+            if(err.status === "413"){
+                toast.error("File size too large")
+            }else{
+                toast.error("Having trouble uploading image")
+            }
+        }
         return true
     }
 
     const removeImage = async (value: any) => {
         const url = value.url.replace(process.env.NEXT_PUBLIC_BASE, '').replace('storage/projects/','')
-        await removeProjectImage(url)
-        const newFileList = fileList.map(Obj => Obj).filter((item) => (item.url !== value.url))
-        setFileList(newFileList)
+        try {
+            await removeProjectImage(url).unwrap()
+            const newFileList = fileList.map(Obj => Obj).filter((item) => (item.url !== value.url))
+            setFileList(newFileList)
+        } catch (error) {
+            toast.error(<I18N>SOMETHING_WENT_WRONG</I18N>)
+        }
+        // await removeProjectImage(url)
+        // const newFileList = fileList.map(Obj => Obj).filter((item) => (item.url !== value.url))
+        // setFileList(newFileList)
     }
     
 

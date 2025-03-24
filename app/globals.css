@@ -237,7 +237,13 @@ input:focus {
     @apply dark:!text-white
   }
   .sidebarNakedIcon{
-    @apply !h-6 !w-6 !text-deep_red dark:!text-white
+    @apply !h-6 !w-6 !text-dark_yellow dark:!text-white duration-300 transition-all
+  }
+  .dashboarIcon {
+    @apply !h-4 !w-4 !text-dark_yellow dark:!text-gray-600 duration-300 transition-all
+  }
+  .imageIcon {
+    @apply !h-6 !w-6 !text-dark_yellow dark:!text-gray-600 duration-300 transition-all
   }
   .socialLink{
     @apply flex justify-center items-center h-[25px] w-[25px] bg-gray-200 hover:bg-white hover:ring-1 hover:ring-gray-300 duration-300
