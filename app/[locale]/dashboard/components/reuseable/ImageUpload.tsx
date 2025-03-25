@@ -65,9 +65,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({fileList, setFileList}) => {
         } catch (error) {
             toast.error(<I18N>SOMETHING_WENT_WRONG</I18N>)
         }
-        // await removeProjectImage(url)
-        // const newFileList = fileList.map(Obj => Obj).filter((item) => (item.url !== value.url))
-        // setFileList(newFileList)
     }
     
 

@@ -11,14 +11,25 @@ interface TextEditorType {
     handleContent?: (value: string) => void;
     placeHolder: string;
     content: string;
-    setContent: (value: string) => void;
+    language: string;
+    setContent?: (value: string) => void;
+    setData: (value: any) => void;
 }
 
-const TextEditor: React.FC<TextEditorType> = ({defaultContent, allowRichTextImage=false, handleContent, placeHolder, content, setContent}) =>{
+const TextEditor: React.FC<TextEditorType> = ({language, placeHolder, content, setData}) =>{
     const ReactQuill = useMemo(() => dynamic(() => import('react-quill-new'), { ssr: false }),[]);
 
     const handleRchTextChange = (hotChange: string) => {
-        setContent(hotChange)
+        setData((prev:  any) => {
+            return {
+                ...prev,
+                content: {
+                    ...prev.content,
+                    [language]: hotChange
+                }
+            }
+        })
+        // setContent(hotChange)
     }
 
     const modules = {
@@ -33,21 +44,6 @@ const TextEditor: React.FC<TextEditorType> = ({defaultContent, allowRichTextImag
         ],
         
     }
-
-    // useEffect(() => {
-    //     const quillEditor = richTextREF.current?.editor?.root; // Access the Quill editor root element
-    //     if (!quillEditor) return;
-
-    //     const handleBlur = () => {
-    //         handleContent(value);
-    //     };
-
-    //     quillEditor.addEventListener("focusout", handleBlur);
-
-    //     return () => {
-    //         quillEditor.removeEventListener("focusout", handleBlur);
-    //     };
-    // }, [value]);
 
     return(
         <div className=' h-[300px] w-full'>

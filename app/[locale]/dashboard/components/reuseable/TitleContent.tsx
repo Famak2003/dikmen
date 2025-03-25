@@ -1,33 +1,59 @@
-import I18N from "@/i18n"
-import { Form, Input } from "antd"
+
+import { Form, FormInstance, Input } from "antd"
 import TextEditor from "./TextEditor"
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { LocaleType } from "../../projects/page";
+import { FormContent } from "@/types";
 
 interface TitleContentType {
-    content: string;
-    setContent: (value: string) => void;
     locale: string;
+    data: FormContent;
+    setData: (value: any) => void;
+    form: FormInstance;
 }
 
-const TitleContent: React.FC<TitleContentType> = ({locale, content, setContent}) => {
+const TitleContent: React.FC<TitleContentType> = ({data, setData, locale, form}) => {
+
+
+    console.log(data?.title?.[locale as keyof LocaleType])
+
+    useEffect(() => {
+        const title = data?.title?.[locale as keyof LocaleType]
+        form.setFieldsValue({
+           [`title${locale}`]: title,
+        })
+    }, [data])
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = e.target.value;
+        setData((prev: any) => ({
+            ...prev,
+            title: {
+                ...prev.title,
+                [locale]: newValue,
+            },
+        }));
+    };
+
     return(
         <div className="w-full">
-            <h1 className=" text16 p-3 rounded-md bg-gray-300 md:bg-transparent italic " >{locale}</h1>
+            <h1 className=" text16 p-3 rounded-md bg-gray-300 md:bg-transparent italic uppercase" >{locale}</h1>
             <Form.Item
                 required
                 name={`title${locale}`}
-                label={locale === "EN" ? "Title" : "Başlık"}
+                label={locale === "en" ? "Title" : "Başlık"}
             >
-                <Input className="inputStyle" placeholder={`${ locale === "EN" ?  "Input Title here" : "Başlığı buraya girin"}`} />
+                <Input className="inputStyle" value={data.title?.[locale as keyof LocaleType]} onChange={handleChange} placeholder={`${ locale === "en" ?  "Input Title here" : "Başlığı buraya girin"}`} />
             </Form.Item>
-            <Form.Item 
+            <Form.Item
                 required
                 // name={`content${locale}`}
                 label={locale === "EN" ? "Content" : "İçerik"}
                 shouldUpdate={true} // Ensures it updates only when needed
-                initialValue={content}
+                initialValue={data?.content?.[locale as keyof LocaleType]}
             >
-                <TextEditor placeHolder={`${ locale === "EN" ?  "Input Content here" : "İçeriği buraya girin"}`} content={content} setContent={setContent}  />
+                {/* <TextEditor placeHolder={`${ locale === "EN" ?  "Input Content here" : "İçeriği buraya girin"}`} content={data?.content?.[locale as keyof LocaleType]} setData={setData} language={locale} setContent={setContent} /> */}
+                <TextEditor placeHolder={`${ locale === "EN" ?  "Input Content here" : "İçeriği buraya girin"}`} content={data?.content?.[locale as keyof LocaleType]} setData={setData} language={locale} />
             </Form.Item>
         </div>
     )

@@ -8,27 +8,27 @@ import { GetAllPageDataType, GetTableDataOutput } from "@/types";
 //     role: string;
 // }
 
-// export interface projectType {
+// export interface newsType {
 //     id: number;
 //     key?: React.Key;
 //     title: LocaleType;
 //     content: LocaleType;
 //     images: string[];
 //     display_image: string;
-//     completed?: boolean;
+//     completed: boolean;
 //     slug: string;
 //     updated_at: string;
 //     total: number;
 //     user?: user;
 // }
 
-// interface prorjectsLinks {
+// interface newsLinks {
 //     active: boolean;
 //     label: string;
 //     url?: string;
 // }
 
-// export interface GetAllProjectsOutputType {
+// export interface GetAllNewsOutputType {
 //     data: FormSourceDataType[];
 //     first_page_url?: string;
 //     links?: PageLinks[];
@@ -41,52 +41,52 @@ import { GetAllPageDataType, GetTableDataOutput } from "@/types";
 //     current_page?: number;
 // }
 
-// interface GetAllProjectsInputType {
+// interface GetAllNewsInputType {
 //     perPage: number; 
 //     page: number;
 // }
 
-export const profileApiSlice = apiSlice.injectEndpoints({
+export const newsApiSlice = apiSlice.injectEndpoints({
     overrideExisting: true,
     endpoints: (builder) => ({
-        getProfile: builder.query<GetTableDataOutput, GetAllPageDataType>({   // get all profile info
-            query: ({perPage, page}) => `projects?perPage=${perPage}&page=${page}`,
+        getNews: builder.query<GetTableDataOutput, GetAllPageDataType>({   // get all profile info
+            query: ({perPage, page}) => `news?perPage=${perPage}&page=${page}`,
             keepUnusedDataFor: 0,
         }),
-        createProject: builder.mutation({
-            query: (projectData) => ({
-                url: "admin/projects",
+        createNews: builder.mutation({
+            query: (newsData) => ({
+                url: "admin/news",
                 method: "PUT",
-                body: projectData
+                body: newsData
             })
         }),
-        postProjectImage: builder.mutation({
+        postNewsImage: builder.mutation({
             query: (image: FormData) => ({
-                url: "admin/projects/image",
+                url: "admin/news/image",
                 method: "POST",
                 body: image
             }) 
         }),
-        removeProjectImage: builder.mutation({
+        removeNewsImage: builder.mutation({
             query: (imageurl) => {
                 return {
-                    url: "admin/projects/image" + imageurl,
+                    url: "admin/news/image" + imageurl,
                     method: "DELETE"
                 }
             }
         }),
-        editProject: builder.mutation({
-            query: ({projectData, id}) => ({
-                url: `admin/projects/${id}`,
+        editNews: builder.mutation({
+            query: ({newsData, id}) => ({
+                url: `admin/news/${id}`,
                 method: "PATCH",
-                body: projectData
+                body: newsData
             })
         }),
-        deleteProject: builder.mutation({
+        deleteNews: builder.mutation({
             query: (id) => {
                 // console.log(" API ID ",id)
                 return {
-                    url: `admin/projects/${id}`,
+                    url: `admin/news/${id}`,
                     method: "DELETE",
                 }
             }
@@ -96,10 +96,10 @@ export const profileApiSlice = apiSlice.injectEndpoints({
 })
 
 export const {
-    useGetProfileQuery,
-    useRemoveProjectImageMutation,
-    useCreateProjectMutation,
-    usePostProjectImageMutation,
-    useEditProjectMutation,
-    useDeleteProjectMutation,
-} = profileApiSlice
+    useGetNewsQuery,
+    useRemoveNewsImageMutation,
+    useCreateNewsMutation,
+    usePostNewsImageMutation,
+    useEditNewsMutation,
+    useDeleteNewsMutation,
+} = newsApiSlice

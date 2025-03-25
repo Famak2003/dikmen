@@ -163,10 +163,12 @@
     "CONTENT": "Content", 
     "SLUG": "Slug",
     "ACTION": "Action",
-    "ADD_NEW_PROJECT": "Add New Project",
+    "ADD_PROJECT": "Add Project",
     "COMPLETED": "Completed",
     "RICH_TEXT_PLACEHOLDER": "Input Content here",
     "UPDATED_SUCCESFULLY": "Updated Successful",
     "SAVED": "Saved",
-    "EDIT_PROJECT": "Edit Project"
+    "EDIT_PROJECT": "Edit Project",
+    "PROJECTS_DELETED": "Project Delete",
+    "ADD_NEWS": "Add News"
 }

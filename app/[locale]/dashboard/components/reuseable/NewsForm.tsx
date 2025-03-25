@@ -4,32 +4,25 @@ import I18N from "@/i18n"
 import { Form, Input, Switch } from "antd"
 import TitleContent from "./TitleContent";
 import ImageUpload from "./ImageUpload";
-import {  useEffect } from "react";
+import { useEffect } from "react";
 import { CustomFormType, FormContent } from "@/types";
 
-interface ProjectsFormType extends CustomFormType {
-    projectdata: FormContent;
-    setProjectData: (value: any) => void;
+interface NewsFormType extends CustomFormType{
+    newsdata: FormContent;
+    setNewsData: (value: any) => void;
 }
 
-const ProjectsForm: React.FC<ProjectsFormType> = (
-        {
-            form,
-            projectdata,
-            setProjectData,
-            fileList,
-            setFileList
-        }
-    ) => {
+const NewsForm: React.FC<NewsFormType> = 
+    ({ form, newsdata, setNewsData, fileList, setFileList }) => {
 
         useEffect(() => {
-            if(projectdata){
+            if(newsdata){
                 form.setFieldsValue({
-                    slug: projectdata.slug,
-                    completed: projectdata?.completed
+                    slug: newsdata.slug,
+                    completed: newsdata?.completed
                 })
             }
-        }, [projectdata])
+        }, [newsdata])
 
 
     return(
@@ -39,8 +32,8 @@ const ProjectsForm: React.FC<ProjectsFormType> = (
             layout="vertical"
         >
             <div className=" flex flex-col md:flex-row justify-between items-start gap-3 " >
-                <TitleContent data={projectdata} setData={setProjectData} locale={"en"} form={form} />
-                <TitleContent data={projectdata} setData={setProjectData} locale={"tr"} form={form} />
+                <TitleContent data={newsdata} setData={setNewsData} locale={"en"} form={form} />
+                <TitleContent data={newsdata} setData={setNewsData} locale={"tr"} form={form} />
             </div>
             <Form.Item 
                 required
@@ -48,7 +41,7 @@ const ProjectsForm: React.FC<ProjectsFormType> = (
                 label={<I18N>SLUG</I18N>}>
                 <Input
                     onChange={(e) => {
-                        setProjectData((prev: any) => {
+                        setNewsData((prev: any) => {
                             return {
                                 ...prev,
                                 slug: e.target.value
@@ -67,7 +60,7 @@ const ProjectsForm: React.FC<ProjectsFormType> = (
                 <Switch 
                     value={true}
                     onChange={(value) => {
-                        setProjectData((prev: any) => {
+                        setNewsData((prev: any) => {
                             return{
                                 ...prev,
                                 completed: value
@@ -88,4 +81,4 @@ const ProjectsForm: React.FC<ProjectsFormType> = (
     )
 }
 
-export default ProjectsForm
+export default NewsForm

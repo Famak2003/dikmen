@@ -19,7 +19,7 @@ const EditModal: React.FC<EditModalType> = ({title, handleSubmit, setisEditModal
             title={ <h1 className=" uppercase font-bold text-[20px] "><I18N>{title}</I18N></h1> }
             open={isEditModalVisible}
             width={"90%"}
-            className=' createAdminForm '
+            className='  '
             okText={"Submit"}
             onOk={() => handleSubmit()}
             confirmLoading={loading}

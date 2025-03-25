@@ -5,11 +5,11 @@ import CustomModal from "./reuseable/CustomModal"
 import ProjectsForm from "./reuseable/ProjectsForm"
 import { UploadFile } from "antd"
 import { useForm } from "antd/es/form/Form"
-import { useCreateProjectMutation } from "@/lib/api/profileApiSlice"
-import { LocaleType } from "../projects/page"
+import { useCreateNewsMutation } from "@/lib/api/newsApiSlice"
 import toast from "react-hot-toast"
 import I18N from "@/i18n"
 import { FormContent } from "@/types"
+import NewsForm from "./reuseable/NewsForm"
 
 // export interface ProjectContent {
 //     title: LocaleType;
@@ -19,18 +19,18 @@ import { FormContent } from "@/types"
 //     images: string[]
 // }
 
-export interface createProjectType {
+export interface createNewsType {
     isModalVisible: boolean,
     setisModalVisible: (value: any) => void
 }
 
-const CreateProject: React.FC<createProjectType> = ({isModalVisible, setisModalVisible}) => {
+const CreateNews: React.FC<createNewsType> = ({isModalVisible, setisModalVisible}) => {
     const [form] = useForm()
     const [fileList, setFileList] = useState<UploadFile[]>([])
 
-    const [createProject, {isSuccess, isError, isLoading: isCreateProjectLoading}] = useCreateProjectMutation()
+    const [createNews, {isSuccess, isError, isLoading: isCreateNewsLoading}] = useCreateNewsMutation()
 
-    const [projectdata, setProjectData] = useState<FormContent>({
+    const [newsdata, setNewsData] = useState<FormContent>({
             title: {
                 en: "",
                 tr: ""
@@ -39,7 +39,6 @@ const CreateProject: React.FC<createProjectType> = ({isModalVisible, setisModalV
                 en: "",
                 tr: ""
             },
-            completed: false,
             slug: "",
             images: [] 
             
@@ -57,17 +56,17 @@ const CreateProject: React.FC<createProjectType> = ({isModalVisible, setisModalV
 
     const handleSubmit = async () => {
         try {
-            console.log(projectdata)
+            console.log(newsdata)
             const newFileList = fileList.map((obj: any) => {
                 const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '').replace('storage/projects/','')
                 return newUrl
             })
             const dataToSubmit = {
-                ...projectdata,
+                ...newsdata,
                 images: newFileList
             }
             console.log(dataToSubmit)
-            createProject(dataToSubmit)
+            createNews(dataToSubmit)
 
         } catch (error) {
             console.log("Form submit Failed")
@@ -77,11 +76,11 @@ const CreateProject: React.FC<createProjectType> = ({isModalVisible, setisModalV
     }
     return(
         <div>
-            <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="ADD_PROJECT" loading={isCreateProjectLoading} >
-                <ProjectsForm projectdata={projectdata} setProjectData={setProjectData} form={form} fileList={fileList} setFileList={setFileList} />
+            <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="ADD_NEWS" loading={isCreateNewsLoading} >
+                <NewsForm newsdata={newsdata} setNewsData={setNewsData} form={form} fileList={fileList} setFileList={setFileList} />
             </CustomModal>
         </div>
     )
 }
 
-export default CreateProject
+export default CreateNews

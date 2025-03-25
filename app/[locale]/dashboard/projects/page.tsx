@@ -3,9 +3,9 @@
 import I18N from "@/i18n";
 import { faEye, faImage, faPlus, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Form, Image, Input, Switch, Table, TableColumnsType, UploadFile } from "antd"
+import { Form, Image, Input, Modal, Switch, Table, TableColumnsType, UploadFile } from "antd"
 import { useEffect, useState } from "react";
-import { projectType, useCreateProjectMutation, useEditProjectMutation, useGetProfileQuery } from "@/lib/api/profileApiSlice";
+import { useDeleteProjectMutation, useGetProfileQuery } from "@/lib/api/profileApiSlice";
 import toast from "react-hot-toast";
 import { useForm } from "antd/es/form/Form";
 import { getLocale } from "next-intl/server";
@@ -14,6 +14,11 @@ import EditModal from "../components/reuseable/EditModal";
 import ProjectsForm from "../components/reuseable/ProjectsForm";
 import CustomModal from "../components/reuseable/CustomModal";
 import CreateProject from "../components/CreateProject";
+import EditProject from "../components/EditProject";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
+import ValidatorModal from "../components/reuseable/ValidatorModal";
+import { FormSourceDataType, user } from "@/types";
 
 export interface LocaleType {
     en: string;
@@ -28,92 +33,46 @@ interface ProjectContent  {
     images: string[]
 }
 
+export interface IndividualType extends ProjectContent {
+    id: number;
+    display_image: string
+    updated_at: string,
+    total: number,
+    user?: user
+}
+
 
 
 const Projects = () => {
-    const [form] = useForm()
+
+    const allProject = useSelector((state: RootState) => state.projects.allProjects)
+    const [individualData, setIndividualData] = useState<any>({})
+
     const locale = useLocale()
     const [isCreateModalVisible, setisCreateModalVisible] = useState(false)
     const [isEditModalVisible, setisEditModalVisible] = useState(false)
     const [page, setPage] = useState<number>(1)
     
-    const [contentEN, setContentEN] = useState<string>("")
-    const [fileList, setFileList] = useState<UploadFile[]>([])
-    
-    const [contentTR, setContentTR] = useState<string>("")
     const perPage = 10
-    const [createProject, {isSuccess, isError, isLoading: isCreateProjectLoading}] = useCreateProjectMutation()
-    const [editProject, {isSuccess: isEditProfileSuccess, isError: isEditProfileError, isLoading: isEditProfileLoading}] = useEditProjectMutation()
+    const [deleteProject, {isSuccess, isError, isLoading: isDeleteProjectLoading}] = useDeleteProjectMutation()
     
-    const {data, refetch} = useGetProfileQuery({perPage, page})
-    const [projectdata, setProjectData] = useState<ProjectContent>({
-        title: {
-            en: "",
-            tr: ""
-        },
-        content: {
-            en: "",
-            tr: ""
-        },
-        completed: false,
-        slug: "",
-        images: [] 
-        
-    })
-    
+    const {data, refetch} = useGetProfileQuery({perPage, page}, { refetchOnMountOrArgChange: true })
+
     useEffect(() => {
         if(isError){
             toast.error(<I18N>SOMETHING_WENT_WRONG</I18N>)
         }
         if(isSuccess){
-            toast.success(<I18N>UPDATED_SUCCESFULLY</I18N>)
+            toast.success(<I18N>PROJECTS_DELETED</I18N>)
         }
     }, [isError, isSuccess])
     
     useEffect(() => {
-        refetch()
+        refetch();
     }, [])
 
-    const handleSubmit = async () => {
-        try {
-            const value = await form.validateFields()
 
-            setProjectData((prev) => {
-                const updatedData = {
-                    ...prev,
-                    completed: value.completed,
-                    slug: value.slug,
-                    content: {
-                        en: contentEN,
-                        tr: contentTR
-                    },
-                    title: {
-                        en: value.titleEN,
-                        tr: value.titleTR
-                    },
-                    images: fileList.map(obj => obj.url)  // Extract URL
-                        .filter((url): url is string => Boolean(url)) // Remove undefined values
-                }
-                
-                createProject(updatedData)
-                // console.log(updatedData)
-
-                return updatedData
-            })
-
-        } catch (error) {
-            console.log("Form submit Failed")
-            console.error("Form validation failed:", error);
-        }
-        
-    }
-
-    const handleEditSubmit = () => {
-        console.log("Edit modal submit")
-    }
-
-
-    const columns: TableColumnsType<projectType> = [
+    const columns: TableColumnsType<FormSourceDataType> = [
         {
             title: <I18N>TITLE</I18N>,
             dataIndex: "title",
@@ -191,8 +150,10 @@ const Projects = () => {
             title: <I18N>UPDATED</I18N>,
             dataIndex: "updated",
             render: (_, record) => {
+                const date = new Date(record.updated_at);
+                const formatedDate = date.toLocaleString()
                 return(
-                    <p>{record.updated_at}</p>
+                    <p>{formatedDate}</p>
                 )
             }
         },
@@ -201,20 +162,31 @@ const Projects = () => {
             fixed: "right",
             dataIndex: "action",
             render: (_, record) => {
+                const handleEditModal = () => {
+                    setIndividualData(record)
+                    return setisEditModalVisible(true)
+                }
+                const handleDelete = () => {
+                    const id = record.id
+                    console.log(id)
+                    deleteProject(id)
+                }
                 return(
                     <div className=" flex gap-2 justify-between items-center ">
-                        <FontAwesomeIcon onClick={() => setisEditModalVisible(true)} className="dashboarIcon" icon={faEye} />
-                        <FontAwesomeIcon className="dashboarIcon" icon={faTrashAlt} />
+                        <FontAwesomeIcon onClick={handleEditModal} className="dashboarIcon" icon={faEye} />
+                        <FontAwesomeIcon onClick={handleDelete} className="dashboarIcon" icon={faTrashAlt} />
                     </div>
                 )
             }
         },
     ]
-    
 
+    //  const handleDeleteProject = () => {
+    //     return 
+    //  }
 
     return (
-        <section className=" relative flex-1 flex flex-col gap-6 justify-center " >
+        <section className=" dashboarPages " >
             <h1 className=" text-[30px] font-bold " >
                 <I18N>PROJECTS</I18N>
             </h1>
@@ -229,18 +201,16 @@ const Projects = () => {
                     <FontAwesomeIcon icon={faPlus} className=' text-[20px] ' /> 
                     
                 </button>
-                {/* <CustomModal handleSubmit={handleSubmit} isModalVisible={isCreateModalVisible} setisModalVisible={setisCreateModalVisible} title="ADD_NEW_PROJECT" loading={isCreateProjectLoading} >
-                    <ProjectsForm form={form} contentEN={contentEN} setContentEN={setContentEN} contentTR={contentTR} setContentTR={setContentTR} fileList={fileList} setFileList={setFileList} />
-                </CustomModal> */}
-                <CreateProject isCreateModalVisible={isCreateModalVisible} setisCreateModalVisible={setisCreateModalVisible} />
-                <EditModal title="EDIT_PROJECT" loading={isEditProfileLoading} setisEditModalVisible={setisEditModalVisible} isEditModalVisible={isEditModalVisible} handleSubmit={handleEditSubmit}  >
-                    <ProjectsForm form={form} contentEN={contentEN} setContentEN={setContentEN} contentTR={contentTR} setContentTR={setContentTR} fileList={fileList} setFileList={setFileList} />
-                </EditModal>
-                <Table 
-                    className=" w-fit  " 
+                <CreateProject isModalVisible={isCreateModalVisible} setisModalVisible={setisCreateModalVisible} />
+                <EditProject data={individualData} isModalVisible={isEditModalVisible} setisModalVisible={setisEditModalVisible} />
+                {/* <ValidatorModal handleSubmit={handleDeleteProject} title="DELETE_PROJECT" >
+
+                </ValidatorModal> */}
+                <Table
+                    className=" w-fit "
                     scroll={{ x: 'max-content' }}
                     columns={columns}
-                    dataSource={data?.data}
+                    dataSource={allProject?.data}
                     pagination={{
                         current: page,
                         total: data?.total ? data?.total : 0,

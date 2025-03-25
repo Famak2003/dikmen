@@ -163,10 +163,12 @@
     "CONTENT": "İçerik",
     "SLUG": "Slug",
     "ACTION": "Aksiyon",
-    "ADD_NEW_PROJECT": "Yeni Proje Ekle",
+    "ADD_PROJECT": "Yeni Proje Ekle",
     "COMPLETED": "Tamamlanmış",
     "RICH_TEXT_PLACEHOLDER": "İçeriği buraya girin",
     "UPDATED_SUCCESFULLY": "Başarılı Olarak Güncellendi",
     "SAVED": "Kaydedildi",
-    "EDIT_PROJECT": "Projeyi Düzenle"
+    "EDIT_PROJECT": "Projeyi Düzenle",
+    "PROJECTS_DELETED": "Proje Sil",
+    "ADD_NEWS": "Add News"
 }

@@ -68,6 +68,5 @@ interface authorizationTokenType {
     baseQuery: baseQueryWithReauth,
     refetchOnFocus: true,
     refetchOnReconnect: true,
-    keepUnusedDataFor: 10800,
     endpoints: (builder) => ({}),
   });
