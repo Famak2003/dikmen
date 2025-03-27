@@ -28,7 +28,7 @@ const newsSlice = createSlice({
                 newsApiSlice.endpoints.getNews.matchFulfilled,
                     (state, action) => {
                         state.allNews = action.payload
-                        console.log("News Action ===>", action)
+                        // console.log("News Action ===>", action)
                     }
             )
     }

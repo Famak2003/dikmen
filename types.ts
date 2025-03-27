@@ -23,6 +23,8 @@ export interface FormContent {
     title: LocaleType;
     content: LocaleType;
     completed?: boolean;
+    visible?: boolean;
+    tags?: string[];
     slug: string;
     images: string[]
 }
@@ -35,7 +37,9 @@ export interface FormSourceDataType {
     images: string[];
     display_image: string;
     completed?: boolean;
+    visible?: boolean;
     slug: string;
+    tags?: string[];
     updated_at: string;
     total: number;
     user?: user;
@@ -64,4 +68,12 @@ export interface GetTableDataOutput {
 export interface GetAllPageDataType {
     perPage: number; 
     page: number;
+}
+
+export interface IndividualType extends FormContent {
+    id: number;
+    display_image: string
+    updated_at: string,
+    total: number,
+    user?: user
 }

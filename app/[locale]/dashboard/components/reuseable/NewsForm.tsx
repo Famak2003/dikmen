@@ -1,11 +1,12 @@
 'use client'
 
 import I18N from "@/i18n"
-import { Form, Input, Switch } from "antd"
+import { Button, Divider, Form, Input, InputRef, Select, Space, Switch } from "antd"
 import TitleContent from "./TitleContent";
 import ImageUpload from "./ImageUpload";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CustomFormType, FormContent } from "@/types";
+import { PlusOutlined } from "@ant-design/icons";
 
 interface NewsFormType extends CustomFormType{
     newsdata: FormContent;
@@ -14,16 +15,38 @@ interface NewsFormType extends CustomFormType{
 
 const NewsForm: React.FC<NewsFormType> = 
     ({ form, newsdata, setNewsData, fileList, setFileList }) => {
+        const inputRef = useRef<InputRef>(null);
+        const [name, setName] = useState('');
+        let index = 0;
 
         useEffect(() => {
             if(newsdata){
                 form.setFieldsValue({
                     slug: newsdata.slug,
-                    completed: newsdata?.completed
+                    visible: newsdata?.visible,
+                    tags: newsdata?.tags
                 })
             }
         }, [newsdata])
 
+
+    const addItem = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+        e.preventDefault();
+        setNewsData((prev: any) => {
+            return {
+                ...prev,
+                tags: [...(prev?.tags || []), name || `New item ${index++}`]
+            }
+        })
+        setName('');
+        setTimeout(() => {
+            inputRef.current?.focus();
+        }, 0);
+    };
+
+    const onNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setName(event.target.value);
+    };
 
     return(
         <Form
@@ -35,6 +58,44 @@ const NewsForm: React.FC<NewsFormType> =
                 <TitleContent data={newsdata} setData={setNewsData} locale={"en"} form={form} />
                 <TitleContent data={newsdata} setData={setNewsData} locale={"tr"} form={form} />
             </div>
+            <Form.Item 
+                required
+                name={"tags"}
+                label={<I18N>TAGS</I18N>}>
+                <Select
+                    mode="multiple"
+                    onChange={(value) => {
+                        console.log(value)
+                        setNewsData((prev: any) => {
+                            return {
+                                ...prev,
+                                tags: value
+                            }
+                        })
+                    } } 
+                    className="inputStyle"
+                    placeholder={"İçerik tag"}
+                    dropdownRender={(menu) => (
+                        <>
+                          {menu}
+                          <Divider style={{ margin: '8px 0' }} />
+                          <Space style={{ padding: '0 8px 4px' }}>
+                            <Input
+                              placeholder="Please enter item"
+                              ref={inputRef}
+                              value={name}
+                              onChange={onNameChange}
+                              onKeyDown={(e) => e.stopPropagation()}
+                            />
+                            <Button type="text" icon={<PlusOutlined />} onClick={addItem}>
+                              Add item
+                            </Button>
+                          </Space>
+                        </>
+                      )}
+                    options={newsdata.tags?.map((item) => ({ lablel: item, value: item }))}
+                />
+            </Form.Item>
             <Form.Item 
                 required
                 name={"slug"}
@@ -54,8 +115,8 @@ const NewsForm: React.FC<NewsFormType> =
             </Form.Item>
             <Form.Item
                 required
-                name={"completed"}
-                label={<I18N>COMPLETED</I18N>}
+                name={"visible"}
+                label={<I18N>VISIBLE</I18N>}
             >
                 <Switch 
                     value={true}
@@ -63,7 +124,7 @@ const NewsForm: React.FC<NewsFormType> =
                         setNewsData((prev: any) => {
                             return{
                                 ...prev,
-                                completed: value
+                                visible: value
                             }
                         })
                     }}

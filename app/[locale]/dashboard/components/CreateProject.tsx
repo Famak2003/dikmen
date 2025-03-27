@@ -59,7 +59,7 @@ const CreateProject: React.FC<createProjectType> = ({isModalVisible, setisModalV
         try {
             console.log(projectdata)
             const newFileList = fileList.map((obj: any) => {
-                const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '').replace('storage/projects/','')
+                const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '')
                 return newUrl
             })
             const dataToSubmit = {

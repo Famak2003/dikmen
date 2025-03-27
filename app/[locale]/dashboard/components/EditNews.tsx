@@ -2,40 +2,40 @@
 
 import React, { useEffect, useState } from "react"
 import CustomModal from "./reuseable/CustomModal"
-import ProjectsForm from "./reuseable/ProjectsForm"
 import { UploadFile } from "antd"
 import { useForm } from "antd/es/form/Form"
-import { useEditProjectMutation } from "@/lib/api/profileApiSlice"
 import toast from "react-hot-toast"
 import I18N from "@/i18n"
 import { createProjectType } from "./CreateProject"
 import { RootState } from "@/lib/store"
 import { useDispatch, useSelector } from "react-redux"
-import { setAllProjects } from "@/lib/slices/profileSlice"
+import { useEditNewsMutation } from "@/lib/api/newsApiSlice"
+import NewsForm from "./reuseable/NewsForm"
+import { setAllNews } from "@/lib/slices/newsSlice"
 import { IndividualType } from "@/types"
 
 
-interface EditProjectType extends createProjectType {
+interface EditNewsType extends createProjectType {
     data: IndividualType
 }
 
-const EditProject: React.FC<EditProjectType> = ({ data, isModalVisible, setisModalVisible}) => {
+const EditNews: React.FC<EditNewsType> = ({ data, isModalVisible, setisModalVisible}) => {
     const dispatch = useDispatch()
-    const allProject = useSelector((state: RootState) => state.projects.allProjects)
+    const allNews = useSelector((state: RootState) => state.news.allNews)
     const imagesObj = data?.images?.map((value, idx) => {
         return {
             uid: `${idx}_${Date.now()} `,
             name: `${data.slug} image${idx + 1}`,
-            url: process.env.NEXT_PUBLIC_BASE + value
+            url:  process.env.NEXT_PUBLIC_BASE + value
         }
     })
 
     const [form] = useForm()
     const [fileList, setFileList] = useState<UploadFile[]>(imagesObj)
 
-    const [editProject, {isSuccess, isError, isLoading: isEditProjectLoading}] = useEditProjectMutation()
+    const [editNews, {isSuccess, isError, isLoading: isEditNewsLoading}] = useEditNewsMutation()
 
-    const [projectdata, setProjectData] = useState<IndividualType>({
+    const [newsdata, setNewsData] = useState<IndividualType>({
         title: {
             en: data?.title?.en,
             tr: data?.title?.tr
@@ -44,9 +44,10 @@ const EditProject: React.FC<EditProjectType> = ({ data, isModalVisible, setisMod
             en: "",
             tr: ""
         },
-        completed: true,
+        visible: true,
         slug: data?.slug,
         images: [],
+        tags: [],
         id: data.id,
         display_image: data.display_image,
         updated_at: data.updated_at,
@@ -57,7 +58,7 @@ const EditProject: React.FC<EditProjectType> = ({ data, isModalVisible, setisMod
         if (data){
             setFileList(imagesObj)
 
-            setProjectData(() => {
+            setNewsData(() => {
                 return {
                     ...data,
                     images: []
@@ -65,6 +66,8 @@ const EditProject: React.FC<EditProjectType> = ({ data, isModalVisible, setisMod
             })
         }
     }, [data])
+
+    console.log(data)
 
     
     useEffect(() => {
@@ -83,18 +86,20 @@ const EditProject: React.FC<EditProjectType> = ({ data, isModalVisible, setisMod
                 return newUrl
             })
             const dataToSubmit = {
-                ...projectdata,
+                ...newsdata,
                 images: newFileList
             }
 
-            editProject({ projectData: dataToSubmit, id: projectdata.id }) // Fire Api to edit project
+            console.log(dataToSubmit)
 
-            const newData = allProject.data.filter((obj: any) => {
-                return obj.id !== projectdata.id
+            editNews({ newsData: dataToSubmit, id: newsdata.id }) // Fire Api to edit project
+
+            const newData = allNews.data.filter((obj: any) => {
+                return obj.id !== newsdata.id
             })
-            newData.push(projectdata)
-            dispatch(setAllProjects({ // update projects to reflect changes immediately
-                ...allProject,
+            newData.push(newsdata)
+            dispatch(setAllNews({ // update projects to reflect changes immediately
+                ...allNews,
                 data: [
                     ...newData
                 ]
@@ -109,11 +114,11 @@ const EditProject: React.FC<EditProjectType> = ({ data, isModalVisible, setisMod
     }
     return(
         <div>
-            <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="EDIT_PROJECT" loading={isEditProjectLoading} >
-                <ProjectsForm form={form} projectdata={projectdata} setProjectData={setProjectData} fileList={fileList} setFileList={setFileList} />
+            <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="EDIT_NEWS" loading={isEditNewsLoading} >
+                <NewsForm form={form} newsdata={newsdata} setNewsData={setNewsData} fileList={fileList} setFileList={setFileList} />
             </CustomModal>
         </div>
     )
 }
 
-export default EditProject
+export default EditNews

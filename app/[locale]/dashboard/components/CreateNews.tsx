@@ -39,8 +39,10 @@ const CreateNews: React.FC<createNewsType> = ({isModalVisible, setisModalVisible
                 en: "",
                 tr: ""
             },
+            visible: false,
             slug: "",
-            images: [] 
+            tags: [],
+            images: []
             
         })
 
@@ -58,7 +60,7 @@ const CreateNews: React.FC<createNewsType> = ({isModalVisible, setisModalVisible
         try {
             console.log(newsdata)
             const newFileList = fileList.map((obj: any) => {
-                const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '').replace('storage/projects/','')
+                const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '')
                 return newUrl
             })
             const dataToSubmit = {

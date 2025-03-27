@@ -3,42 +3,20 @@
 import I18N from "@/i18n";
 import { faEye, faImage, faPlus, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Form, Image, Input, Modal, Switch, Table, TableColumnsType, UploadFile } from "antd"
+import { Image, Switch, Table, TableColumnsType } from "antd"
 import { useEffect, useState } from "react";
 import { useDeleteProjectMutation, useGetProfileQuery } from "@/lib/api/profileApiSlice";
 import toast from "react-hot-toast";
-import { useForm } from "antd/es/form/Form";
-import { getLocale } from "next-intl/server";
 import { useLocale } from "next-intl";
-import EditModal from "../components/reuseable/EditModal";
-import ProjectsForm from "../components/reuseable/ProjectsForm";
-import CustomModal from "../components/reuseable/CustomModal";
 import CreateProject from "../components/CreateProject";
 import EditProject from "../components/EditProject";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
-import ValidatorModal from "../components/reuseable/ValidatorModal";
-import { FormSourceDataType, user } from "@/types";
+import { FormSourceDataType } from "@/types";
 
 export interface LocaleType {
     en: string;
     tr: string;
-}
-
-interface ProjectContent  {
-    title: LocaleType;
-    content: LocaleType;
-    completed: boolean;
-    slug: string;
-    images: string[]
-}
-
-export interface IndividualType extends ProjectContent {
-    id: number;
-    display_image: string
-    updated_at: string,
-    total: number,
-    user?: user
 }
 
 
@@ -111,13 +89,14 @@ const Projects = () => {
         {
             title: <I18N>IMAGES</I18N>,
             dataIndex: "display_image",
-            render: (diaplayImage, _) => {
+            render: (displayImage, _) => {
+                const imageURL = process.env.NEXT_PUBLIC_BASE + displayImage
                 return(
                     <div className=" flex justify-center items-center ">
                         {
-                            diaplayImage ? (
+                            displayImage ? (
                                 <figure className=" w-[70px] aspect-square rounded-md overflow-hidden border-dark_yellow ">
-                                    <Image className=" h-full w-full object-fill " height={70} width={70} src={diaplayImage} alt="Project Display Image" />
+                                    <Image className=" h-full w-full object-fill " height={70} width={70} src={imageURL} alt="Project Display Image" />
                                 </figure>
                             ) : (
                                 <FontAwesomeIcon className=" imageIcon " icon={faImage} />
@@ -181,9 +160,7 @@ const Projects = () => {
         },
     ]
 
-    //  const handleDeleteProject = () => {
-    //     return 
-    //  }
+    // console.log(allProject?.data)
 
     return (
         <section className=" dashboarPages " >
@@ -197,7 +174,7 @@ const Projects = () => {
                         return setisCreateModalVisible(true)
                     }}
                     className=' flex gap-4 justify-between items-center rounded-md px-4 py-2 bg-primary_black dark:bg-slate-600 w-fit text-white '>
-                    <span> <I18N>ADD_NEW_PROJECT</I18N> </span>
+                    <span> <I18N>ADD_PROJECT</I18N> </span>
                     <FontAwesomeIcon icon={faPlus} className=' text-[20px] ' /> 
                     
                 </button>

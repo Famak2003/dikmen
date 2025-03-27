@@ -170,5 +170,10 @@
     "SAVED": "Saved",
     "EDIT_PROJECT": "Edit Project",
     "PROJECTS_DELETED": "Project Delete",
-    "ADD_NEWS": "Add News"
+    "ADD_NEWS": "Add News",
+    "VISIBLE": "Visible",
+    "HIDDEN": "Hidden",
+    "TAGS": "Tags",
+    "TAG": "Tag",
+    "EDIT_NEWS":"Edit News"
 }

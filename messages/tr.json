@@ -170,5 +170,10 @@
     "SAVED": "Kaydedildi",
     "EDIT_PROJECT": "Projeyi Düzenle",
     "PROJECTS_DELETED": "Proje Sil",
-    "ADD_NEWS": "Add News"
+    "ADD_NEWS": "Add News",
+    "VISIBLE": "Görünür",
+    "HIDDEN": "Gizlenmiş",
+    "TAGS": "Etiketler",
+    "TAG": "Etiket",
+    "EDIT_NEWS":"Haberleri Düzenle"
 }

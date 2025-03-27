@@ -240,7 +240,7 @@ input:focus {
     @apply !h-6 !w-6 !text-dark_yellow dark:!text-white duration-300 transition-all
   }
   .dashboarIcon {
-    @apply !h-4 !w-4 !text-dark_yellow dark:!text-gray-600 duration-300 transition-all
+    @apply !h-4 !w-4 !text-dark_yellow dark:!text-gray-600 duration-300 transition-all cursor-pointer
   }
   .imageIcon {
     @apply !h-6 !w-6 !text-dark_yellow dark:!text-gray-600 duration-300 transition-all

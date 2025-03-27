@@ -28,7 +28,7 @@ const projectSlice = createSlice({
                 profileApiSlice.endpoints.getProfile.matchFulfilled,
                     (state, action) => {
                         state.allProjects = action.payload
-                        console.log("Projects Action ===>", action)
+                        // console.log("Projects Action ===>", action)
                     }
             )
     }

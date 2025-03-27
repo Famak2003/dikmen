@@ -3,16 +3,16 @@
 import I18N from "@/i18n"
 import { useDeleteNewsMutation, useGetNewsQuery } from "@/lib/api/newsApiSlice"
 import { RootState } from "@/lib/store"
-import { Switch, Table, TableColumnsType } from "antd"
+import { Image, Switch, Table, TableColumnsType } from "antd"
 import { useLocale } from "next-intl"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { LocaleType } from "../projects/page"
-import Image from "next/image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faImage, faPenFancy, faPlus, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 import CreateNews from "../components/CreateNews"
 import { FormSourceDataType } from "@/types"
+import EditNews from "../components/EditNews"
 
 
 const News = () => {
@@ -30,6 +30,7 @@ const News = () => {
     const [isEditModalVisible, setisEditModalVisible] = useState(false)
     
     useEffect(() => {
+        console.log("Refetch news")
         refetch()
     }, [])
 
@@ -37,7 +38,6 @@ const News = () => {
         {
             title: <I18N>TITLE</I18N>,
             dataIndex: "title",
-            // fixed: "left",
             defaultSortOrder: "ascend",
             sorter: (a, b) => a.title.en.length - b.title.en.length,
             sortDirections: ['descend'],
@@ -50,41 +50,58 @@ const News = () => {
             }
         },
         {
-            title: <I18N>COMPLETED_PROJECTS</I18N>,
-            dataIndex: "completed",
+            title: <I18N>VISIBLE</I18N>,
+            dataIndex: "visible",
             filters: [
                 {
-                    text: <I18N>COMPLETED_PROJECTS</I18N>,
+                    text: <I18N>VISIBLE</I18N>,
                     value: true
                 },
                 {
-                    text: <I18N>ONGOING_PROJECTS</I18N>,
+                    text: <I18N>HIDDEN</I18N>,
                     value: false
                 },
             ],
             onFilter: (value, record) => record.completed === value,
             render: (_, record) => {
                 return (
-                    <Switch checked={record.completed} />
+                    <Switch checked={record.visible} />
                 )
             }
         },
         {
             title: <I18N>IMAGES</I18N>,
             dataIndex: "display_image",
-            render: (diaplayImage, _) => {
+            render: (displayImage, _) => {
+                const imageURL = process.env.NEXT_PUBLIC_BASE + displayImage
                 return(
                     <div className=" flex justify-center items-center ">
                         {
-                            diaplayImage ? (
+                            displayImage ? (
                                 <figure className=" w-[70px] aspect-square rounded-md overflow-hidden border-dark_yellow ">
-                                    <Image className=" h-full w-full object-fill " height={70} width={70} src={diaplayImage} alt="Project Display Image" />
+                                    <Image className=" h-full w-full object-fill " height={70} width={70} src={imageURL} alt="News Display Image" />
                                 </figure>
                             ) : (
                                 <FontAwesomeIcon className=" imageIcon " icon={faImage} />
                             )
                         }
                     </div>
+                )
+            }
+        },
+        {
+            title: <I18N>TAGS</I18N>,
+            dataIndex: "tags",
+            render: (tags, _) => {
+                return(
+                    <ul className=" flex justify-center items-center text ">
+                        {tags?.map((item: string, idx: number) => {
+                            const isLast = (tags.length - 1) === idx
+                            return(
+                                <li key={idx} className={` px-2 ${isLast ? "border-r-0" : "border-r-2"} `} >{item}</li>
+                            )
+                        })}
+                    </ul>
                 )
             }
         },
@@ -160,7 +177,7 @@ const News = () => {
                     
                 </button>
                 <CreateNews isModalVisible={isCreateModalVisible} setisModalVisible={setisCreateModalVisible} />
-                {/* <EditProject data={individualData} isModalVisible={isEditModalVisible} setisModalVisible={setisEditModalVisible} /> */}
+                <EditNews data={individualData} isModalVisible={isEditModalVisible} setisModalVisible={setisEditModalVisible} />
                 {/* <ValidatorModal handleSubmit={handleDeleteProject} title="DELETE_PROJECT" >
 
                 </ValidatorModal> */}
