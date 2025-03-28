@@ -57,6 +57,7 @@ const CreateProject: React.FC<createProjectType> = ({isModalVisible, setisModalV
 
     const handleSubmit = async () => {
         try {
+            form.validateFields
             console.log(projectdata)
             const newFileList = fileList.map((obj: any) => {
                 const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '')

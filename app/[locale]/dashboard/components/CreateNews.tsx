@@ -58,7 +58,8 @@ const CreateNews: React.FC<createNewsType> = ({isModalVisible, setisModalVisible
 
     const handleSubmit = async () => {
         try {
-            console.log(newsdata)
+            form.validateFields
+            // console.log(newsdata)
             const newFileList = fileList.map((obj: any) => {
                 const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '')
                 return newUrl

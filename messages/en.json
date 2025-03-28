@@ -175,5 +175,7 @@
     "HIDDEN": "Hidden",
     "TAGS": "Tags",
     "TAG": "Tag",
-    "EDIT_NEWS":"Edit News"
+    "EDIT_NEWS":"Edit News",
+    "ADD_ANNOUNCEMENT": "Add Announcement",
+    "EDIT_ANNOUNCEMENT": "Edit Announcement"
 }

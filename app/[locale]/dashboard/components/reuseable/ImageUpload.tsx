@@ -1,14 +1,29 @@
 import I18N from "@/i18n";
 import { usePostProjectImageMutation, useRemoveProjectImageMutation } from "@/lib/api/profileApiSlice";
-import { InboxOutlined, PlusOutlined } from "@ant-design/icons";
-import { GetProp, Image, message, Upload, UploadFile, UploadProps } from "antd"
-import Dragger from "antd/es/upload/Dragger";
+import { PlusOutlined } from "@ant-design/icons";
+import { GetProp, Image, Upload, UploadFile, UploadProps } from "antd"
 import { Dispatch, SetStateAction, useState } from "react";
 import toast from "react-hot-toast";
+import { usePostAnnouncementImageMutation, useRemoveAnnouncementImageMutation } from "@/lib/api/announcementApiSlice";
+import { usePostNewsImageMutation, useRemoveNewsImageMutation } from "@/lib/api/newsApiSlice";
+
+export type TPostApi = 
+    ReturnType<typeof usePostAnnouncementImageMutation>[0] |
+    ReturnType<typeof usePostNewsImageMutation>[0] |
+    ReturnType<typeof usePostProjectImageMutation>[0]; 
+
+export type TRemoveApi = 
+    ReturnType<typeof useRemoveAnnouncementImageMutation>[0] |
+    ReturnType<typeof useRemoveNewsImageMutation>[0] |
+    ReturnType<typeof useRemoveProjectImageMutation>[0]; 
 
 export interface ImageUploadProps {
     fileList: UploadFile[];
     setFileList: Dispatch<SetStateAction<UploadFile[]>>;
+    multiple?: boolean;
+    singleImage?: boolean;
+    postImageApi: TPostApi;
+    removeImageApi: TRemoveApi;
 }
 
 
@@ -23,24 +38,21 @@ const getBase64 = (file: FileType): Promise<string> =>
 });
 
 
-const ImageUpload: React.FC<ImageUploadProps> = ({fileList, setFileList}) => {
+const ImageUpload: React.FC<ImageUploadProps> = ({fileList, setFileList, multiple=true, singleImage=false, removeImageApi, postImageApi}) => {
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
-    const [postProjectImage, {}] = usePostProjectImageMutation()
-    const [removeProjectImage, {data, isError: removeProjectImageIsError }] = useRemoveProjectImageMutation()
-    // const [fileList, setFileList] = useState<UploadFile[]>([])
 
     const uploadImage = async (value:any) => {
         const formData = new FormData()
         formData.append("file", value.file)
         try {
-            const response = await postProjectImage(formData).unwrap() // unwrap handles async errors
+            const response = await postImageApi(formData).unwrap() // unwrap handles async errors
             console.log(response)
             console.log(response?.link)
             if (response?.link) {
                 setFileList((prev) => {
                     return [
-                        ...prev, 
+                        ...prev,
                         {uid: Date.now()+'', name: Date.now()+'', url: process.env.NEXT_PUBLIC_BASE+response?.link}
                     ]}
                 )
@@ -57,21 +69,17 @@ const ImageUpload: React.FC<ImageUploadProps> = ({fileList, setFileList}) => {
     }
 
     const removeImage = async (value: any) => {
-        const url = value.url.replace(process.env.NEXT_PUBLIC_BASE, '').replace('storage/projects/','')
+        const splitValueArr = value.url.split('/')
+        const lastValueIndex = (splitValueArr.length - 1)
+        const url = `/${splitValueArr[lastValueIndex]}` // Extracting image url from values array
         try {
-            await removeProjectImage(url).unwrap()
+            await removeImageApi(url).unwrap() // Removes image
             const newFileList = fileList.map(Obj => Obj).filter((item) => (item.url !== value.url))
             setFileList(newFileList)
         } catch (error) {
             toast.error(<I18N>SOMETHING_WENT_WRONG</I18N>)
         }
     }
-    
-
-    // const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) =>
-    //     // setFileList(newFileList);
-    //     console.log(newFileList)
-
 
     const handlePreview = async (file: UploadFile) => {
         if (!file.url && !file.preview) {
@@ -81,7 +89,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({fileList, setFileList}) => {
         setPreviewImage(file.url || (file.preview as string));
         setPreviewOpen(true);
     };
-    
     
     const uploadButton = (
         <button style={{ border: 0, background: 'none' }} type="button">
@@ -95,14 +102,20 @@ const ImageUpload: React.FC<ImageUploadProps> = ({fileList, setFileList}) => {
             <Upload
                 listType="picture-card"
                 fileList={fileList}
-                multiple={true}
+                multiple={multiple}
                 onPreview={handlePreview}
-                // onChange={handleChange}
                 customRequest={uploadImage}
                 onRemove={removeImage}
                 
             >
-            { uploadButton}
+            { 
+                singleImage ?  // checks if it should only allow a single image
+                    fileList?.length >= 1 ?
+                        null : 
+                    uploadButton 
+                    :
+                uploadButton 
+            }
             </Upload>
             {   previewImage && (
                     <Image

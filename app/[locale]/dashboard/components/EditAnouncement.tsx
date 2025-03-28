@@ -9,19 +9,19 @@ import I18N from "@/i18n"
 import { createProjectType } from "./CreateProject"
 import { RootState } from "@/lib/store"
 import { useDispatch, useSelector } from "react-redux"
-import { useEditNewsMutation } from "@/lib/api/newsApiSlice"
-import NewsForm from "./reuseable/NewsForm"
-import { setAllNews } from "@/lib/slices/newsSlice"
 import { IndividualType } from "@/types"
+import { useEditAnnouncementMutation } from "@/lib/api/announcementApiSlice"
+import AnnouncementForm from "./reuseable/AnnouncementForm"
+import { setAllAnnouncement } from "@/lib/slices/announcementSlice"
 
 
-interface EditNewsType extends createProjectType {
+interface EditAnnouncementType extends createProjectType {
     data: IndividualType
 }
 
-const EditNews: React.FC<EditNewsType> = ({ data, isModalVisible, setisModalVisible}) => {
+const EditAnnouncement: React.FC<EditAnnouncementType> = ({ data, isModalVisible, setisModalVisible}) => {
     const dispatch = useDispatch()
-    const allNews = useSelector((state: RootState) => state.news.allNews)
+    const allAnnouncement = useSelector((state: RootState) => state.announcement.allAnnouncement)
     const imagesObj = data?.images?.map((value, idx) => {
         return {
             uid: `${idx}_${Date.now()} `,
@@ -33,9 +33,9 @@ const EditNews: React.FC<EditNewsType> = ({ data, isModalVisible, setisModalVisi
     const [form] = useForm()
     const [fileList, setFileList] = useState<UploadFile[]>(imagesObj)
 
-    const [editNews, {isSuccess, isError, isLoading: isEditNewsLoading}] = useEditNewsMutation()
+    const [editAnnouncement, {isSuccess, isError, isLoading: isEditAnnouncementLoading}] = useEditAnnouncementMutation()
 
-    const [newsdata, setNewsData] = useState<IndividualType>({
+    const [announcementdata, setAnnouncementData] = useState<IndividualType>({
         title: {
             en: data?.title?.en,
             tr: data?.title?.tr
@@ -58,7 +58,7 @@ const EditNews: React.FC<EditNewsType> = ({ data, isModalVisible, setisModalVisi
         if (data){
             setFileList(imagesObj)
 
-            setNewsData(() => {
+            setAnnouncementData(() => {
                 return {
                     ...data,
                     images: []
@@ -67,7 +67,7 @@ const EditNews: React.FC<EditNewsType> = ({ data, isModalVisible, setisModalVisi
         }
     }, [data])
 
-    console.log(data)
+    // console.log("Edit Announcement ==> ", data)
 
     
     useEffect(() => {
@@ -82,25 +82,27 @@ const EditNews: React.FC<EditNewsType> = ({ data, isModalVisible, setisModalVisi
     const handleSubmit = async () => {
         try {
             form.validateFields
-            const newFileList = fileList.map((obj: any) => {
-                const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '')
+            const newFileList = fileList?.map((obj: any) => {
+                const newUrl = obj?.url?.replace(process.env.NEXT_PUBLIC_BASE, '')
                 return newUrl
             })
-            const timestamp = new Date().toISOString()
+            const timestamp = new Date().toISOString();  
             const dataToSubmit = {
-                ...newsdata,
+                ...announcementdata,
                 images: newFileList,
                 updated_at: timestamp
             }
 
-            editNews({ newsData: dataToSubmit, id: newsdata.id }) // Fire Api to edit project
+            console.log(dataToSubmit)
 
-            const newData = allNews.data.filter((obj: any) => {
-                return obj.id !== newsdata.id
+            editAnnouncement({ AnnouncementData: dataToSubmit, id: announcementdata.id }) // Fire Api to edit project
+
+            const newData = allAnnouncement.data.filter((obj: any) => { // Append hot changes to redux to populate ui immediately before another API fetch
+                return obj.id !== announcementdata.id
             })
             newData.push(dataToSubmit)
-            dispatch(setAllNews({ // update projects to reflect changes immediately
-                ...allNews,
+            dispatch(setAllAnnouncement({ // update projects to reflect changes immediately
+                ...allAnnouncement,
                 data: [
                     ...newData
                 ]
@@ -115,11 +117,11 @@ const EditNews: React.FC<EditNewsType> = ({ data, isModalVisible, setisModalVisi
     }
     return(
         <div>
-            <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="EDIT_NEWS" loading={isEditNewsLoading} >
-                <NewsForm form={form} newsdata={newsdata} setNewsData={setNewsData} fileList={fileList} setFileList={setFileList} />
+            <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="EDIT_ANNOUNCEMENT" loading={isEditAnnouncementLoading} >
+                <AnnouncementForm form={form} announcementdata={announcementdata} setAnnouncementData={setAnnouncementData} fileList={fileList} setFileList={setFileList} />
             </CustomModal>
         </div>
     )
 }
 
-export default EditNews
+export default EditAnnouncement

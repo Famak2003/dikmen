@@ -40,7 +40,7 @@ const SidebarLink = ({href, childRoute = false, isLogout = false, children}: sid
     if(childRoute){
         return(
             <Link href={href ?? '/'} >
-                <div className={` ${isActive ? "!bg-deep_red text-white shadow-custom2 " : ""} ${isSidebarCollapsed ? "" : "pl-[65px]"} subMenuPage-text `}>
+                <div className={` ${isActive ? "!bg-base_yellow text-white shadow-custom2 " : ""} ${isSidebarCollapsed ? "" : "pl-[65px]"} subMenuPage-text `}>
                     {children}
                 </div>
             </Link>
@@ -48,7 +48,7 @@ const SidebarLink = ({href, childRoute = false, isLogout = false, children}: sid
     }
     if(isLogout){
         return(
-            <div onClick={handleLogout} className={` flex gap-3 items-center h-[57px] ${isActive ? "!bg-deep_red text-white shadow-custom2 " : ""} ${isSidebarCollapsed ? "!pr-0 !pl-2" : "!px-4"}`} >
+            <div onClick={handleLogout} className={` flex gap-3 items-center h-[57px] ${isActive ? "!bg-base_yellow text-white shadow-custom2 " : ""} ${isSidebarCollapsed ? "!pr-0 !pl-2" : "!px-4"}`} >
                 { children }
             </div>
         )
@@ -58,7 +58,7 @@ const SidebarLink = ({href, childRoute = false, isLogout = false, children}: sid
             prefetch={true}
             href={href ?? "/"}
         >
-            <div className={` flex gap-3 items-center h-[57px] ${isActive ? "!bg-deep_red text-white shadow-custom2 " : ""} ${isSidebarCollapsed ? "!pr-0 !pl-2" : "!px-4"}`} >
+            <div className={` flex gap-3 items-center h-[57px] ${isActive ? "!bg-base_yellow text-white shadow-custom2 " : ""} ${isSidebarCollapsed ? "!pr-0 !pl-2" : "!px-4"}`} >
                 { children }
             </div>
         </Link>

@@ -15,7 +15,7 @@ interface TitleContentType {
 const TitleContent: React.FC<TitleContentType> = ({data, setData, locale, form}) => {
 
 
-    console.log(data?.title?.[locale as keyof LocaleType])
+    // console.log(data?.title?.[locale as keyof LocaleType])
 
     useEffect(() => {
         const title = data?.title?.[locale as keyof LocaleType]

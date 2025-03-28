@@ -7,6 +7,7 @@ import ImageUpload from "./ImageUpload";
 import { useEffect, useRef, useState } from "react";
 import { CustomFormType, FormContent } from "@/types";
 import { PlusOutlined } from "@ant-design/icons";
+import { usePostNewsImageMutation, useRemoveNewsImageMutation } from "@/lib/api/newsApiSlice";
 
 interface NewsFormType extends CustomFormType{
     newsdata: FormContent;
@@ -15,6 +16,8 @@ interface NewsFormType extends CustomFormType{
 
 const NewsForm: React.FC<NewsFormType> = 
     ({ form, newsdata, setNewsData, fileList, setFileList }) => {
+        const [postNewsImage, {}] = usePostNewsImageMutation()
+        const [removeNewsImage, {}] = useRemoveNewsImageMutation()
         const inputRef = useRef<InputRef>(null);
         const [name, setName] = useState('');
         let index = 0;
@@ -135,7 +138,7 @@ const NewsForm: React.FC<NewsFormType> =
                 name={"images"}
                 label={<I18N>IMAGES</I18N>}
             >
-                <ImageUpload setFileList={setFileList} fileList={fileList}  />
+                <ImageUpload setFileList={setFileList} fileList={fileList} removeImageApi={removeNewsImage} postImageApi={postNewsImage}  />
             </Form.Item>
         </Form>
 

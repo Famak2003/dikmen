@@ -78,21 +78,27 @@ const EditProject: React.FC<EditProjectType> = ({ data, isModalVisible, setisMod
 
     const handleSubmit = async () => {
         try {
+            form.validateFields
             const newFileList = fileList.map((obj: any) => {
                 const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '')
                 return newUrl
             })
+            const timestamp = new Date().toISOString()
             const dataToSubmit = {
                 ...projectdata,
-                images: newFileList
+                images: newFileList,
+                updated_at: timestamp
             }
+
+            console.log(dataToSubmit)
 
             editProject({ projectData: dataToSubmit, id: projectdata.id }) // Fire Api to edit project
 
             const newData = allProject.data.filter((obj: any) => {
                 return obj.id !== projectdata.id
             })
-            newData.push(projectdata)
+
+            newData.push(dataToSubmit)
             dispatch(setAllProjects({ // update projects to reflect changes immediately
                 ...allProject,
                 data: [

@@ -7,7 +7,6 @@ import {
   } from "@reduxjs/toolkit/query/react";
   import { RootState } from "../store";
 import toast from "react-hot-toast";
-// import { logoutUser, setAuthorizationToken } from "../slices/authSlice";
 import clearCookie from "@/utility/clearToken";
 
 interface authorizationTokenType {

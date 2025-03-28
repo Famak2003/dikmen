@@ -1,7 +1,7 @@
 'use client'
 
 import I18N from "@/i18n"
-import { useDeleteNewsMutation, useGetNewsQuery } from "@/lib/api/newsApiSlice"
+// import { useDeleteAnnouncementMutation, useGetAnnouncementQuery } from "@/lib/api/announcementApiSlice"
 import { RootState } from "@/lib/store"
 import { Image, Switch, Table, TableColumnsType } from "antd"
 import { useLocale } from "next-intl"
@@ -10,18 +10,22 @@ import { useSelector } from "react-redux"
 import { LocaleType } from "../projects/page"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faImage, faPenFancy, faPlus, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
-import CreateNews from "../components/CreateNews"
+// import CreateAnnouncement from "../components/CreateAnnouncement"
 import { FormSourceDataType } from "@/types"
-import EditNews from "../components/EditNews"
+import { useDeleteAnnouncementMutation, useGetAnnouncementQuery } from "@/lib/api/announcementApiSlice"
+import CreateAnnouncement from "../components/CreateAnnouncement"
+import EditAnnouncement from "../components/EditAnouncement"
+import toast from "react-hot-toast"
+// import EditAnnouncement from "../components/EditAnnouncement"
 
 
-const News = () => {
-    const allNews = useSelector((state: RootState) => state.news.allNews)
+const Announcement = () => {
+    const allAnnouncement = useSelector((state: RootState) => state.announcement.allAnnouncement)
     const [page, setPage] = useState<number>(1)
     const perPage = 10
 
-    const {data, refetch} = useGetNewsQuery({perPage, page}, { refetchOnFocus: true })
-    const [deleteNews, {isSuccess, isError, isLoading: isDeleteNewsLoading}] = useDeleteNewsMutation()
+    const {data, refetch} = useGetAnnouncementQuery({perPage, page})
+    const [deleteAnnouncement, {isSuccess, isError, isLoading: isDeleteAnnouncementLoading}] = useDeleteAnnouncementMutation()
     
     const locale = useLocale()
 
@@ -30,9 +34,18 @@ const News = () => {
     const [isEditModalVisible, setisEditModalVisible] = useState(false)
     
     useEffect(() => {
-        console.log("Refetch news")
+        console.log("Refetch Announcement")
         refetch()
     }, [])
+
+    useEffect(() => {
+            if(isError){
+                toast.error(<I18N>SOMETHING_WENT_WRONG</I18N>)
+            }
+            if(isSuccess){
+                toast.success(<I18N>PROJECTS_DELETED</I18N>)
+            }
+        }, [isError, isSuccess])
 
     const columns: TableColumnsType<FormSourceDataType> = [
         {
@@ -79,7 +92,7 @@ const News = () => {
                         {
                             displayImage ? (
                                 <figure className=" w-[70px] aspect-square rounded-md overflow-hidden border-dark_yellow ">
-                                    <Image className=" h-full w-full object-fill " height={70} width={70} src={imageURL} alt="News Display Image" />
+                                    <Image className=" h-full w-full object-fill " height={70} width={70} src={imageURL} alt="Announcement Display Image" />
                                 </figure>
                             ) : (
                                 <FontAwesomeIcon className=" imageIcon " icon={faImage} />
@@ -147,7 +160,7 @@ const News = () => {
                 const handleDelete = () => {
                     const id = record.id
                     console.log(id)
-                    deleteNews(id)
+                    deleteAnnouncement(id)
                 }
                 return(
                     <div className=" flex gap-2 justify-between items-center ">
@@ -159,12 +172,12 @@ const News = () => {
         },
     ]
 
-    console.log(data)
+    console.log( "All Announcement", allAnnouncement)
 
     return (
         <section className=" dashboarPages ">
             <h1 className=" text-[30px] font-bold " >
-                <I18N>NEWS</I18N>
+                <I18N>ANNOUNCEMENT</I18N>
             </h1>
             <div className=" flex flex-col gap-6 bg-white dark:bg-dark_side rounded-md p-6 duration-300 transition-all shadow-custom_shad5 w-full overflow-x-scroll " >
                 <button
@@ -172,19 +185,16 @@ const News = () => {
                         return setisCreateModalVisible(true)
                     }}
                     className=' flex gap-4 justify-between items-center rounded-md px-4 py-2 bg-primary_black dark:bg-slate-600 w-fit text-white '>
-                    <span> <I18N>ADD_NEWS</I18N> </span>
+                    <span> <I18N>ADD_ANNOUNCEMENT</I18N> </span>
                     <FontAwesomeIcon icon={faPlus} className=' text-[20px] ' /> 
                     
                 </button>
-                <CreateNews isModalVisible={isCreateModalVisible} setisModalVisible={setisCreateModalVisible} />
-                <EditNews data={individualData} isModalVisible={isEditModalVisible} setisModalVisible={setisEditModalVisible} />
-                {/* <ValidatorModal handleSubmit={handleDeleteProject} title="DELETE_PROJECT" >
-
-                </ValidatorModal> */}
+                <CreateAnnouncement isModalVisible={isCreateModalVisible} setisModalVisible={setisCreateModalVisible} />
+                <EditAnnouncement data={individualData} isModalVisible={isEditModalVisible} setisModalVisible={setisEditModalVisible} />
                 <Table
                     className=" w-full " 
                     columns={columns}
-                    dataSource={allNews.data}
+                    dataSource={allAnnouncement.data}
                     pagination={{
                         current: page,
                         total: data?.total ? data?.total : 0,
@@ -198,4 +208,4 @@ const News = () => {
     )
 }
 
-export default News
+export default Announcement

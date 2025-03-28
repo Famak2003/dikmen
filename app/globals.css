@@ -182,16 +182,16 @@ input:focus {
     @apply text-black
   }
   .sidebarPages{
-    @apply flex items-center hover:!bg-deep_red hover:!text-white dark:text-white !w-full !min-h-[57px] !m-0 !py-0 !px-0 !rounded-none border-b dark:border-slate-600
+    @apply flex items-center sidebarHoverEffect dark:text-white !w-full !min-h-[57px] !m-0 !py-0 !px-0 !rounded-none border-b dark:border-slate-600
   }
   .sidebarSubPages{
     @apply !rounded-none border-b dark:border-slate-600 
   }
   .sidebarSubPages > div {
-    @apply !flex items-center !m-0 !py-0 !px-4 dark:!text-white gap-3 !w-full !rounded-none !min-h-[57px] hover:!bg-deep_red hover:!text-white
+    @apply !flex items-center !m-0 !py-0 !px-4 dark:!text-white gap-3 !w-full !rounded-none !min-h-[57px] sidebarHoverEffect
   }
   .collapsedSidebarSubPages > div {
-    @apply !flex items-center !m-0 !py-0 !pr-0 !pl-2 dark:!text-white gap-3 !w-full !rounded-none !min-h-[57px] hover:!bg-deep_red hover:!text-white
+    @apply !flex items-center !m-0 !py-0 !pr-0 !pl-2 dark:!text-white gap-3 !w-full !rounded-none !min-h-[57px] sidebarHoverEffect
   }
   .sidebarSubPages > ul {
     @apply !bg-gray-100 dark:!bg-slate-500 !border-t dark:border-slate-600
@@ -200,7 +200,7 @@ input:focus {
     @apply !bg-gray-100 dark:!bg-slate-500 !border-t dark:border-slate-600
   }
   .subMenuPage{
-    @apply flex gap-4 justify-center items-center !py-0 !px-0 !m-0 !rounded-none !w-full !max-h-[36px] hover:!bg-deep_red hover:!text-white dark:text-white
+    @apply flex gap-4 justify-center items-center !py-0 !px-0 !m-0 !rounded-none !w-full !max-h-[36px] sidebarHoverEffect dark:text-white
   }
   .subMenuPage-text{
     @apply flex h-full items-center !rounded-none
@@ -210,6 +210,9 @@ input:focus {
   }
   .inputStyle {
     @apply text max-w-[443px] h-[35px] rounded-md border-gray-300
+  }
+  .sidebarHoverEffect{
+    @apply hover:!bg-base_yellow hover:!text-white
   }
   /* .ant-menu-submenu{
     @apply !hidden

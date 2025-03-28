@@ -157,7 +157,7 @@ const Sidebar = () => {
                         // items={sidebarData}
                         onSelect={handleMenuSelect}
                     >
-                        <Menu.Item key={'1'} className={` sidebarPages `} >
+                        <Menu.Item key={'1'} className={` sidebarPages  `} >
                             <SidebarLink href={"/dashboard"} >
                                 <SidebarIcon>
                                     <FontAwesomeIcon icon={faChartPie} className="sidebarNakedIcon" />
@@ -167,7 +167,7 @@ const Sidebar = () => {
                                 </p>
                             </SidebarLink>
                         </Menu.Item>
-                        <Menu.Item key={'2'} className={` sidebarPages `} >
+                        <Menu.Item key={'2'} className={` sidebarPages  `} >
                             <SidebarLink href={"/dashboard/projects"} >
                                 <SidebarIcon>
                                     <FontAwesomeIcon icon={faProjectDiagram} className="sidebarNakedIcon" />
@@ -177,7 +177,7 @@ const Sidebar = () => {
                                 </p>
                             </SidebarLink>
                         </Menu.Item>
-                        <Menu.Item key={'3'} className={` sidebarPages `} >
+                        <Menu.Item key={'3'} className={` sidebarPages  `} >
                             <SidebarLink href={"/dashboard/news"} >
                                 <SidebarIcon>
                                     <FontAwesomeIcon icon={faNewspaper} className="sidebarNakedIcon" />
@@ -188,7 +188,7 @@ const Sidebar = () => {
                             </SidebarLink>
                         </Menu.Item>
                         {/* <Menu.SubMenu 
-                            className={` ${isSidebarCollapsed ? "collapsedSidebarSubPages" : "sidebarSubPages"} `}
+                            className={` ${isSidebarCollapsed ? "collapsedSidebarSubPages" : "sidebarSubPages "} `}
                             icon={(
                                 <SidebarIcon>
                                     <FontAwesomeIcon icon={faUserFriends} className="sidebarNakedIcon" />
@@ -196,14 +196,14 @@ const Sidebar = () => {
                             )} 
                             title={ isSidebarCollapsed ? "": "Kadro" }
                         >
-                            <Menu.Item key={'3'} className=" subMenuPage" >
+                            <Menu.Item key={'3'} className=" subMenuPage " >
                                 <SidebarLink href={"/dashboard/kadro1"} childRoute={true}  >
                                     <p>
                                         Sub Menu 1
                                     </p>
                                 </SidebarLink>
                             </Menu.Item>
-                            <Menu.Item key={'4'} className=" subMenuPage" >
+                            <Menu.Item key={'4'} className=" subMenuPage " >
                                 <SidebarLink href={"/dashboard/kadro2"} childRoute={true}  >
                                     <p>
                                         Sub Menu 2
@@ -211,6 +211,16 @@ const Sidebar = () => {
                                 </SidebarLink>
                             </Menu.Item>
                         </Menu.SubMenu> */}
+                        <Menu.Item key={'4'} className={` sidebarPages  `} >
+                            <SidebarLink href={"/dashboard/announcement"} >
+                                <SidebarIcon>
+                                    <FontAwesomeIcon icon={faBullhorn} className="sidebarNakedIcon" />
+                                </SidebarIcon>
+                                <p className={` ${isSidebarCollapsed ? "hidden" : " "} `}>
+                                    <I18N>ANNOUNCEMENT</I18N>
+                                </p>
+                            </SidebarLink>
+                        </Menu.Item>
                         <Menu.SubMenu 
                             className={` ${isSidebarCollapsed ? "collapsedSidebarSubPages" : ""} sidebarSubPages  "`}
                             icon={(
@@ -220,14 +230,14 @@ const Sidebar = () => {
                             )} 
                             title={ isSidebarCollapsed ? "": "Blog"}
                         >
-                            <Menu.Item key={'5'} className=" subMenuPage" >
+                            <Menu.Item key={'5'} className=" subMenuPage " >
                                 <SidebarLink href={"/dashboard/blog1"} childRoute={true}>
                                     <p>
                                         Sub Menu 1
                                     </p>
                                 </SidebarLink>
                             </Menu.Item>
-                            <Menu.Item key={'6'} className=" subMenuPage" >
+                            <Menu.Item key={'6'} className=" subMenuPage " >
                                 <SidebarLink href={"/dashboard/blog2"} childRoute={true}>
                                     <p>
                                         Sub Menu 2
@@ -236,7 +246,7 @@ const Sidebar = () => {
                             </Menu.Item>
                         </Menu.SubMenu>
                         <Menu.SubMenu 
-                            className={` ${isSidebarCollapsed ? "collapsedSidebarSubPages" : ""} sidebarSubPages  "`}
+                            className={` ${isSidebarCollapsed ? "collapsedSidebarSubPages" : ""} sidebarSubPages   "`}
                             icon={(
                                 <SidebarIcon>
                                     <FontAwesomeIcon icon={faPenFancy} className="sidebarNakedIcon" />
@@ -244,14 +254,14 @@ const Sidebar = () => {
                             )} 
                             title={ isSidebarCollapsed ? "": "Sayfalar"}
                         >
-                            <Menu.Item key={'7'} className=" subMenuPage" >
+                            <Menu.Item key={'7'} className=" subMenuPage " >
                                 <SidebarLink href={"dashboard/sayfalar1"} childRoute={true} >
                                     <p>
                                         Sub Menu 1
                                     </p>
                                 </SidebarLink>
                             </Menu.Item>
-                            <Menu.Item key={'8'} className=" subMenuPage" >
+                            <Menu.Item key={'8'} className=" subMenuPage " >
                                 <SidebarLink href={"dashboard/sayfalar2"} childRoute={true} >
                                     <p>
                                         Sub Menu 2
@@ -260,7 +270,7 @@ const Sidebar = () => {
                             </Menu.Item>
                         </Menu.SubMenu>
                         <Menu.SubMenu 
-                            className={` ${isSidebarCollapsed ? "collapsedSidebarSubPages" : ""} sidebarSubPages  "`}
+                            className={` ${isSidebarCollapsed ? "collapsedSidebarSubPages" : ""} sidebarSubPages   "`}
                             icon={(
                                 <SidebarIcon>
                                     <FontAwesomeIcon icon={faUserTie} className="sidebarNakedIcon" />
@@ -268,14 +278,14 @@ const Sidebar = () => {
                             )} 
                             title={ isSidebarCollapsed ? "": "Kullanıcılar"}
                         >
-                            <Menu.Item key={'9'} className=" subMenuPage" >
+                            <Menu.Item key={'9'} className=" subMenuPage " >
                                 <SidebarLink href={"/dashboard/user1"} childRoute={true}>
                                     <p>
                                         Sub Menu 1
                                     </p>
                                 </SidebarLink>
                             </Menu.Item>
-                            <Menu.Item key={'10'} className=" subMenuPage" >
+                            <Menu.Item key={'10'} className=" subMenuPage " >
                                 <SidebarLink href={"/dashboard/user2"} childRoute={true}>
                                     <p>
                                         Sub Menu 2
@@ -284,7 +294,7 @@ const Sidebar = () => {
                             </Menu.Item>
                         </Menu.SubMenu>
                         <Menu.SubMenu 
-                            className={` ${isSidebarCollapsed ? "collapsedSidebarSubPages" : ""} sidebarSubPages  "`}
+                            className={` ${isSidebarCollapsed ? "collapsedSidebarSubPages" : ""} sidebarSubPages   "`}
                             icon={(
                                 <SidebarIcon>
                                     <FontAwesomeIcon icon={faUsers} className="sidebarNakedIcon" />
@@ -292,14 +302,14 @@ const Sidebar = () => {
                             )} 
                             title={ isSidebarCollapsed ? "": "Müşteriler" }
                         >
-                            <Menu.Item key={'11'} className=" subMenuPage" >
+                            <Menu.Item key={'11'} className=" subMenuPage " >
                                 <SidebarLink href={"/dashboard/customer1"} childRoute={true}>
                                     <p>
                                         Sub Menu 1
                                     </p>
                                 </SidebarLink>
                             </Menu.Item>
-                            <Menu.Item key={'12'} className=" subMenuPage" >
+                            <Menu.Item key={'12'} className=" subMenuPage " >
                                 <SidebarLink href={"/dashboard/customer2"} childRoute={true}>
                                     <p>
                                         Sub Menu 2
@@ -307,7 +317,7 @@ const Sidebar = () => {
                                 </SidebarLink>
                             </Menu.Item>
                         </Menu.SubMenu>
-                        <Menu.Item key={'13'} className={` sidebarPages`} >
+                        <Menu.Item key={'13'} className={` sidebarPages `} >
                             <SidebarLink href={"/dashboard/muhasebe"}>
                                 <SidebarIcon>
                                     <FontAwesomeIcon icon={faCalculator} className="sidebarNakedIcon" />
@@ -317,7 +327,7 @@ const Sidebar = () => {
                                 </p>
                             </SidebarLink>
                         </Menu.Item>
-                        <Menu.Item key={'14'} className={` sidebarPages`} >
+                        <Menu.Item key={'14'} className={` sidebarPages `} >
                             <SidebarLink href={"/dashboard/aboneler"}>
                                 <SidebarIcon>
                                     <FontAwesomeIcon icon={faCertificate} className="sidebarNakedIcon" />
@@ -327,7 +337,7 @@ const Sidebar = () => {
                                 </p>
                             </SidebarLink>
                         </Menu.Item>
-                        <Menu.Item key={'15'} className={` sidebarPages`} >
+                        <Menu.Item key={'15'} className={` sidebarPages `} >
                             <SidebarLink href={"/dashboard/duyuru-modal"}>
                                 <SidebarIcon>
                                     <FontAwesomeIcon icon={faBullhorn} className="sidebarNakedIcon" />
@@ -338,7 +348,7 @@ const Sidebar = () => {
                             </SidebarLink>
                         </Menu.Item>
                         <Menu.SubMenu 
-                            className={` ${isSidebarCollapsed ? "collapsedSidebarSubPages" : ""} sidebarSubPages  "`}
+                            className={` ${isSidebarCollapsed ? "collapsedSidebarSubPages" : ""} sidebarSubPages   "`}
                             icon={(
                                 <SidebarIcon>
                                     <FontAwesomeIcon icon={faMouse} className="sidebarNakedIcon" />
@@ -346,14 +356,14 @@ const Sidebar = () => {
                             )} 
                             title={ isSidebarCollapsed ? "": "Ürünler" }
                         >
-                            <Menu.Item key={'16'} className=" subMenuPage" >
+                            <Menu.Item key={'16'} className=" subMenuPage " >
                                 <SidebarLink href={"/dashboard/products1"} childRoute={true}>
                                     <p>
                                         Sub Menu 1
                                     </p>
                                 </SidebarLink>
                             </Menu.Item>
-                            <Menu.Item key={'17'} className=" subMenuPage" >
+                            <Menu.Item key={'17'} className=" subMenuPage " >
                                 <SidebarLink href={"/dashboard/products2"} childRoute={true} >
                                     <p>
                                         Sub Menu 2
@@ -362,7 +372,7 @@ const Sidebar = () => {
                             </Menu.Item>
                         </Menu.SubMenu>
                         <Menu.SubMenu 
-                            className={` ${isSidebarCollapsed ? "collapsedSidebarSubPages" : ""} sidebarSubPages  "`}
+                            className={` ${isSidebarCollapsed ? "collapsedSidebarSubPages" : ""} sidebarSubPages   "`}
                             icon={(
                                 <SidebarIcon>
                                     <FontAwesomeIcon icon={faQuestionCircle} className="sidebarNakedIcon" />
@@ -370,14 +380,14 @@ const Sidebar = () => {
                             )} 
                             title={ isSidebarCollapsed ? "": "S.S.S" }
                         >
-                            <Menu.Item key={'18'} className=" subMenuPage" >
+                            <Menu.Item key={'18'} className=" subMenuPage " >
                                 <SidebarLink href={"/dashboard/sss1"} childRoute={true} >
                                     <p>
                                         Sub Menu 1
                                     </p>
                                 </SidebarLink>
                             </Menu.Item>
-                            <Menu.Item key={'19'} className=" subMenuPage" >
+                            <Menu.Item key={'19'} className=" subMenuPage " >
                                 <SidebarLink href={"/dashboard/sss2"} childRoute={true} >
                                     <p>
                                         Sub Menu 2
@@ -385,7 +395,7 @@ const Sidebar = () => {
                                 </SidebarLink>
                             </Menu.Item>
                         </Menu.SubMenu>
-                        <Menu.Item key={""} className={` sidebarPages`} >
+                        <Menu.Item key={""} className={` sidebarPages `} >
                             <SidebarLink isLogout={true}>
                                 <SidebarIcon>
                                     <FontAwesomeIcon icon={faSignOut} className="sidebarNakedIcon" />

@@ -26,7 +26,8 @@ export interface FormContent {
     visible?: boolean;
     tags?: string[];
     slug: string;
-    images: string[]
+    images: string[];
+    image?: string;
 }
 
 export interface FormSourceDataType {

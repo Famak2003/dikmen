@@ -6,6 +6,7 @@ import TitleContent from "./TitleContent";
 import ImageUpload from "./ImageUpload";
 import {  useEffect } from "react";
 import { CustomFormType, FormContent } from "@/types";
+import { usePostProjectImageMutation, useRemoveProjectImageMutation } from "@/lib/api/profileApiSlice";
 
 interface ProjectsFormType extends CustomFormType {
     projectdata: FormContent;
@@ -21,6 +22,9 @@ const ProjectsForm: React.FC<ProjectsFormType> = (
             setFileList
         }
     ) => {
+
+        const [postProjectImage, {}] = usePostProjectImageMutation() 
+        const [removeProjectImage, {}] = useRemoveProjectImageMutation()
 
         useEffect(() => {
             if(projectdata){
@@ -81,7 +85,7 @@ const ProjectsForm: React.FC<ProjectsFormType> = (
                 name={"images"}
                 label={<I18N>IMAGES</I18N>}
             >
-                <ImageUpload setFileList={setFileList} fileList={fileList}  />
+                <ImageUpload setFileList={setFileList} fileList={fileList} removeImageApi={removeProjectImage} postImageApi={postProjectImage} />
             </Form.Item>
         </Form>
 

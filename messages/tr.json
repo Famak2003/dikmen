@@ -175,5 +175,7 @@
     "HIDDEN": "Gizlenmiş",
     "TAGS": "Etiketler",
     "TAG": "Etiket",
-    "EDIT_NEWS":"Haberleri Düzenle"
+    "EDIT_NEWS":"Haberleri Düzenle",
+    "ADD_ANNOUNCEMENT": "Duyuru Ekle",
+    "EDIT_ANNOUNCEMENT": "Duyuru Düzenle"
 }
