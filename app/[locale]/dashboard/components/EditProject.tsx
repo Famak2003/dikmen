@@ -8,14 +8,13 @@ import { useForm } from "antd/es/form/Form"
 import { useEditProjectMutation } from "@/lib/api/profileApiSlice"
 import toast from "react-hot-toast"
 import I18N from "@/i18n"
-import { createProjectType } from "./CreateProject"
 import { RootState } from "@/lib/store"
 import { useDispatch, useSelector } from "react-redux"
 import { setAllProjects } from "@/lib/slices/profileSlice"
-import { IndividualType } from "@/types"
+import { IndividualType, modalStateType } from "@/types"
 
 
-interface EditProjectType extends createProjectType {
+interface EditProjectType extends modalStateType {
     data: IndividualType
 }
 

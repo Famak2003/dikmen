@@ -6,16 +6,15 @@ import { UploadFile } from "antd"
 import { useForm } from "antd/es/form/Form"
 import toast from "react-hot-toast"
 import I18N from "@/i18n"
-import { createProjectType } from "./CreateProject"
 import { RootState } from "@/lib/store"
 import { useDispatch, useSelector } from "react-redux"
-import { IndividualType } from "@/types"
+import { IndividualType, modalStateType } from "@/types"
 import { useEditAnnouncementMutation } from "@/lib/api/announcementApiSlice"
 import AnnouncementForm from "./reuseable/AnnouncementForm"
 import { setAllAnnouncement } from "@/lib/slices/announcementSlice"
 
 
-interface EditAnnouncementType extends createProjectType {
+interface EditAnnouncementType extends modalStateType {
     data: IndividualType
 }
 
@@ -86,7 +85,7 @@ const EditAnnouncement: React.FC<EditAnnouncementType> = ({ data, isModalVisible
                 const newUrl = obj?.url?.replace(process.env.NEXT_PUBLIC_BASE, '')
                 return newUrl
             })
-            const timestamp = new Date().toISOString();  
+            const timestamp = new Date().toISOString();
             const dataToSubmit = {
                 ...announcementdata,
                 images: newFileList,
@@ -95,13 +94,13 @@ const EditAnnouncement: React.FC<EditAnnouncementType> = ({ data, isModalVisible
 
             console.log(dataToSubmit)
 
-            editAnnouncement({ AnnouncementData: dataToSubmit, id: announcementdata.id }) // Fire Api to edit project
+            editAnnouncement({ AnnouncementData: dataToSubmit, id: announcementdata.id }) // Fire Api to edit announcement
 
             const newData = allAnnouncement.data.filter((obj: any) => { // Append hot changes to redux to populate ui immediately before another API fetch
                 return obj.id !== announcementdata.id
             })
             newData.push(dataToSubmit)
-            dispatch(setAllAnnouncement({ // update projects to reflect changes immediately
+            dispatch(setAllAnnouncement({ // update announcement to reflect changes immediately
                 ...allAnnouncement,
                 data: [
                     ...newData

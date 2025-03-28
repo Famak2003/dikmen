@@ -7,30 +7,32 @@ import { useForm } from "antd/es/form/Form"
 import toast from "react-hot-toast"
 import I18N from "@/i18n"
 import { FormContent, modalStateType } from "@/types"
-import AnnouncementForm from "./reuseable/AnnouncementForm"
-import { useCreateAnnouncementMutation } from "@/lib/api/announcementApiSlice"
+// import EventsForm from "./reuseable/EventsForm"
+// import { useCreateEventsMutation } from "@/lib/api/announcementApiSlice"
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query"
+import EventsForm from "./reuseable/EventsForm"
+import { useCreateEventsMutation } from "@/lib/api/eventsApiSlice"
 
-
-const CreateAnnouncement: React.FC<modalStateType> = ({isModalVisible, setisModalVisible}) => {
+const CreateEvents: React.FC<modalStateType> = ({isModalVisible, setisModalVisible}) => {
     const [form] = useForm()
     const [fileList, setFileList] = useState<UploadFile[]>([])
 
-    const [createAnnouncement, {isSuccess, isError, error, isLoading: isCreateAnnouncementLoading}] = useCreateAnnouncementMutation()
+    const [createEvents, {isSuccess, isError, error, isLoading: isCreateEventsLoading}] = useCreateEventsMutation()
 
-    const [announcementdata, setAnnouncementData] = useState<FormContent>({
-            title: {
-                en: "",
-                tr: ""
-            },
-            content: {
-                en: "",
-                tr: ""
-            },
-            visible: false,
-            slug: "",
-            images: []
-        })
+    const [eventsData, setEventsData] = useState<FormContent>({
+        title: {
+            en: "",
+            tr: ""
+        },
+        content: {
+            en: "",
+            tr: ""
+        },
+        type: "",
+        datetime: "",
+        slug: "",
+        images: []
+    })
 
     
     useEffect(() => { // Listening to response status from the request
@@ -57,17 +59,17 @@ const CreateAnnouncement: React.FC<modalStateType> = ({isModalVisible, setisModa
     const handleSubmit = async () => {
         form.validateFields().then(() =>{
             try {
-                console.log(announcementdata)
+                console.log(eventsData)
                 const newFileList = fileList.map((obj: any) => {
                     const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '') // Removing backend url from the image rul before appending it to the data to submit
                     return newUrl
                 })
-                const dataToSubmit = { // add images to the announcementdata
-                    ...announcementdata,
+                const dataToSubmit = { // add images to the eventsData
+                    ...eventsData,
                     images: newFileList
                 }
                 console.log(dataToSubmit)
-                createAnnouncement(dataToSubmit)
+                createEvents(dataToSubmit)
     
             } catch (error) {
                 console.log("Form submit Failed")
@@ -80,11 +82,11 @@ const CreateAnnouncement: React.FC<modalStateType> = ({isModalVisible, setisModa
     }
     return(
         <div>
-            <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="ADD_ANNOUNCEMENT" loading={isCreateAnnouncementLoading} >
-                <AnnouncementForm announcementdata={announcementdata} setAnnouncementData={setAnnouncementData} form={form} fileList={fileList} setFileList={setFileList} />
+            <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="ADD_ANNOUNCEMENT" loading={isCreateEventsLoading} >
+                <EventsForm eventsdata={eventsData} setEventsData={setEventsData} form={form} fileList={fileList} setFileList={setFileList} />
             </CustomModal>
         </div>
     )
 }
 
-export default CreateAnnouncement
+export default CreateEvents

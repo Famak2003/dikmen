@@ -153,7 +153,7 @@
     "CORRAL_CONNECTION": "Corral Connection",
     "COPY_OF_TITLE_DEED_TO_CONNECTION": "Copy of the Title Deed of the Place Where the Connection Will Be Made",
     "ID_PHOTOCOPY": "Id Photocopy",
-    "PHOOCOPY_OF_WRITTEN_PETITTION": "Photocop of Written Petition",
+    "PHOTCOPY_OF_WRITTEN_PETITTION": "Photocop of Written Petition",
     "IF_CONSTRUCTION_PHOTOCOPY_OF_CONSTRUCTION_PERMIT": "If location is a construction site, a photocopy of the construction permit",
     "CORRECT_ENTERED_INFO": "I accept that the information I have entered is correct."    ,
     "DASHBOARD": "Dashboard",
@@ -177,5 +177,16 @@
     "TAG": "Tag",
     "EDIT_NEWS":"Edit News",
     "ADD_ANNOUNCEMENT": "Add Announcement",
-    "EDIT_ANNOUNCEMENT": "Edit Announcement"
+    "EDIT_ANNOUNCEMENT": "Edit Announcement",
+    "EVENT_TYPE": "Event Type",
+    "DATE_AND_TIME": "Date and Time",
+    "DATE": "Date",
+    "TIME": "Time",
+    "ADD_EVENTS": "Add Events",
+    "TROUBLE_UPPLOADING": "Having trouble uploading",
+    "UPLOADED": "Uploaded...",
+    "UPLOADING": "Uploading...",
+    "FILE_TOO_LARGE": "File size too large",
+    "REMOVING": "Removing...",
+    "EDIT_EVENTS": "Edit Events"
 }

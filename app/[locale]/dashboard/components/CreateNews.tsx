@@ -8,27 +8,15 @@ import { useForm } from "antd/es/form/Form"
 import { useCreateNewsMutation } from "@/lib/api/newsApiSlice"
 import toast from "react-hot-toast"
 import I18N from "@/i18n"
-import { FormContent } from "@/types"
+import { FormContent, modalStateType } from "@/types"
 import NewsForm from "./reuseable/NewsForm"
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query"
 
-// export interface ProjectContent {
-//     title: LocaleType;
-//     content: LocaleType;
-//     completed: boolean;
-//     slug: string;
-//     images: string[]
-// }
-
-export interface createNewsType {
-    isModalVisible: boolean,
-    setisModalVisible: (value: any) => void
-}
-
-const CreateNews: React.FC<createNewsType> = ({isModalVisible, setisModalVisible}) => {
+const CreateNews: React.FC<modalStateType> = ({isModalVisible, setisModalVisible}) => {
     const [form] = useForm()
     const [fileList, setFileList] = useState<UploadFile[]>([])
 
-    const [createNews, {isSuccess, isError, isLoading: isCreateNewsLoading}] = useCreateNewsMutation()
+    const [createNews, {isSuccess, isError, error, isLoading: isCreateNewsLoading}] = useCreateNewsMutation()
 
     const [newsdata, setNewsData] = useState<FormContent>({
             title: {
@@ -47,9 +35,21 @@ const CreateNews: React.FC<createNewsType> = ({isModalVisible, setisModalVisible
         })
 
     
-    useEffect(() => {
+    useEffect(() => { // Listening to response status from the request
         if(isError){
-            toast.error(<I18N>SOMETHING_WENT_WRONG</I18N>)
+            const fetchError = error as FetchBaseQueryError & { // data is undefined in rtk FetchBaseQuerryError type definition, so i extended it to add type to data.
+                data: {
+                    message: string;
+                    errors: {
+                        slug: string[]
+                    }
+                }
+            }
+            if (fetchError?.status === 422){
+                toast.error(fetchError?.data?.message)
+            }else{
+                toast.error(<I18N>SOMETHING_WENT_WRONG</I18N>)
+            }
         }
         if(isSuccess){
             toast.success(<I18N>UPDATED_SUCCESFULLY</I18N>)

@@ -8,19 +8,23 @@ import toast from "react-hot-toast"
 import I18N from "@/i18n"
 import { RootState } from "@/lib/store"
 import { useDispatch, useSelector } from "react-redux"
-import { useEditNewsMutation } from "@/lib/api/newsApiSlice"
-import NewsForm from "./reuseable/NewsForm"
-import { setAllNews } from "@/lib/slices/newsSlice"
 import { IndividualType, modalStateType } from "@/types"
+// import { useEditEventsMutation } from "@/lib/api/EventsApiSlice"
+// import EventsForm from "./reuseable/EventsForm"
+import { setAllEvents } from "@/lib/slices/eventsSlice"
+import { useEditEventsMutation } from "@/lib/api/eventsApiSlice"
+import EventsForm from "./reuseable/EventsForm"
+// import EventsForm from "./reuseable/EventsForm"
+// import { setAllEvents } from "@/lib/slices/EventsSlice"
 
 
-interface EditNewsType extends modalStateType {
+interface EditEventsType extends modalStateType {
     data: IndividualType
 }
 
-const EditNews: React.FC<EditNewsType> = ({ data, isModalVisible, setisModalVisible}) => {
+const EditEvents: React.FC<EditEventsType> = ({ data, isModalVisible, setisModalVisible}) => {
     const dispatch = useDispatch()
-    const allNews = useSelector((state: RootState) => state.news.allNews)
+    const allEvents = useSelector((state: RootState) => state.events.allEvents)
     const imagesObj = data?.images?.map((value, idx) => {
         return {
             uid: `${idx}_${Date.now()} `,
@@ -32,9 +36,9 @@ const EditNews: React.FC<EditNewsType> = ({ data, isModalVisible, setisModalVisi
     const [form] = useForm()
     const [fileList, setFileList] = useState<UploadFile[]>(imagesObj)
 
-    const [editNews, {isSuccess, isError, isLoading: isEditNewsLoading}] = useEditNewsMutation()
+    const [editEvents, {isSuccess, isError, isLoading: isEditEventsLoading}] = useEditEventsMutation()
 
-    const [newsdata, setNewsData] = useState<IndividualType>({
+    const [eventsData, setEventsData] = useState<IndividualType>({
         title: {
             en: data?.title?.en,
             tr: data?.title?.tr
@@ -48,6 +52,8 @@ const EditNews: React.FC<EditNewsType> = ({ data, isModalVisible, setisModalVisi
         images: [],
         tags: [],
         id: data.id,
+        type: "",
+        datetime: "",
         display_image: data.display_image,
         updated_at: data.updated_at,
         total: data.total
@@ -57,7 +63,7 @@ const EditNews: React.FC<EditNewsType> = ({ data, isModalVisible, setisModalVisi
         if (data){
             setFileList(imagesObj)
 
-            setNewsData(() => {
+            setEventsData(() => {
                 return {
                     ...data,
                     images: []
@@ -66,7 +72,7 @@ const EditNews: React.FC<EditNewsType> = ({ data, isModalVisible, setisModalVisi
         }
     }, [data])
 
-    console.log(data)
+    // console.log("Edit Events ==> ", data)
 
     
     useEffect(() => {
@@ -81,25 +87,27 @@ const EditNews: React.FC<EditNewsType> = ({ data, isModalVisible, setisModalVisi
     const handleSubmit = async () => {
         try {
             form.validateFields
-            const newFileList = fileList.map((obj: any) => {
-                const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '')
+            const newFileList = fileList?.map((obj: any) => {
+                const newUrl = obj?.url?.replace(process.env.NEXT_PUBLIC_BASE, '')
                 return newUrl
             })
-            const timestamp = new Date().toISOString()
+            const timestamp = new Date().toISOString();
             const dataToSubmit = {
-                ...newsdata,
+                ...eventsData,
                 images: newFileList,
                 updated_at: timestamp
             }
 
-            editNews({ newsData: dataToSubmit, id: newsdata.id }) // Fire Api to edit project
+            console.log(dataToSubmit)
 
-            const newData = allNews.data.filter((obj: any) => {
-                return obj.id !== newsdata.id
+            editEvents({ EventsData: dataToSubmit, id: eventsData.id }) // Fire Api to edit events
+
+            const newData = allEvents.data.filter((obj: any) => { // Append hot changes to redux to populate ui immediately before another API fetch
+                return obj.id !== eventsData.id
             })
             newData.push(dataToSubmit)
-            dispatch(setAllNews({ // update projects to reflect changes immediately
-                ...allNews,
+            dispatch(setAllEvents({ // update events to reflect changes immediately
+                ...allEvents,
                 data: [
                     ...newData
                 ]
@@ -114,11 +122,11 @@ const EditNews: React.FC<EditNewsType> = ({ data, isModalVisible, setisModalVisi
     }
     return(
         <div>
-            <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="EDIT_NEWS" loading={isEditNewsLoading} >
-                <NewsForm form={form} newsdata={newsdata} setNewsData={setNewsData} fileList={fileList} setFileList={setFileList} />
+            <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="EDIT_EVENTS" loading={isEditEventsLoading} >
+                <EventsForm form={form} eventsdata={eventsData} setEventsData={setEventsData} fileList={fileList} setFileList={setFileList} />
             </CustomModal>
         </div>
     )
 }
 
-export default EditNews
+export default EditEvents

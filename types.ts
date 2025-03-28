@@ -28,6 +28,8 @@ export interface FormContent {
     slug: string;
     images: string[];
     image?: string;
+    type?: string;
+    datetime?: string;
 }
 
 export interface FormSourceDataType {
@@ -42,6 +44,7 @@ export interface FormSourceDataType {
     slug: string;
     tags?: string[];
     updated_at: string;
+    datetime?: string;
     total: number;
     user?: user;
 }
@@ -77,4 +80,9 @@ export interface IndividualType extends FormContent {
     updated_at: string,
     total: number,
     user?: user
+}
+
+export interface modalStateType {
+    isModalVisible: boolean,
+    setisModalVisible: (value: any) => void
 }

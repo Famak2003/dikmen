@@ -1,7 +1,7 @@
 'use client'
 
 import I18N from "@/i18n"
-// import { useDeleteAnnouncementMutation, useGetAnnouncementQuery } from "@/lib/api/announcementApiSlice"
+
 import { RootState } from "@/lib/store"
 import { Image, Switch, Table, TableColumnsType } from "antd"
 import { useLocale } from "next-intl"
@@ -9,14 +9,12 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { LocaleType } from "../projects/page"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faImage, faPenFancy, faPlus, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
-// import CreateAnnouncement from "../components/CreateAnnouncement"
+import { faImage, faPen, faPlus, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 import { FormSourceDataType } from "@/types"
 import { useDeleteAnnouncementMutation, useGetAnnouncementQuery } from "@/lib/api/announcementApiSlice"
 import CreateAnnouncement from "../components/CreateAnnouncement"
 import EditAnnouncement from "../components/EditAnouncement"
 import toast from "react-hot-toast"
-// import EditAnnouncement from "../components/EditAnnouncement"
 
 
 const Announcement = () => {
@@ -164,7 +162,7 @@ const Announcement = () => {
                 }
                 return(
                     <div className=" flex gap-2 justify-between items-center ">
-                        <FontAwesomeIcon onClick={handleEditModal} className="dashboarIcon" icon={faPenFancy} />
+                        <FontAwesomeIcon onClick={handleEditModal} className="dashboarIcon" icon={faPen} />
                         <FontAwesomeIcon onClick={handleDelete} className="dashboarIcon" icon={faTrashAlt} />
                     </div>
                 )
@@ -175,7 +173,7 @@ const Announcement = () => {
     console.log( "All Announcement", allAnnouncement)
 
     return (
-        <section className=" dashboarPages ">
+        <section className=" dashboardPages ">
             <h1 className=" text-[30px] font-bold " >
                 <I18N>ANNOUNCEMENT</I18N>
             </h1>

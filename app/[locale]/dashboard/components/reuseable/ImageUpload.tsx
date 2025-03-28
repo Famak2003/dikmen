@@ -21,7 +21,7 @@ export interface ImageUploadProps {
     fileList: UploadFile[];
     setFileList: Dispatch<SetStateAction<UploadFile[]>>;
     multiple?: boolean;
-    singleImage?: boolean;
+    // singleImage?: boolean;
     postImageApi: TPostApi;
     removeImageApi: TRemoveApi;
 }
@@ -38,13 +38,16 @@ const getBase64 = (file: FileType): Promise<string> =>
 });
 
 
-const ImageUpload: React.FC<ImageUploadProps> = ({fileList, setFileList, multiple=true, singleImage=false, removeImageApi, postImageApi}) => {
+const ImageUpload: React.FC<ImageUploadProps> = ({fileList, setFileList, multiple=true, removeImageApi, postImageApi}) => {
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
 
     const uploadImage = async (value:any) => {
         const formData = new FormData()
         formData.append("file", value.file)
+
+        // Initialise toast
+        const toastid = toast.loading(<I18N>UPLOADING</I18N>)
         try {
             const response = await postImageApi(formData).unwrap() // unwrap handles async errors
             console.log(response)
@@ -57,13 +60,16 @@ const ImageUpload: React.FC<ImageUploadProps> = ({fileList, setFileList, multipl
                     ]}
                 )
             }
+            toast.success(<I18N>UPLOADED</I18N>, {id: toastid})
             
         } catch (err: any) {
             if(err.status === "413"){
-                toast.error("File size too large")
+                toast.error(<I18N>FILE_TOO_LARGE</I18N>, {id: toastid})
             }else{
-                toast.error("Having trouble uploading image")
+                toast.error(<I18N>TROUBLE_UPPLOADING</I18N>, {id: toastid})
             }
+        } finally{
+            toast.dismiss(toastid)
         }
         return true
     }
@@ -72,12 +78,18 @@ const ImageUpload: React.FC<ImageUploadProps> = ({fileList, setFileList, multipl
         const splitValueArr = value.url.split('/')
         const lastValueIndex = (splitValueArr.length - 1)
         const url = `/${splitValueArr[lastValueIndex]}` // Extracting image url from values array
+
+        // Initialise toast
+        const toastid = toast.loading(<I18N>REMOVING</I18N>)
         try {
             await removeImageApi(url).unwrap() // Removes image
             const newFileList = fileList.map(Obj => Obj).filter((item) => (item.url !== value.url))
             setFileList(newFileList)
+            toast.success("Image removed", {id: toastid})
         } catch (error) {
-            toast.error(<I18N>SOMETHING_WENT_WRONG</I18N>)
+            toast.error(<I18N>SOMETHING_WENT_WRONG</I18N>, {id: toastid})
+        } finally {
+            toast.dismiss(toastid)
         }
     }
 
@@ -109,7 +121,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({fileList, setFileList, multipl
                 
             >
             { 
-                singleImage ?  // checks if it should only allow a single image
+                !multiple ?  // checks if it should only allow a single image
                     fileList?.length >= 1 ?
                         null : 
                     uploadButton 

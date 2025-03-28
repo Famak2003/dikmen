@@ -177,5 +177,16 @@
     "TAG": "Etiket",
     "EDIT_NEWS":"Haberleri Düzenle",
     "ADD_ANNOUNCEMENT": "Duyuru Ekle",
-    "EDIT_ANNOUNCEMENT": "Duyuru Düzenle"
+    "EDIT_ANNOUNCEMENT": "Duyuru Düzenle",
+    "EVENT_TYPE": "Etkinlik Türü",
+    "DATE_AND_TIME": "Tarih ve Saat",
+    "DATE": "Tarih",
+    "TIME": "Saat",
+    "ADD_EVENTS": "Etkinlik Ekle",
+    "TROUBLE_UPPLOADING": "Yüklemede sorun yaşıyorum",
+    "UPLOADED": "Yüklendi",
+    "UPLOADING": "Yükleniyor",
+    "FILE_TOO_LARGE": "Dosya boyutu çok büyük",
+    "REMOVING": "Kaldırılıyor...",
+    "EDIT_EVENTS": "Etkinlikleri Düzenle"
 }

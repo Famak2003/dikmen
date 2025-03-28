@@ -1,6 +1,6 @@
 'use client'
 
-import { faBars, faBlog, faBullhorn, faCalculator, faCertificate, faChartPie, faFolder, faMouse, faNewspaper, faPenFancy, faProjectDiagram, faQuestion, faQuestionCircle, faSignOut, faUser, faUserFriends, faUsers, faUserTie } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faBlog, faBullhorn, faCalculator, faCalendarAlt, faCertificate, faChartPie, faFolder, faMouse, faNewspaper, faPen, faProjectDiagram, faQuestion, faQuestionCircle, faSignOut, faUser, faUserFriends, faUsers, faUserTie } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ConfigProvider, Menu, MenuProps } from "antd";
 import SidebarIcon from "./reuseable/SidebarIcon";
@@ -221,7 +221,17 @@ const Sidebar = () => {
                                 </p>
                             </SidebarLink>
                         </Menu.Item>
-                        <Menu.SubMenu 
+                        <Menu.Item key={'5'} className={` sidebarPages  `} >
+                            <SidebarLink href={"/dashboard/events"} >
+                                <SidebarIcon>
+                                    <FontAwesomeIcon icon={faCalendarAlt} className="sidebarNakedIcon" />
+                                </SidebarIcon>
+                                <p className={` ${isSidebarCollapsed ? "hidden" : " "} `}>
+                                    <I18N>EVENTS</I18N>
+                                </p>
+                            </SidebarLink>
+                        </Menu.Item>
+                        {/* <Menu.SubMenu 
                             className={` ${isSidebarCollapsed ? "collapsedSidebarSubPages" : ""} sidebarSubPages  "`}
                             icon={(
                                 <SidebarIcon>
@@ -244,12 +254,12 @@ const Sidebar = () => {
                                     </p>
                                 </SidebarLink>
                             </Menu.Item>
-                        </Menu.SubMenu>
+                        </Menu.SubMenu> */}
                         <Menu.SubMenu 
                             className={` ${isSidebarCollapsed ? "collapsedSidebarSubPages" : ""} sidebarSubPages   "`}
                             icon={(
                                 <SidebarIcon>
-                                    <FontAwesomeIcon icon={faPenFancy} className="sidebarNakedIcon" />
+                                    <FontAwesomeIcon icon={faPen} className="sidebarNakedIcon" />
                                 </SidebarIcon>
                             )} 
                             title={ isSidebarCollapsed ? "": "Sayfalar"}

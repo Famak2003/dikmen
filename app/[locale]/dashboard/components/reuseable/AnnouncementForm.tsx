@@ -79,7 +79,7 @@ const AnnouncementForm: React.FC<AnnouncementFormType> =
                 name={"images"}
                 label={<I18N>IMAGES</I18N>}
             >
-                <ImageUpload setFileList={setFileList} fileList={fileList} multiple={false} singleImage={true} removeImageApi={removeAnnouncementImage} postImageApi={postAnnouncementImage}  />
+                <ImageUpload setFileList={setFileList} fileList={fileList} multiple={false} removeImageApi={removeAnnouncementImage} postImageApi={postAnnouncementImage}  />
             </Form.Item>
         </Form>
 

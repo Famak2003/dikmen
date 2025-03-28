@@ -163,7 +163,7 @@ const Projects = () => {
     // console.log(allProject?.data)
 
     return (
-        <section className=" dashboarPages " >
+        <section className=" dashboardPages " >
             <h1 className=" text-[30px] font-bold " >
                 <I18N>PROJECTS</I18N>
             </h1>

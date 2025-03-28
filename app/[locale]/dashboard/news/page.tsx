@@ -9,7 +9,7 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { LocaleType } from "../projects/page"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faImage, faPenFancy, faPlus, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
+import { faImage, faPen, faPlus, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 import CreateNews from "../components/CreateNews"
 import { FormSourceDataType } from "@/types"
 import EditNews from "../components/EditNews"
@@ -151,7 +151,7 @@ const News = () => {
                 }
                 return(
                     <div className=" flex gap-2 justify-between items-center ">
-                        <FontAwesomeIcon onClick={handleEditModal} className="dashboarIcon" icon={faPenFancy} />
+                        <FontAwesomeIcon onClick={handleEditModal} className="dashboarIcon" icon={faPen} />
                         <FontAwesomeIcon onClick={handleDelete} className="dashboarIcon" icon={faTrashAlt} />
                     </div>
                 )
@@ -162,7 +162,7 @@ const News = () => {
     console.log(data)
 
     return (
-        <section className=" dashboarPages ">
+        <section className=" dashboardPages ">
             <h1 className=" text-[30px] font-bold " >
                 <I18N>NEWS</I18N>
             </h1>

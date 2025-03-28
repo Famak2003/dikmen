@@ -281,7 +281,7 @@ input:focus {
   .decimalList{
     @apply flex flex-col gap-2 list-decimal  pl-4
   }
-  .dashboarPages{
+  .dashboardPages{
     @apply relative flex-1 flex flex-col gap-6 justify-center rounded-md overflow-hidden mb-7
   }
 

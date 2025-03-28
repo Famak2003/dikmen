@@ -5,7 +5,7 @@ import { GetAllPageDataType, GetTableDataOutput } from "@/types";
 export const announcementApiSlice = apiSlice.injectEndpoints({
     overrideExisting: true,
     endpoints: (builder) => ({
-        getAnnouncement: builder.query<GetTableDataOutput, GetAllPageDataType>({   // get all profile info
+        getAnnouncement: builder.query<GetTableDataOutput, GetAllPageDataType>({   // get all announcement info
             query: ({perPage, page}) => `announcement?perPage=${perPage}&page=${page}`,
             keepUnusedDataFor: 0,
         }),
