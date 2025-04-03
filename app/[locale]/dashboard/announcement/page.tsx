@@ -63,20 +63,9 @@ const Announcement = () => {
         {
             title: <I18N>VISIBLE</I18N>,
             dataIndex: "visible",
-            filters: [
-                {
-                    text: <I18N>VISIBLE</I18N>,
-                    value: true
-                },
-                {
-                    text: <I18N>HIDDEN</I18N>,
-                    value: false
-                },
-            ],
-            onFilter: (value, record) => record.completed === value,
             render: (_, record) => {
                 return (
-                    <Switch checked={record.visible} />
+                    <Switch className=" scale-75 " checked={record.visible} />
                 )
             }
         },
@@ -174,7 +163,7 @@ const Announcement = () => {
 
     return (
         <section className=" dashboardPages ">
-            <h1 className=" text-[30px] font-bold " >
+            <h1 className=" text30 " >
                 <I18N>ANNOUNCEMENT</I18N>
             </h1>
             <div className=" flex flex-col gap-6 bg-white dark:bg-dark_side rounded-md p-6 duration-300 transition-all shadow-custom_shad5 w-full overflow-x-scroll " >
@@ -190,7 +179,7 @@ const Announcement = () => {
                 <CreateAnnouncement isModalVisible={isCreateModalVisible} setisModalVisible={setisCreateModalVisible} />
                 <EditAnnouncement data={individualData} isModalVisible={isEditModalVisible} setisModalVisible={setisEditModalVisible} />
                 <Table
-                    className=" w-full " 
+                    className=" w-full "
                     columns={columns}
                     dataSource={allAnnouncement.data}
                     pagination={{

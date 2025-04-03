@@ -1,6 +1,6 @@
 'use client'
 
-import { faBars, faBlog, faBullhorn, faCalculator, faCalendarAlt, faCertificate, faChartPie, faFolder, faMouse, faNewspaper, faPen, faProjectDiagram, faQuestion, faQuestionCircle, faSignOut, faUser, faUserFriends, faUsers, faUserTie } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faBlog, faBullhorn, faCalculator, faCalendarAlt, faCertificate, faChartPie, faFileAlt, faFolder, faMouse, faNewspaper, faPen, faProjectDiagram, faQuestion, faQuestionCircle, faSignOut, faUser, faUserFriends, faUsers, faUserTie } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ConfigProvider, Menu, MenuProps } from "antd";
 import SidebarIcon from "./reuseable/SidebarIcon";
@@ -228,6 +228,16 @@ const Sidebar = () => {
                                 </SidebarIcon>
                                 <p className={` ${isSidebarCollapsed ? "hidden" : " "} `}>
                                     <I18N>EVENTS</I18N>
+                                </p>
+                            </SidebarLink>
+                        </Menu.Item>
+                        <Menu.Item key={'6'} className={` sidebarPages  `} >
+                            <SidebarLink href={"/dashboard/pages"} >
+                                <SidebarIcon>
+                                    <FontAwesomeIcon icon={faFileAlt} className="sidebarNakedIcon" />
+                                </SidebarIcon>
+                                <p className={` ${isSidebarCollapsed ? "hidden" : " "} `}>
+                                    <I18N>PAGES</I18N>
                                 </p>
                             </SidebarLink>
                         </Menu.Item>

@@ -13,7 +13,7 @@ type OverViewData = {
 
 const OverView = ({data, title}: OverViewData) => {
     return(
-        <div className=" w-full h-fit rounded-md px-5 pt-4 pb-7 shadow-custom_shad5 dark:shadow-custom_shad6 ">
+        <div className=" w-full h-fit rounded-md px-5 pt-4 pb-7 bg-white shadow-custom_shad5 dark:shadow-custom_shad6 ">
             <h1 className=" text-[17px] sm:text-[20px] font-semibold p-4 border-b-[2px] border-red-700 "><I18N>{title}</I18N></h1>
             <ul className=" flex flex-col " >
                 {

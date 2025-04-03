@@ -188,5 +188,7 @@
     "UPLOADING": "Yükleniyor",
     "FILE_TOO_LARGE": "Dosya boyutu çok büyük",
     "REMOVING": "Kaldırılıyor...",
-    "EDIT_EVENTS": "Etkinlikleri Düzenle"
+    "EDIT_EVENTS": "Etkinlikleri Düzenle",
+    "PAGES": "Sayfalar",
+    "ADD_PAGE": "Sayfa Ekle"
 }

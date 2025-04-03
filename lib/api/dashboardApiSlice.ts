@@ -13,7 +13,7 @@ export const dashboardApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         // get dashboard info
         getInfo: builder.query<InfoDataType, void>({
-            query: () => "app-info",
+            query: () => "admin/app-info",
         })
     })
 })

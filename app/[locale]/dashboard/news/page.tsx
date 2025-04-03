@@ -163,7 +163,7 @@ const News = () => {
 
     return (
         <section className=" dashboardPages ">
-            <h1 className=" text-[30px] font-bold " >
+            <h1 className=" text30 " >
                 <I18N>NEWS</I18N>
             </h1>
             <div className=" flex flex-col gap-6 bg-white dark:bg-dark_side rounded-md p-6 duration-300 transition-all shadow-custom_shad5 w-full overflow-x-scroll " >

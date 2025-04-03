@@ -42,6 +42,7 @@ const createNoopStorage = (): NoopStorage => {
 const persistConfig = {
   key: "root",
   version: 1,
+  blacklist: ['pages'],
   storage:
     typeof window === "undefined"
       ? createNoopStorage()

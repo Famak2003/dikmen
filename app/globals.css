@@ -18,6 +18,10 @@
   }
 }
 
+.ant-switch-inner {
+  background-color: #6C6F00 !important;
+}
+
 .DisableScrollBar {
   scroll-behavior: smooth;
 }
@@ -209,7 +213,7 @@ input:focus {
     @apply hover:border-black focus-within:!border-black bg-gray-200
   }
   .inputStyle {
-    @apply text max-w-[443px] h-[35px] rounded-md border-gray-300
+    @apply text max-w-[443px] h-[35px] rounded-md border-gray-300 ring-2
   }
   .sidebarHoverEffect{
     @apply hover:!bg-base_yellow hover:!text-white
@@ -262,6 +266,9 @@ input:focus {
   }
   .text18{
     @apply text-base mobile:text-lg
+  }
+  .text30{
+    @apply text-[20px] lg:text-[30px] font-semibold text-dark_yellow
   }
   .section{
     @apply w-screen max-w-[1170px] px-4 xl:px-2

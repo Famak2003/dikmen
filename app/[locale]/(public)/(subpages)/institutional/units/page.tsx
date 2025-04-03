@@ -1,7 +1,5 @@
 "use client"
 
-import I18N from "@/i18n"
-import Image from "next/image"
 import GridLayout from "../../../component/pagesComponent/GridLayout"
 import UnitsCard from "../../../component/pagesComponent/UnitsCard"
 

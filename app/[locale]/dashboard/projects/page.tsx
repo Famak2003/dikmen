@@ -164,7 +164,7 @@ const Projects = () => {
 
     return (
         <section className=" dashboardPages " >
-            <h1 className=" text-[30px] font-bold " >
+            <h1 className=" text30 " >
                 <I18N>PROJECTS</I18N>
             </h1>
             

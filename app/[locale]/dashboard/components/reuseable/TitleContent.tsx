@@ -10,9 +10,10 @@ interface TitleContentType {
     data: FormContent;
     setData: (value: any) => void;
     form: FormInstance;
+    justTitle?: boolean
 }
 
-const TitleContent: React.FC<TitleContentType> = ({data, setData, locale, form}) => {
+const TitleContent: React.FC<TitleContentType> = ({data, setData, locale, form, justTitle=false}) => {
 
 
     // console.log(data?.title?.[locale as keyof LocaleType])
@@ -45,16 +46,27 @@ const TitleContent: React.FC<TitleContentType> = ({data, setData, locale, form})
             >
                 <Input className="inputStyle" value={data.title?.[locale as keyof LocaleType]} onChange={handleChange} placeholder={`${ locale === "en" ?  "Input Title here" : "Başlığı buraya girin"}`} />
             </Form.Item>
-            <Form.Item
+            {
+                !justTitle ?
+                    <Form.Item
+                        required
+                        label={locale === "EN" ? "Content" : "İçerik"}
+                        shouldUpdate={true} // Ensures it updates only when needed
+                        initialValue={data?.content?.[locale as keyof LocaleType]}
+                    >                        
+                        <TextEditor placeHolder={`${ locale === "EN" ?  "Input Content here" : "İçeriği buraya girin"}`} content={data?.content?.[locale as keyof LocaleType]} setData={setData} language={locale} />
+                    </Form.Item>
+                    :
+                    ""
+            }
+            {/* <Form.Item
                 required
-                // name={`content${locale}`}
                 label={locale === "EN" ? "Content" : "İçerik"}
                 shouldUpdate={true} // Ensures it updates only when needed
                 initialValue={data?.content?.[locale as keyof LocaleType]}
-            >
-                {/* <TextEditor placeHolder={`${ locale === "EN" ?  "Input Content here" : "İçeriği buraya girin"}`} content={data?.content?.[locale as keyof LocaleType]} setData={setData} language={locale} setContent={setContent} /> */}
+            >            
                 <TextEditor placeHolder={`${ locale === "EN" ?  "Input Content here" : "İçeriği buraya girin"}`} content={data?.content?.[locale as keyof LocaleType]} setData={setData} language={locale} />
-            </Form.Item>
+            </Form.Item> */}
         </div>
     )
 }

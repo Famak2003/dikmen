@@ -188,5 +188,7 @@
     "UPLOADING": "Uploading...",
     "FILE_TOO_LARGE": "File size too large",
     "REMOVING": "Removing...",
-    "EDIT_EVENTS": "Edit Events"
+    "EDIT_EVENTS": "Edit Events",
+    "PAGES": "Pages",
+    "ADD_PAGE": "Add Page"
 }
