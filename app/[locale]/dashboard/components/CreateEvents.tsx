@@ -82,7 +82,7 @@ const CreateEvents: React.FC<modalStateType> = ({isModalVisible, setisModalVisib
     }
     return(
         <div>
-            <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="ADD_ANNOUNCEMENT" loading={isCreateEventsLoading} >
+            <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="ADD_EVENT" loading={isCreateEventsLoading} >
                 <EventsForm eventsdata={eventsData} setEventsData={setEventsData} form={form} fileList={fileList} setFileList={setFileList} />
             </CustomModal>
         </div>

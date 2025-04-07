@@ -13,6 +13,7 @@ import EditProject from "../components/EditProject";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import { FormSourceDataType } from "@/types";
+import AddButton from "../components/reuseable/AddButton";
 
 export interface LocaleType {
     en: string;
@@ -169,15 +170,9 @@ const Projects = () => {
             </h1>
             
             <div className=" flex flex-col gap-6 bg-white dark:bg-dark_side rounded-md p-6 duration-300 transition-all shadow-custom_shad5 w-full overflow-x-scroll " >
-                <button
-                    onClick={() => {
-                        return setisCreateModalVisible(true)
-                    }}
-                    className=' flex gap-4 justify-between items-center rounded-md px-4 py-2 bg-primary_black dark:bg-slate-600 w-fit text-white '>
-                    <span> <I18N>ADD_PROJECT</I18N> </span>
-                    <FontAwesomeIcon icon={faPlus} className=' text-[20px] ' /> 
-                    
-                </button>
+                
+                <AddButton text="ADD_PROJECT" setState={setisCreateModalVisible} />
+
                 <CreateProject isModalVisible={isCreateModalVisible} setisModalVisible={setisCreateModalVisible} />
                 <EditProject data={individualData} isModalVisible={isEditModalVisible} setisModalVisible={setisEditModalVisible} />
                 {/* <ValidatorModal handleSubmit={handleDeleteProject} title="DELETE_PROJECT" >

@@ -7,7 +7,7 @@ interface CustomModalProps {
     setisModalVisible: (visible: boolean) => void;
     handleSubmit: () => void;
     title: string
-    loading: boolean;
+    loading?: boolean;
     children: ReactNode;
 }
 
@@ -25,7 +25,7 @@ const CustomModal: React.FC<CustomModalProps> = ({ handleSubmit, isModalVisible,
             onCancel={() => setisModalVisible(false)} 
             onClose={() => setisModalVisible(false)}
         >
-            <div className=" flex flex-col gap-6 ">
+            <div className=" flex flex-col gap-6 min-h-[150px] ">
                 {children}
             </div>
         </Modal>

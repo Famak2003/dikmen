@@ -190,5 +190,7 @@
     "REMOVING": "Removing...",
     "EDIT_EVENTS": "Edit Events",
     "PAGES": "Pages",
-    "ADD_PAGE": "Add Page"
+    "ADD_PAGE": "Add Page",
+    "ADD_EVENT": "Add Event",
+    "ADD_SUBPAGE": "Add Subpage"
 }

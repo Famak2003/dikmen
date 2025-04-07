@@ -213,7 +213,7 @@ input:focus {
     @apply hover:border-black focus-within:!border-black bg-gray-200
   }
   .inputStyle {
-    @apply text max-w-[443px] h-[35px] rounded-md border-gray-300 ring-2
+    @apply text w-full md:max-w-[443px] h-[35px] rounded-md border-gray-300
   }
   .sidebarHoverEffect{
     @apply hover:!bg-base_yellow hover:!text-white

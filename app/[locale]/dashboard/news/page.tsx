@@ -13,6 +13,7 @@ import { faImage, faPen, faPlus, faTrashAlt } from "@fortawesome/free-solid-svg-
 import CreateNews from "../components/CreateNews"
 import { FormSourceDataType } from "@/types"
 import EditNews from "../components/EditNews"
+import AddButton from "../components/reuseable/AddButton"
 
 
 const News = () => {
@@ -167,15 +168,9 @@ const News = () => {
                 <I18N>NEWS</I18N>
             </h1>
             <div className=" flex flex-col gap-6 bg-white dark:bg-dark_side rounded-md p-6 duration-300 transition-all shadow-custom_shad5 w-full overflow-x-scroll " >
-                <button
-                    onClick={() => {
-                        return setisCreateModalVisible(true)
-                    }}
-                    className=' flex gap-4 justify-between items-center rounded-md px-4 py-2 bg-primary_black dark:bg-slate-600 w-fit text-white '>
-                    <span> <I18N>ADD_NEWS</I18N> </span>
-                    <FontAwesomeIcon icon={faPlus} className=' text-[20px] ' /> 
-                    
-                </button>
+                
+                <AddButton text="ADD_NEWS" setState={setisCreateModalVisible} />
+
                 <CreateNews isModalVisible={isCreateModalVisible} setisModalVisible={setisCreateModalVisible} />
                 <EditNews data={individualData} isModalVisible={isEditModalVisible} setisModalVisible={setisEditModalVisible} />
                 {/* <ValidatorModal handleSubmit={handleDeleteProject} title="DELETE_PROJECT" >

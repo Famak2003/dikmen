@@ -29,6 +29,7 @@ export interface FormContent {
     images: string[];
     image?: string;
     type?: string;
+    name?: string;
     datetime?: string;
 }
 
@@ -85,4 +86,20 @@ export interface IndividualType extends FormContent {
 export interface modalStateType {
     isModalVisible: boolean,
     setisModalVisible: (value: any) => void
+}
+
+export interface PagesDataType {
+    id: number;
+    title: LocaleType,
+    visible?: boolean
+}
+
+export interface PageFormType extends CustomFormType{
+    pagedata: PagesDataType;
+    setPageData: (value: any) => void;
+}
+
+export interface SubPageType extends CustomFormType {
+    data: FormContent;
+    setData: (vale:any) => void;
 }

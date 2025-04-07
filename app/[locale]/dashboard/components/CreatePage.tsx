@@ -5,11 +5,12 @@ import CustomModal from "./reuseable/CustomModal"
 import { UploadFile } from "antd"
 import { useForm } from "antd/es/form/Form"
 import toast from "react-hot-toast"
-import I18N from "@/i18n"
-import { FormContent, modalStateType } from "@/types"
+import { modalStateType, PagesDataType } from "@/types"
 import PageForm from "./reuseable/PageForm"
-import { FetchBaseQueryError } from "@reduxjs/toolkit/query"
 import { useCreatePageMutation } from "@/lib/api/pagesApiSlice"
+// import { PagesDataType } from "@/lib/slices/pagesSlice"
+import I18N from "@/i18n"
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query"
 
 
 const CreatePage: React.FC<modalStateType> = ({isModalVisible, setisModalVisible}) => {
@@ -18,19 +19,15 @@ const CreatePage: React.FC<modalStateType> = ({isModalVisible, setisModalVisible
 
     const [createPage, {isSuccess, isError, error, isLoading: isCreatePageLoading}] = useCreatePageMutation()
 
-    const [pagedata, setPageData] = useState<FormContent>({
+    const [pagedata, setPageData] = useState<PagesDataType>({
             title: {
                 en: "",
                 tr: ""
             },
-            content: {
-                en: "",
-                tr: ""
-            },
-            visible: false,
-            slug: "",
-            images: []
-        })
+            visible: false, 
+            id: 0
+        }
+    )
 
     
     useEffect(() => { // Listening to response status from the request
@@ -57,17 +54,7 @@ const CreatePage: React.FC<modalStateType> = ({isModalVisible, setisModalVisible
     const handleSubmit = async () => {
         form.validateFields().then(() =>{
             try {
-                console.log(pagedata)
-                // const newFileList = fileList.map((obj: any) => {
-                //     const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '') // Removing backend url from the image rul before appending it to the data to submit
-                //     return newUrl
-                // })
-                // const dataToSubmit = { // add images to the pagedata
-                //     ...pagedata,
-                //     images: newFileList
-                // }
-                // console.log(dataToSubmit)
-                // createPage(dataToSubmit)
+                createPage(pagedata)
     
             } catch (error) {
                 console.log("Form submit Failed")
@@ -80,7 +67,7 @@ const CreatePage: React.FC<modalStateType> = ({isModalVisible, setisModalVisible
     }
     return(
         <div>
-            <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="ADD_Page" loading={isCreatePageLoading} >
+            <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="ADD_PAGE" loading={isCreatePageLoading} >
                 <PageForm pagedata={pagedata} setPageData={setPageData} form={form} fileList={fileList} setFileList={setFileList} />
             </CustomModal>
         </div>

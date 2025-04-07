@@ -1,7 +1,7 @@
 'use client'
 
 import I18N from "@/i18n"
-import { FormSourceDataType, LocaleType } from "@/types"
+import { FormSourceDataType, LocaleType, PagesDataType } from "@/types"
 import { HolderOutlined } from "@ant-design/icons"
 import { faImage, faPen, faPlus, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
@@ -12,10 +12,13 @@ import { useLocale } from "next-intl"
 import React, { useContext, useEffect, useMemo, useState } from "react"
 import { useAppDispatch, useAppSelector } from "@/lib/store"
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
-import { moveRow, PagesDataType } from "@/lib/slices/pagesSlice"
+import { moveRow } from "@/lib/slices/pagesSlice"
 import { DndContext, DragEndEvent } from "@dnd-kit/core"
 import { SyntheticListenerMap } from "@dnd-kit/core/dist/hooks/utilities"
 import CreatePage from "../components/CreatePage"
+import { useGetPagesQuery } from "@/lib/api/pagesApiSlice"
+import AddButton from "../components/reuseable/AddButton"
+import CreateSubPage from "../components/CreateSubpage"
 
 
 interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {
@@ -72,10 +75,18 @@ const Pages = () => {
     const dispatch = useAppDispatch();
     const dataSource = useAppSelector(state => state.pages.allPages.data);
     const [sortedArr, setSortedArr] = useState<{sort_id: number, id: number}[]>([])
-
+    const {data, refetch} = useGetPagesQuery()
     const [individualData, setIndividualData] = useState<any>({})
     const [isCreateModalVisible, setisCreateModalVisible] = useState(false)
+    const [isCreatePageModalVisible, setIsCreatePageModalVisible] = useState(false)
+    // setIsCreatePageModalVisible
     const [isEditModalVisible, setisEditModalVisible] = useState(false)
+
+    useEffect(() => {
+        refetch();
+    }, [])
+
+    console.log("Pages fetched from backend", data)
 
     const locale = useLocale()
 
@@ -117,12 +128,16 @@ const Pages = () => {
         {
             title: <I18N>ACTION</I18N>,
             width: "5%",
-            fixed: "right",
+            // fixed: "right",
             dataIndex: "action",
             render: (_, record) => {
                 const handleEditModal = () => {
                     setIndividualData(record)
                     return setisEditModalVisible(true)
+                }
+                const handleCreateModal = () => {
+                    // setIndividualData(record)
+                    return setIsCreatePageModalVisible(true)
                 }
                 // const handleDelete = () => {
                 //     const id = record.id
@@ -131,6 +146,7 @@ const Pages = () => {
                 // }
                 return(
                     <div className=" flex gap-2 justify-between items-center ">
+                        <FontAwesomeIcon onClick={handleCreateModal} className="dashboarIcon" icon={faPlus} />
                         <FontAwesomeIcon onClick={handleEditModal} className="dashboarIcon" icon={faPen} />
                         {/* <FontAwesomeIcon onClick={handleDelete} className="dashboarIcon" icon={faTrashAlt} /> */}
                         <FontAwesomeIcon className="dashboarIcon" icon={faTrashAlt} />
@@ -198,7 +214,7 @@ const Pages = () => {
     const expandedRowRender = () => {
         return(
             <Table<FormSourceDataType>
-                columns={expandedRowRenderColumn}
+                columns={expandedRowRenderColumn}                
                 // dataSource={expandedRowRenderData}
                 pagination={false}
             />
@@ -230,32 +246,25 @@ const Pages = () => {
                 <I18N>PAGES</I18N>
             </h1>
             <div className=" flex flex-col gap-6 bg-white dark:bg-dark_side rounded-md p-6 duration-300 transition-all shadow-custom_shad5 w-full overflow-x-scroll " >
-                <button
-                    onClick={() => {
-                        return setisCreateModalVisible(true)
-                    }}
-                    className=' flex gap-4 justify-between items-center rounded-md px-4 py-2 bg-primary_black dark:bg-slate-600 w-fit text-white '>
-                    <span> <I18N>ADD_PAGE</I18N> </span>
-                    <FontAwesomeIcon icon={faPlus} className=' text-[20px] ' /> 
-                    
-                </button>
-                <CreatePage isModalVisible={isCreateModalVisible} setisModalVisible={setisCreateModalVisible} />
-                {/* <EditNews data={individualData} isModalVisible={isEditModalVisible} setisModalVisible={setisEditModalVisible} /> */}
-                {/* <ValidatorModal handleSubmit={handleDeleteProject} title="DELETE_PROJECT" >
+                <AddButton text="ADD_PAGE" setState={setisCreateModalVisible} />
 
-                </ValidatorModal> */}
+                <CreatePage isModalVisible={isCreateModalVisible} setisModalVisible={setisCreateModalVisible} />
+                <CreateSubPage isModalVisible={isCreatePageModalVisible} setisModalVisible={setIsCreatePageModalVisible} />
+                {/* <EditNews data={individualData} isModalVisible={isEditModalVisible} setisModalVisible={setisEditModalVisible} /> */}
+
                 <DndContext modifiers={[restrictToVerticalAxis]} onDragEnd={onDragEnd}>
-                    <SortableContext items={dataSource.map((i) => i.key)} strategy={verticalListSortingStrategy}>
+                    <SortableContext items={dataSource.map((i) => i.id)} strategy={verticalListSortingStrategy}>
                         <Table
                             className=" w-full " 
-                            rowKey="key"
+                            rowKey="id"
                             columns={columns}
                             components={{ body: { row: Row } }}
-                            expandable={{expandedRowRender, defaultExpandedRowKeys: ['0']}}
+                            // expandable={{expandedRowRender, defaultExpandedRowKeys: ['0']}}
+                            expandable={{expandedRowRender}}
                             dataSource={dataSource}
                             // pagination={{
                             //     current: page,
-                            //     total: data?.total ? data?.total : 0,
+                            //     total: data?.total ? data?.  total : 0,
                             //     pageSize: perPage,
                             //     onChange: (page) => setPage(page)
                             // }}

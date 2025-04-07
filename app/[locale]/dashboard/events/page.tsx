@@ -14,6 +14,7 @@ import toast from "react-hot-toast"
 import { useDeleteEventsMutation, useGetEventsQuery } from "@/lib/api/eventsApiSlice"
 import CreateEvents from "../components/CreateEvents"
 import EditEvents from "../components/EditEvents"
+import AddButton from "../components/reuseable/AddButton"
 
 
 const Events = () => {
@@ -154,15 +155,10 @@ const Events = () => {
                 <I18N>EVENTS</I18N>
             </h1>
             <div className=" flex flex-col gap-6 bg-white dark:bg-dark_side rounded-md p-6 duration-300 transition-all shadow-custom_shad5 w-full overflow-x-scroll " >
-                <button
-                    onClick={() => {
-                        return setisCreateModalVisible(true)
-                    }}
-                    className=' flex gap-4 justify-between items-center rounded-md px-4 py-2 bg-primary_black dark:bg-slate-600 w-fit text-white '>
-                    <span> <I18N>ADD_EVENTS</I18N> </span>
-                    <FontAwesomeIcon icon={faPlus} className=' text-[20px] ' /> 
-                    
-                </button>
+
+
+                <AddButton text="ADD_EVENTS" setState={setisCreateModalVisible} />
+
                 <CreateEvents isModalVisible={isCreateModalVisible} setisModalVisible={setisCreateModalVisible} />
                 <EditEvents data={individualData} isModalVisible={isEditModalVisible} setisModalVisible={setisEditModalVisible} />
                 <Table

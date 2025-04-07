@@ -1,26 +1,38 @@
-// import { DataType } from "../slices/pagesSlice";
-import { PagesDataType } from "../slices/pagesSlice";
 import { apiSlice } from "./apiSlice";
-import { GetAllPageDataType, GetTableDataOutput } from "@/types";
+import { GetAllPageDataType, GetTableDataOutput, PagesDataType } from "@/types";
 
+interface GetSinglePage {
+    id: number
+}
 
 export const pagesApiSlice = apiSlice.injectEndpoints({
     overrideExisting: true,
     endpoints: (builder) => ({
-        getPage: builder.query<PagesDataType[], GetAllPageDataType>({   // get all pages info
-            query: ({perPage, page}) => `pages?perPage=${perPage}&page=${page}`,
+        getPages: builder.query<PagesDataType[], void>({   // get all pages info
+            query: () => `pages`,
             keepUnusedDataFor: 0,
+        }),
+        getPage: builder.query<PagesDataType[], GetSinglePage>({   // get single page
+            query: ({id}) => `pages/${id}`,
+            // keepUnusedDataFor: 0,
         }),
         createPage: builder.mutation({
             query: (pageData) => ({
-                url: "admin/page",
+                url: "admin/pages",
+                method: "PUT",
+                body: pageData
+            })
+        }),
+        createSubPage: builder.mutation({
+            query: (pageData) => ({
+                url: "admin/pages",
                 method: "PUT",
                 body: pageData
             })
         }),
         postPageImage: builder.mutation({
             query: (image: FormData) => ({
-                url: "admin/page/image",
+                url: "admin/pages/image",
                 method: "POST",
                 body: image
             }) 
@@ -28,14 +40,14 @@ export const pagesApiSlice = apiSlice.injectEndpoints({
         removePageImage: builder.mutation({
             query: (imageurl) => {
                 return {
-                    url: "admin/page/image" + imageurl,
+                    url: "admin/pages/image" + imageurl,
                     method: "DELETE"
                 }
             }
         }),
         editPage: builder.mutation({
             query: ({pageData, id}) => ({
-                url: `admin/page/${id}`,
+                url: `admin/pages/${id}`,
                 method: "PATCH",
                 body: pageData
             })
@@ -43,7 +55,7 @@ export const pagesApiSlice = apiSlice.injectEndpoints({
         deletePage: builder.mutation({
             query: (id) => {
                 return {
-                    url: `admin/page/${id}`,
+                    url: `admin/pages/${id}`,
                     method: "DELETE",
                 }
             }
@@ -53,9 +65,11 @@ export const pagesApiSlice = apiSlice.injectEndpoints({
 })
 
 export const {
+    useGetPagesQuery,
     useGetPageQuery,
     useRemovePageImageMutation,
     useCreatePageMutation,
+    useCreateSubPageMutation,
     usePostPageImageMutation,
     useEditPageMutation,
     useDeletePageMutation,
