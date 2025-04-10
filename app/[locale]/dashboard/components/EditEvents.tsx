@@ -34,7 +34,7 @@ const EditEvents: React.FC<EditEventsType> = ({ data, isModalVisible, setisModal
     })
 
     const [form] = useForm()
-    const [fileList, setFileList] = useState<UploadFile[]>(imagesObj)
+    // const [fileList, setFileList] = useState<UploadFile[]>(imagesObj)
 
     const [editEvents, {isSuccess, isError, isLoading: isEditEventsLoading}] = useEditEventsMutation()
 
@@ -49,7 +49,7 @@ const EditEvents: React.FC<EditEventsType> = ({ data, isModalVisible, setisModal
         },
         visible: true,
         slug: data?.slug,
-        images: [],
+        images: imagesObj,
         tags: [],
         id: data.id,
         type: "",
@@ -61,12 +61,12 @@ const EditEvents: React.FC<EditEventsType> = ({ data, isModalVisible, setisModal
 
     useEffect(() => {
         if (data){
-            setFileList(imagesObj)
+            // setFileList(imagesObj)
 
             setEventsData(() => {
                 return {
                     ...data,
-                    images: []
+                    images: imagesObj
                 }
             })
         }
@@ -87,7 +87,7 @@ const EditEvents: React.FC<EditEventsType> = ({ data, isModalVisible, setisModal
     const handleSubmit = async () => {
         try {
             form.validateFields
-            const newFileList = fileList?.map((obj: any) => {
+            const newFileList = eventsData.images?.map((obj: any) => {
                 const newUrl = obj?.url?.replace(process.env.NEXT_PUBLIC_BASE, '')
                 return newUrl
             })
@@ -123,7 +123,7 @@ const EditEvents: React.FC<EditEventsType> = ({ data, isModalVisible, setisModal
     return(
         <div>
             <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="EDIT_EVENTS" loading={isEditEventsLoading} >
-                <EventsForm form={form} eventsdata={eventsData} setEventsData={setEventsData} fileList={fileList} setFileList={setFileList} />
+                <EventsForm form={form} eventsdata={eventsData} setEventsData={setEventsData} />
             </CustomModal>
         </div>
     )

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { pagesApiSlice } from "../api/pagesApiSlice"
 import { arrayMove } from "@dnd-kit/sortable"
-import { LocaleType, PagesDataType } from "@/types";
+import { FormContent, LocaleType, PagesDataType } from "@/types";
 
 // interface pagesStateType {
 //     allPages: GetTableDataOutput
@@ -21,6 +21,7 @@ interface initialType {
 
 interface pagesType {
     allPages: initialType
+    sub_pages: FormContent[]
 }
 
 const initialState: pagesType = {
@@ -35,7 +36,21 @@ const initialState: pagesType = {
         ],
         per_page: 10,
         total: 0
-    }
+    },
+    sub_pages: [
+        {
+            title: {
+                en: "",
+                tr: ""
+            },
+            content: {
+                en: "",
+                tr: ""
+            },
+            slug: "",
+            images: []
+        }
+    ],
 }
 
 const pagesSlice = createSlice({
@@ -51,6 +66,9 @@ const pagesSlice = createSlice({
             const newIndex = state.allPages.data.findIndex((item) => item.id === overId);
             state.allPages.data = arrayMove(state.allPages.data, oldIndex, newIndex);
         },
+        setSub_Pages: (state, action) => {
+            state.sub_pages = action.payload
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -64,5 +82,5 @@ const pagesSlice = createSlice({
     }
 })
 
-export const { setAllPages, moveRow } = pagesSlice.actions
+export const { setAllPages, moveRow, setSub_Pages } = pagesSlice.actions
 export default pagesSlice.reducer

@@ -15,7 +15,7 @@ interface AnnouncementFormType extends CustomFormType{
 }
 
 const AnnouncementForm: React.FC<AnnouncementFormType> = 
-    ({ form, announcementdata, setAnnouncementData, fileList, setFileList }) => {
+    ({ form, announcementdata, setAnnouncementData }) => {
         const [postAnnouncementImage, {}] = usePostAnnouncementImageMutation()
         const [removeAnnouncementImage, {}] = useRemoveAnnouncementImageMutation()
         useEffect(() => {
@@ -28,7 +28,7 @@ const AnnouncementForm: React.FC<AnnouncementFormType> =
             }
         }, [announcementdata])
 
-        console.log("image data from announcement form", fileList)
+        console.log("image data from announcement form", announcementdata.images)
 
     return(
         <Form
@@ -79,7 +79,7 @@ const AnnouncementForm: React.FC<AnnouncementFormType> =
                 name={"images"}
                 label={<I18N>IMAGES</I18N>}
             >
-                <ImageUpload setFileList={setFileList} fileList={fileList} multiple={false} removeImageApi={removeAnnouncementImage} postImageApi={postAnnouncementImage}  />
+                <ImageUpload setData={setAnnouncementData} fileList={announcementdata.images} multiple={false} removeImageApi={removeAnnouncementImage} postImageApi={postAnnouncementImage}  />
             </Form.Item>
         </Form>
 

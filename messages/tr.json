@@ -192,5 +192,7 @@
     "PAGES": "Sayfalar",
     "ADD_PAGE": "Sayfa Ekle",
     "ADD_EVENT": "Etkinlik Ekle",
-    "ADD_SUBPAGE": "Alt Sayfa Ekle"
+    "ADD_SUBPAGE": "Alt Sayfa Ekle",
+    "CAPTION": "Altyazı",
+    "PLEASE_ENTER_TAG": "Lütfen etiketi girin"
 }

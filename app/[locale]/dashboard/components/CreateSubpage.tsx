@@ -16,25 +16,27 @@ import SubPageForm from "./reuseable/SubPageForm"
 export interface SubPagesDataType extends PagesDataType {
     type: string;
     slug: string;
-    subpageData: FormContent
+    sub_pages: FormContent[]
 }
 
 
 const CreateSubPage: React.FC<modalStateType> = ({isModalVisible, setisModalVisible}) => {
     const [form] = useForm()
-    const [fileList, setFileList] = useState<UploadFile[]>([])
-    const [subPageState, setSubPageState] = useState<FormContent>({
-        title: {
-            en: "",
-            tr: ""
-        },
-        content: {
-            en: "",
-            tr: ""
-        },
-        slug: "",
-        images: []
-    })
+    // const [fileList, setFileList] = useState<UploadFile[]>([])
+    const [sub_pages, setSub_Pages] = useState<FormContent[]>([])
+
+    // {
+    //     title: {
+    //         en: "",
+    //         tr: ""
+    //     },
+    //     content: {
+    //         en: "",
+    //         tr: ""
+    //     },
+    //     slug: "",
+    //     images: []
+    // }
 
     // const [createSubPage, {isSuccess, isError, error, isLoading: isCreateSubPageLoading}] = useCreateSubPageMutation()
 
@@ -45,18 +47,7 @@ const CreateSubPage: React.FC<modalStateType> = ({isModalVisible, setisModalVisi
             },
             type: "",
             slug: "",
-            subpageData: {
-                title: {
-                    en: "",
-                    tr: ""
-                },
-                content: {
-                    en: "",
-                    tr: ""
-                },
-                slug: "",
-                images: []
-            },
+            sub_pages: [],
             id: 0
         }
     )
@@ -86,16 +77,23 @@ const CreateSubPage: React.FC<modalStateType> = ({isModalVisible, setisModalVisi
     const handleSubmit = async () => {
         form.validateFields().then(() =>{
             try {
-                const newFileList = fileList.map((obj: any) => {
-                    const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '')
-                    return newUrl
+                const newSub_Pages = sub_pages.map((obj: any, key) => {
+                    return {
+                        ...obj,
+                        images: obj.images.map((obj: any) => {
+                            const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '')
+                            return newUrl
+                        })
+                    }
                 })
+                // const newFileList = fileList.map((obj: any) => {
+                //     const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '')
+                //     return newUrl
+                // })
                 const dataToSubmit = {
                     ...SubPagedata,
-                    subpageData: {
-                        ...subPageState,
-                        images: newFileList
-                    }
+                    sub_pages:
+                        [...newSub_Pages],
                 }
                 console.log(dataToSubmit)
                 // createSubPage(SubPagedata)
@@ -113,7 +111,7 @@ const CreateSubPage: React.FC<modalStateType> = ({isModalVisible, setisModalVisi
         <div>
             <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="ADD_SUBPAGE"  >
                 {/* <SubPageForm pagedata={SubPagedata} setSubPageData={setSubPageData} form={form} fileList={fileList} setFileList={setFileList} /> */}
-                <SubPageForm subPagedata={SubPagedata} setSubPageData={setSubPageData} subPageState={subPageState} setSubPageState={setSubPageState} fileList={fileList} setFileList={setFileList} form={form} />
+                <SubPageForm data={SubPagedata} setData={setSubPageData} sub_pages={sub_pages} setSub_Pages={setSub_Pages} form={form} />
             </CustomModal>
         </div>
     )

@@ -19,7 +19,7 @@ export type TRemoveApi =
 
 export interface ImageUploadProps {
     fileList: UploadFile[];
-    setData: (value: any) => void;
+    setFileList: Dispatch<SetStateAction<UploadFile[]>>;
     multiple?: boolean;
     // singleImage?: boolean;
     postImageApi: TPostApi;
@@ -38,7 +38,7 @@ const getBase64 = (file: FileType): Promise<string> =>
 });
 
 
-const ImageUpload: React.FC<ImageUploadProps> = ({fileList, setData, multiple=true, removeImageApi, postImageApi}) => {
+const ImageUpload: React.FC<ImageUploadProps> = ({fileList, setFileList, multiple=true, removeImageApi, postImageApi}) => {
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
 
@@ -53,14 +53,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({fileList, setData, multiple=tr
             console.log(response)
             console.log(response?.link)
             if (response?.link) {
-                setData((prev: any) => {
-                    return {
+                setFileList((prev) => {
+                    return [
                         ...prev,
-                        images: [
-                            ...prev.images,
-                            {uid: Date.now()+'', name: Date.now()+'', url: process.env.NEXT_PUBLIC_BASE+response?.link}
-                        ]
-                    }}
+                        {uid: Date.now()+'', name: Date.now()+'', url: process.env.NEXT_PUBLIC_BASE+response?.link}
+                    ]}
                 )
             }
             toast.success(<I18N>UPLOADED</I18N>, {id: toastid})
@@ -87,12 +84,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({fileList, setData, multiple=tr
         try {
             await removeImageApi(url).unwrap() // Removes image
             const newFileList = fileList.map(Obj => Obj).filter((item) => (item.url !== value.url))
-            setData((prev:any) => {
-                return{
-                    ...prev,
-                    images: newFileList
-                }
-            })
+            setFileList(newFileList)
             toast.success("Image removed", {id: toastid})
         } catch (error) {
             toast.error(<I18N>SOMETHING_WENT_WRONG</I18N>, {id: toastid})

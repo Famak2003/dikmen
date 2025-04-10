@@ -15,7 +15,7 @@ import { useCreateEventsMutation } from "@/lib/api/eventsApiSlice"
 
 const CreateEvents: React.FC<modalStateType> = ({isModalVisible, setisModalVisible}) => {
     const [form] = useForm()
-    const [fileList, setFileList] = useState<UploadFile[]>([])
+    // const [fileList, setFileList] = useState<UploadFile[]>([])
 
     const [createEvents, {isSuccess, isError, error, isLoading: isCreateEventsLoading}] = useCreateEventsMutation()
 
@@ -60,7 +60,7 @@ const CreateEvents: React.FC<modalStateType> = ({isModalVisible, setisModalVisib
         form.validateFields().then(() =>{
             try {
                 console.log(eventsData)
-                const newFileList = fileList.map((obj: any) => {
+                const newFileList = eventsData.images.map((obj: any) => {
                     const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '') // Removing backend url from the image rul before appending it to the data to submit
                     return newUrl
                 })
@@ -83,7 +83,7 @@ const CreateEvents: React.FC<modalStateType> = ({isModalVisible, setisModalVisib
     return(
         <div>
             <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="ADD_EVENT" loading={isCreateEventsLoading} >
-                <EventsForm eventsdata={eventsData} setEventsData={setEventsData} form={form} fileList={fileList} setFileList={setFileList} />
+                <EventsForm eventsdata={eventsData} setEventsData={setEventsData} form={form} />
             </CustomModal>
         </div>
     )

@@ -14,11 +14,16 @@ const getBase64 = (file: FileType): Promise<string> =>
       reader.onerror = (error) => reject(error);
 });
 
-const DragUpload: React.FC<ImageUploadProps> = ({fileList, setFileList}) => {
+const DragUpload: React.FC<ImageUploadProps> = ({fileList, setData}) => {
      const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) =>
-        setFileList(newFileList);
+        setData((prev:any) => {
+            return{
+                ...prev,
+                images: newFileList
+            }
+        })
 
     const handlePreview = async (file: UploadFile) => {
         if (!file.url && !file.preview) {

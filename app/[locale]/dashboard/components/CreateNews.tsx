@@ -14,7 +14,7 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/query"
 
 const CreateNews: React.FC<modalStateType> = ({isModalVisible, setisModalVisible}) => {
     const [form] = useForm()
-    const [fileList, setFileList] = useState<UploadFile[]>([])
+    // const [fileList, setFileList] = useState<UploadFile[]>([])
 
     const [createNews, {isSuccess, isError, error, isLoading: isCreateNewsLoading}] = useCreateNewsMutation()
 
@@ -60,7 +60,7 @@ const CreateNews: React.FC<modalStateType> = ({isModalVisible, setisModalVisible
         try {
             form.validateFields
             // console.log(newsdata)
-            const newFileList = fileList.map((obj: any) => {
+            const newFileList = newsdata.images.map((obj: any) => {
                 const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '')
                 return newUrl
             })
@@ -80,7 +80,7 @@ const CreateNews: React.FC<modalStateType> = ({isModalVisible, setisModalVisible
     return(
         <div>
             <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="ADD_NEWS" loading={isCreateNewsLoading} >
-                <NewsForm newsdata={newsdata} setNewsData={setNewsData} form={form} fileList={fileList} setFileList={setFileList} />
+                <NewsForm newsdata={newsdata} setNewsData={setNewsData} form={form} />
             </CustomModal>
         </div>
     )

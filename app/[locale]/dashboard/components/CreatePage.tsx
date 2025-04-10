@@ -15,7 +15,7 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/query"
 
 const CreatePage: React.FC<modalStateType> = ({isModalVisible, setisModalVisible}) => {
     const [form] = useForm()
-    const [fileList, setFileList] = useState<UploadFile[]>([])
+    // const [fileList, setFileList] = useState<UploadFile[]>([])
 
     const [createPage, {isSuccess, isError, error, isLoading: isCreatePageLoading}] = useCreatePageMutation()
 
@@ -68,7 +68,7 @@ const CreatePage: React.FC<modalStateType> = ({isModalVisible, setisModalVisible
     return(
         <div>
             <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="ADD_PAGE" loading={isCreatePageLoading} >
-                <PageForm pagedata={pagedata} setPageData={setPageData} form={form} fileList={fileList} setFileList={setFileList} />
+                <PageForm pagedata={pagedata} setPageData={setPageData} form={form} />
             </CustomModal>
         </div>
     )

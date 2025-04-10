@@ -30,7 +30,7 @@ const EditProject: React.FC<EditProjectType> = ({ data, isModalVisible, setisMod
     })
 
     const [form] = useForm()
-    const [fileList, setFileList] = useState<UploadFile[]>(imagesObj)
+    // const [fileList, setFileList] = useState<UploadFile[]>(imagesObj)
 
     const [editProject, {isSuccess, isError, isLoading: isEditProjectLoading}] = useEditProjectMutation()
 
@@ -45,7 +45,7 @@ const EditProject: React.FC<EditProjectType> = ({ data, isModalVisible, setisMod
         },
         completed: true,
         slug: data?.slug,
-        images: [],
+        images: imagesObj,
         id: data.id,
         display_image: data.display_image,
         updated_at: data.updated_at,
@@ -54,12 +54,12 @@ const EditProject: React.FC<EditProjectType> = ({ data, isModalVisible, setisMod
 
     useEffect(() => {
         if (data){
-            setFileList(imagesObj)
+            // setFileList(imagesObj)
 
             setProjectData(() => {
                 return {
                     ...data,
-                    images: []
+                    images: imagesObj
                 }
             })
         }
@@ -78,7 +78,7 @@ const EditProject: React.FC<EditProjectType> = ({ data, isModalVisible, setisMod
     const handleSubmit = async () => {
         try {
             form.validateFields
-            const newFileList = fileList.map((obj: any) => {
+            const newFileList = projectdata.images.map((obj: any) => {
                 const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '')
                 return newUrl
             })
@@ -115,7 +115,7 @@ const EditProject: React.FC<EditProjectType> = ({ data, isModalVisible, setisMod
     return(
         <div>
             <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="EDIT_PROJECT" loading={isEditProjectLoading} >
-                <ProjectsForm form={form} projectdata={projectdata} setProjectData={setProjectData} fileList={fileList} setFileList={setFileList} />
+                <ProjectsForm form={form} projectdata={projectdata} setProjectData={setProjectData} />
             </CustomModal>
         </div>
     )

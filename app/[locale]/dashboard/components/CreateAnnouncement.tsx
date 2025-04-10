@@ -14,7 +14,7 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/query"
 
 const CreateAnnouncement: React.FC<modalStateType> = ({isModalVisible, setisModalVisible}) => {
     const [form] = useForm()
-    const [fileList, setFileList] = useState<UploadFile[]>([])
+    // const [fileList, setFileList] = useState<UploadFile[]>([])
 
     const [createAnnouncement, {isSuccess, isError, error, isLoading: isCreateAnnouncementLoading}] = useCreateAnnouncementMutation()
 
@@ -58,7 +58,7 @@ const CreateAnnouncement: React.FC<modalStateType> = ({isModalVisible, setisModa
         form.validateFields().then(() =>{
             try {
                 console.log(announcementdata)
-                const newFileList = fileList.map((obj: any) => {
+                const newFileList = announcementdata.images.map((obj: any) => {
                     const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '') // Removing backend url from the image rul before appending it to the data to submit
                     return newUrl
                 })
@@ -81,7 +81,7 @@ const CreateAnnouncement: React.FC<modalStateType> = ({isModalVisible, setisModa
     return(
         <div>
             <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="ADD_ANNOUNCEMENT" loading={isCreateAnnouncementLoading} >
-                <AnnouncementForm announcementdata={announcementdata} setAnnouncementData={setAnnouncementData} form={form} fileList={fileList} setFileList={setFileList} />
+                <AnnouncementForm announcementdata={announcementdata} setAnnouncementData={setAnnouncementData} form={form} />
             </CustomModal>
         </div>
     )

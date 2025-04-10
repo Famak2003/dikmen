@@ -192,5 +192,7 @@
     "PAGES": "Pages",
     "ADD_PAGE": "Add Page",
     "ADD_EVENT": "Add Event",
-    "ADD_SUBPAGE": "Add Subpage"
+    "ADD_SUBPAGE": "Add Subpage",
+    "CAPTION": "Caption",
+    "PLEASE_ENTER_TAG": "Please enter tag"
 }

@@ -86,7 +86,7 @@ const Pages = () => {
         refetch();
     }, [])
 
-    console.log("Pages fetched from backend", data)
+    // console.log("Pages fetched from backend", data)
 
     const locale = useLocale()
 
@@ -238,7 +238,7 @@ const Pages = () => {
             }
         }))
     }, [dataSource])
-    console.log("Sorted Arr \n",sortedArr)
+    // console.log("Sorted Arr \n",sortedArr)
 
     return(
         <section className="dashboardPages">

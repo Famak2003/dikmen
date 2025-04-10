@@ -28,9 +28,9 @@ const EditAnnouncement: React.FC<EditAnnouncementType> = ({ data, isModalVisible
             url:  process.env.NEXT_PUBLIC_BASE + value
         }
     })
-
+    // console.log(process.env.NEXT_PUBLIC_BASE)
     const [form] = useForm()
-    const [fileList, setFileList] = useState<UploadFile[]>(imagesObj)
+    // const [fileList, setFileList] = useState<UploadFile[]>(imagesObj)
 
     const [editAnnouncement, {isSuccess, isError, isLoading: isEditAnnouncementLoading}] = useEditAnnouncementMutation()
 
@@ -45,7 +45,7 @@ const EditAnnouncement: React.FC<EditAnnouncementType> = ({ data, isModalVisible
         },
         visible: true,
         slug: data?.slug,
-        images: [],
+        images: imagesObj,
         tags: [],
         id: data.id,
         display_image: data.display_image,
@@ -55,12 +55,12 @@ const EditAnnouncement: React.FC<EditAnnouncementType> = ({ data, isModalVisible
 
     useEffect(() => {
         if (data){
-            setFileList(imagesObj)
+            // setFileList(imagesObj)
 
             setAnnouncementData(() => {
                 return {
                     ...data,
-                    images: []
+                    images: imagesObj
                 }
             })
         }
@@ -81,7 +81,7 @@ const EditAnnouncement: React.FC<EditAnnouncementType> = ({ data, isModalVisible
     const handleSubmit = async () => {
         try {
             form.validateFields
-            const newFileList = fileList?.map((obj: any) => {
+            const newFileList = announcementdata.images?.map((obj: any) => {
                 const newUrl = obj?.url?.replace(process.env.NEXT_PUBLIC_BASE, '')
                 return newUrl
             })
@@ -117,7 +117,7 @@ const EditAnnouncement: React.FC<EditAnnouncementType> = ({ data, isModalVisible
     return(
         <div>
             <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="EDIT_ANNOUNCEMENT" loading={isEditAnnouncementLoading} >
-                <AnnouncementForm form={form} announcementdata={announcementdata} setAnnouncementData={setAnnouncementData} fileList={fileList} setFileList={setFileList} />
+                <AnnouncementForm form={form} announcementdata={announcementdata} setAnnouncementData={setAnnouncementData} />
             </CustomModal>
         </div>
     )

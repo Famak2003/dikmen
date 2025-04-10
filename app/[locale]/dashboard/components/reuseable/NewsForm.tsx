@@ -15,7 +15,7 @@ interface NewsFormType extends CustomFormType{
 }
 
 const NewsForm: React.FC<NewsFormType> = 
-    ({ form, newsdata, setNewsData, fileList, setFileList }) => {
+    ({ form, newsdata, setNewsData }) => {
         const [postNewsImage, {}] = usePostNewsImageMutation()
         const [removeNewsImage, {}] = useRemoveNewsImageMutation()
         const inputRef = useRef<InputRef>(null);
@@ -33,12 +33,12 @@ const NewsForm: React.FC<NewsFormType> =
         }, [newsdata])
 
 
-    const addItem = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+    const addItem = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement | any>) => {
         e.preventDefault();
         setNewsData((prev: any) => {
             return {
                 ...prev,
-                tags: [...(prev?.tags || []), name || `New item ${index++}`]
+                tags: [...(prev?.tags || []), name ]
             }
         })
         setName('');
@@ -84,13 +84,13 @@ const NewsForm: React.FC<NewsFormType> =
                           <Divider style={{ margin: '8px 0' }} />
                           <Space style={{ padding: '0 8px 4px' }}>
                             <Input
-                              placeholder="Please enter item"
+                              placeholder="Lütfen etiketi girin"
                               ref={inputRef}
                               value={name}
                               onChange={onNameChange}
                               onKeyDown={(e) => e.stopPropagation()}
                             />
-                            <Button type="text" icon={<PlusOutlined />} onClick={addItem}>
+                            <Button type="text" icon={<PlusOutlined />} onClick={(e) => name ? addItem(e) : ""}>
                               Add item
                             </Button>
                           </Space>
@@ -138,7 +138,7 @@ const NewsForm: React.FC<NewsFormType> =
                 name={"images"}
                 label={<I18N>IMAGES</I18N>}
             >
-                <ImageUpload setFileList={setFileList} fileList={fileList} removeImageApi={removeNewsImage} postImageApi={postNewsImage}  />
+                <ImageUpload setData={setNewsData} fileList={newsdata.images} removeImageApi={removeNewsImage} postImageApi={postNewsImage}  />
             </Form.Item>
         </Form>
 

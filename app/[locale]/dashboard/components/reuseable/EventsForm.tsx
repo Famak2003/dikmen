@@ -16,7 +16,7 @@ interface EventsFormType extends CustomFormType{
 }
 
 const EventsForm: React.FC<EventsFormType> = 
-    ({ form, eventsdata, setEventsData, fileList, setFileList }) => {
+    ({ form, eventsdata, setEventsData }) => {
     const locale = useLocale();
     const [postEventsImage, {}] = usePostEventsImageMutation()
     const [removeEventsImage, {}] = useRemoveEventsImageMutation()
@@ -25,7 +25,7 @@ const EventsForm: React.FC<EventsFormType> =
             form.setFieldsValue({
                 slug: eventsdata.slug,
                 visible: eventsdata?.visible,
-                tags: eventsdata?.tags,
+                // tags: eventsdata?.tags,
                 type: eventsdata?.type,
                 datetime: eventsdata?.datetime ? dayjs(eventsdata.datetime) : null
             })
@@ -50,7 +50,7 @@ const EventsForm: React.FC<EventsFormType> =
         })
     }
 
-    console.log("image data from Events form", fileList)
+    console.log("image data from Events form", eventsdata.images)
 
     return(
         <Form
@@ -98,7 +98,7 @@ const EventsForm: React.FC<EventsFormType> =
                 name={"images"}
                 label={<I18N>IMAGES</I18N>}
             >
-                <ImageUpload setFileList={setFileList} fileList={fileList} multiple={false} removeImageApi={removeEventsImage} postImageApi={postEventsImage}  />
+                <ImageUpload setData={setEventsData} fileList={eventsdata.images} multiple={false} removeImageApi={removeEventsImage} postImageApi={postEventsImage}  />
             </Form.Item>
         </Form>
 

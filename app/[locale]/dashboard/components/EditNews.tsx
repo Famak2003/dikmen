@@ -30,7 +30,7 @@ const EditNews: React.FC<EditNewsType> = ({ data, isModalVisible, setisModalVisi
     })
 
     const [form] = useForm()
-    const [fileList, setFileList] = useState<UploadFile[]>(imagesObj)
+    // const [fileList, setFileList] = useState<UploadFile[]>(imagesObj)
 
     const [editNews, {isSuccess, isError, isLoading: isEditNewsLoading}] = useEditNewsMutation()
 
@@ -45,7 +45,7 @@ const EditNews: React.FC<EditNewsType> = ({ data, isModalVisible, setisModalVisi
         },
         visible: true,
         slug: data?.slug,
-        images: [],
+        images: imagesObj,
         tags: [],
         id: data.id,
         display_image: data.display_image,
@@ -55,12 +55,12 @@ const EditNews: React.FC<EditNewsType> = ({ data, isModalVisible, setisModalVisi
 
     useEffect(() => {
         if (data){
-            setFileList(imagesObj)
+            // setFileList(imagesObj)
 
             setNewsData(() => {
                 return {
                     ...data,
-                    images: []
+                    images: imagesObj
                 }
             })
         }
@@ -81,7 +81,7 @@ const EditNews: React.FC<EditNewsType> = ({ data, isModalVisible, setisModalVisi
     const handleSubmit = async () => {
         try {
             form.validateFields
-            const newFileList = fileList.map((obj: any) => {
+            const newFileList = newsdata.images.map((obj: any) => {
                 const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '')
                 return newUrl
             })
@@ -115,7 +115,7 @@ const EditNews: React.FC<EditNewsType> = ({ data, isModalVisible, setisModalVisi
     return(
         <div>
             <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="EDIT_NEWS" loading={isEditNewsLoading} >
-                <NewsForm form={form} newsdata={newsdata} setNewsData={setNewsData} fileList={fileList} setFileList={setFileList} />
+                <NewsForm form={form} newsdata={newsdata} setNewsData={setNewsData} />
             </CustomModal>
         </div>
     )

@@ -18,8 +18,6 @@ const ProjectsForm: React.FC<ProjectsFormType> = (
             form,
             projectdata,
             setProjectData,
-            fileList,
-            setFileList
         }
     ) => {
 
@@ -85,7 +83,7 @@ const ProjectsForm: React.FC<ProjectsFormType> = (
                 name={"images"}
                 label={<I18N>IMAGES</I18N>}
             >
-                <ImageUpload setFileList={setFileList} fileList={fileList} removeImageApi={removeProjectImage} postImageApi={postProjectImage} />
+                <ImageUpload setData={setProjectData} fileList={projectdata.images} removeImageApi={removeProjectImage} postImageApi={postProjectImage} />
             </Form.Item>
         </Form>
 

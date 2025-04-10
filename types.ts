@@ -14,8 +14,8 @@ export interface user {
 }
 
 export interface CustomFormType {
-    fileList: UploadFile[]; // Files to store images
-    setFileList:  Dispatch<SetStateAction<UploadFile<any>[]>>;
+    // fileList: UploadFile[]; // Files to store images
+    // setFileList:  Dispatch<SetStateAction<UploadFile<any>[]>>;
     form: FormInstance; // Ant Design Form Instance
 }
 
@@ -26,11 +26,13 @@ export interface FormContent {
     visible?: boolean;
     tags?: string[];
     slug: string;
-    images: string[];
+    images: UploadFile[];
     image?: string;
     type?: string;
     name?: string;
     datetime?: string;
+    caption?: string
+    date?: string;
 }
 
 export interface FormSourceDataType {
@@ -100,6 +102,12 @@ export interface PageFormType extends CustomFormType{
 }
 
 export interface SubPageType extends CustomFormType {
-    data: FormContent;
+    data: FormContent[];
     setData: (vale:any) => void;
+    index: number;
+}
+
+export interface SubForm {
+    index: number;
+    form: FormInstance
 }

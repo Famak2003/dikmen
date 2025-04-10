@@ -14,7 +14,7 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/query"
 
 const CreateProject: React.FC<modalStateType> = ({isModalVisible, setisModalVisible}) => {
     const [form] = useForm()
-    const [fileList, setFileList] = useState<UploadFile[]>([])
+    // const [fileList, setFileList] = useState<UploadFile[]>([])
 
     const [createProject, {isSuccess, isError, error, isLoading: isCreateProjectLoading}] = useCreateProjectMutation()
 
@@ -59,7 +59,7 @@ const CreateProject: React.FC<modalStateType> = ({isModalVisible, setisModalVisi
         try {
             form.validateFields
             console.log(projectdata)
-            const newFileList = fileList.map((obj: any) => {
+            const newFileList = projectdata.images.map((obj: any) => {
                 const newUrl = obj.url.replace(process.env.NEXT_PUBLIC_BASE, '')
                 return newUrl
             })
@@ -79,7 +79,7 @@ const CreateProject: React.FC<modalStateType> = ({isModalVisible, setisModalVisi
     return(
         <div>
             <CustomModal handleSubmit={handleSubmit} isModalVisible={isModalVisible} setisModalVisible={setisModalVisible} title="ADD_PROJECT" loading={isCreateProjectLoading} >
-                <ProjectsForm projectdata={projectdata} setProjectData={setProjectData} form={form} fileList={fileList} setFileList={setFileList} />
+                <ProjectsForm projectdata={projectdata} setProjectData={setProjectData} form={form} />
             </CustomModal>
         </div>
     )

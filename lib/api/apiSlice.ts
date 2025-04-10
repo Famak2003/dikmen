@@ -44,7 +44,7 @@ interface authorizationTokenType {
     const authorizationToken = result.meta?.response?.headers?.get('Authorization')
     if(authorizationToken){
         api.dispatch(setAuthorizationToken(authorizationToken.split(" ")[1]))
-        document.cookie = `token=${authorizationToken}; path=/; secure; samesite=strict`;
+        document.cookie = `token=${authorizationToken}; path=/; samesite=lax`;
     }
 
   
